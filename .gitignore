@@ -1,0 +1,16 @@
+# Ignore prototypes and auto-generated files.
+prototype
+Makefile
+build
+*.pro.user*
+*.o
+*.autosave
+/doc/html
+
+# Temporarily ignore these files.
+.travis.yml
+doc
+modules
+qtstereoscopy.pro
+sync.profile
+.qmake.cache

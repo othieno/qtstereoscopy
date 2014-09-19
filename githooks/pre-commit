@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# This script performs software testing and verification. It fails if any one
+# of the following commands has an exit status that is not zero (failure).
+set -e
+set -o pipefail
+
+SRCDIR="$(git rev-parse --show-toplevel)/src"
+
+# Perform static analysis.
+cppcheck "$SRCDIR" --enable=warning,style,performance,portability --language=c++ -q --error-exitcode=1
+
+# Make sure the documentation can be built without any errors.
+#qdoc -redirect-documentation-to-dev-null "$SRCDIR/doc/qthmd.qdocconf"
