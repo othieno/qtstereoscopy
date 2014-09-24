@@ -39,12 +39,19 @@ class QStereoWindow Q_DECL_FINAL : public QWindow
    static_assert(std::is_base_of<QAbstractStereoRenderer, Renderer>::value, "Renderer must derive from QAbstractStereoRenderer.");
    static_assert(std::is_default_constructible<Renderer>::value, "Renderer requires a default constructor.");
 public:
-   QStereoWindow();
-   explicit QStereoWindow(const QString& title);
-   explicit QStereoWindow(Renderer* const renderer);
-   QStereoWindow(Renderer* const renderer, const QString& title);
+   explicit QStereoWindow(QStereoWindow* const parent = nullptr);
+   explicit QStereoWindow(const QStereoWindow&) = delete;
+
+   QStereoWindow(const QString& title, QStereoWindow* const parent = nullptr);
+   QStereoWindow(Renderer& renderer, QStereoWindow* const parent = nullptr);
+   QStereoWindow(Renderer& renderer, const QString& title, QStereoWindow* const parent = nullptr);
+
+   QStereoWindow& operator=(const QStereoWindow&) = delete;
 private:
-   void updateGL();
+   QStereoWindow(Renderer* const renderer, QStereoWindow* const parent);
+   QStereoWindow(Renderer* const renderer, const QString& title, QStereoWindow* const parent);
+
+   void update();
    void paintGL();
 
    bool event(QEvent* const e) Q_DECL_OVERRIDE;
@@ -57,23 +64,36 @@ private:
 
 
 template<class T>
-QStereoWindow<T>::QStereoWindow() :
-QStereoWindow<T>(new T)
+QStereoWindow<T>::QStereoWindow(QStereoWindow* const parent) :
+QStereoWindow(new T, parent)
 {
-   _renderer->setParent(this); // Handle memory deallocation.
+   // Change the renderer's ownership to manage dynamic memory automatically.
+   _renderer->setParent(this);
 }
 
 
 template<class T>
-QStereoWindow<T>::QStereoWindow(const QString& title) :
-QStereoWindow<T>()
+QStereoWindow<T>::QStereoWindow(const QString& title, QStereoWindow* const parent) :
+QStereoWindow(parent)
 {
    setTitle(title);
 }
 
 
 template<class T>
-QStereoWindow<T>::QStereoWindow(T* const renderer) :
+QStereoWindow<T>::QStereoWindow(T& renderer, QStereoWindow* const parent) :
+QStereoWindow(&renderer, parent)
+{}
+
+
+template<class T>
+QStereoWindow<T>::QStereoWindow(T& renderer, const QString& title, QStereoWindow* const parent) :
+QStereoWindow(&renderer, title, parent)
+{}
+
+
+template<class T>
+QStereoWindow<T>::QStereoWindow(T* const renderer, QStereoWindow* const parent) :
 _renderer(renderer),
 _updateRequestPending(false)
 {
@@ -83,19 +103,22 @@ _updateRequestPending(false)
 
    if (_renderer == nullptr)
       qFatal("[QtStereoscopy] Error: QStereoWindow renderer is null.");
+
+   if (parent != nullptr)
+      setParent(parent);
 }
 
 
 template<class T>
-QStereoWindow<T>::QStereoWindow(T* const renderer, const QString& title) :
-QStereoWindow<T>(renderer)
+QStereoWindow<T>::QStereoWindow(T* const renderer, const QString& title, QStereoWindow* const parent) :
+QStereoWindow(renderer, parent)
 {
    setTitle(title);
 }
 
 
 template<class T> void
-QStereoWindow<T>::updateGL()
+QStereoWindow<T>::update()
 {
    if (!_updateRequestPending)
    {
@@ -121,9 +144,9 @@ QStereoWindow<T>::event(QEvent* const e)
    {
       _updateRequestPending = false;
 
-      // Render the scene and make a new update request (or else drawing ends after the call to paintGL).
+      // Draw a new frame and make an update request (or else drawing ends after the call to paintGL).
       paintGL();
-      updateGL();
+      update();
    }
    return QWindow::event(e);
 }
@@ -139,7 +162,7 @@ QStereoWindow<T>::exposeEvent(QExposeEvent* const e)
       if (_context.create() && _context.makeCurrent(this))
       {
          _renderer->initialize(*this);
-         updateGL();
+         update();
       }
       else
          qFatal("[QtStereoscopy] Error: Could not create an OpenGL context.");

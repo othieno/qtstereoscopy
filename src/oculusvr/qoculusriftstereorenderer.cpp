@@ -37,21 +37,19 @@
 #include <OVR.h>
 
 /**
- * @brief Constructs a QOculusRiftStereoRenderer that is attached to an OpenGL capable window
- * and the Oculus Rift at the specified index.
- * @param window the OpenGL window.
+ * @brief Constructs a QOculusRiftStereoRenderer that is attached to the Oculus Rift at the specified index.
  * @param index the Oculus Rift HMD device's index.
  */
 QOculusRiftStereoRenderer::QOculusRiftStereoRenderer(const unsigned int& index) :
 _display(index),
 _fbo(nullptr),
+_fboChanged(true),
 _apiConfiguration(new ovrGLConfig),
 _eyeTextureConfigurations(new ovrGLTexture[ovrEye_Count]),
-_fovs(_display.recommendedFov()),
+_eyeRenderConfigurationsChanged(true),
+_eyeFovs(_display.recommendedFov()),
 _pixelDensity(1.0f),
-_forceZeroIPD(false),
-_coherentFBO(false),
-_coherentRenderingConfiguration(false)
+_forceZeroIPD(false)
 {
    if (_apiConfiguration == nullptr && _eyeTextureConfigurations == nullptr)
       qFatal("[QtStereoscopy] Error: Could not instantiate a QOculusRiftStereoRenderer.");
@@ -87,7 +85,7 @@ QOculusRiftStereoRenderer::apply()
    for (const auto& eye : _display.eyeRenderOrder())
    {
       const auto& pose = ovrHmd_BeginEyeRender(_display, eye);
-      paintGL(camera(eye, pose), frameTiming.DeltaSeconds);
+      paintGL(eyeCamera(eye, pose), frameTiming.DeltaSeconds);
       ovrHmd_EndEyeRender(_display, eye, pose, &_eyeTextureConfigurations[eye].Texture);
    }
 
@@ -149,7 +147,7 @@ QOculusRiftStereoRenderer::setPixelDensity(const float& density)
    if (!qFuzzyCompare(_pixelDensity, density))
    {
       _pixelDensity = density;
-      _coherentFBO = false;
+      _fboChanged = true;
    }
 }
 
@@ -169,7 +167,7 @@ QOculusRiftStereoRenderer::initializeWindow(const WId& winId)
 #elif defined(Q_OS_WIN32)
       _apiConfiguration->OGL.Window = static_cast<HWND>(winId);
 #endif
-      _coherentRenderingConfiguration = false;
+      _eyeRenderConfigurationsChanged = true;
    }
    else
       qWarning("[QtStereoscopy] Warning: Could not configure the target window.");
@@ -203,15 +201,15 @@ QOculusRiftStereoRenderer::configureGL()
          glDisable(GL_MULTISAMPLE);
          multisample = 0;
       }
-      _coherentRenderingConfiguration = false;
+      _eyeRenderConfigurationsChanged = true;
    }
 */
    // Configure the framebuffer object.
-   if (!_coherentFBO)
+   if (_fboChanged)
    {
       // Calculate the FBO's new resolution.
-      const auto& sizeL = ovrHmd_GetFovTextureSize(_display, ovrEye_Left,  _fovs[ovrEye_Left],  _pixelDensity);
-      const auto& sizeR = ovrHmd_GetFovTextureSize(_display, ovrEye_Right, _fovs[ovrEye_Right], _pixelDensity);
+      const auto& sizeL = ovrHmd_GetFovTextureSize(_display, ovrEye_Left,  _eyeFovs[ovrEye_Left],  _pixelDensity);
+      const auto& sizeR = ovrHmd_GetFovTextureSize(_display, ovrEye_Right, _eyeFovs[ovrEye_Right], _pixelDensity);
       const auto& newSize = QSize(sizeL.w + sizeR.w, std::max(sizeL.h, sizeR.h));
 
       // Resets (re-instantiates) the framebuffer object if the size or format differs.
@@ -233,7 +231,7 @@ QOculusRiftStereoRenderer::configureGL()
             OGL.TexId = _fbo->texture();
 
             // Set the camera viewport.
-            auto& camera = _cameras[i];
+            auto& camera = _eyeCameras[i];
             auto& viewport = camera.viewport;
             viewport = QRect(i * ((w + 1) * 0.5f), 0, w * 0.5f, h);
 
@@ -249,14 +247,14 @@ QOculusRiftStereoRenderer::configureGL()
 
       // Mark the framebuffer as coherent, however since it has been resized, the
       // rendering configuration needs to be updated.
-      _coherentFBO = true;
-      _coherentRenderingConfiguration = false;
+      _fboChanged = false;
+      _eyeRenderConfigurationsChanged = true;
    }
 
    // Update the rendering configuration.
-   if (!_coherentRenderingConfiguration)
+   if (_eyeRenderConfigurationsChanged)
    {
-      const ovrFovPort* const fovs = _fovs.data();
+      const ovrFovPort* const fovs = _eyeFovs.data();
       const ovrRenderAPIConfig* const apiConfig = &(_apiConfiguration->Config);
       const unsigned int& distortionCapabilities = _display.enabledDistortionCapabilities();
       ovrEyeRenderDesc* const renderConfigs = _eyeRenderConfigurations.data();
@@ -272,12 +270,12 @@ QOculusRiftStereoRenderer::configureGL()
       // Set the view adjust vectors.
       for (const auto& eye : _display.eyeRenderOrder())
       {
-         auto& camera = _cameras[eye];
+         auto& camera = _eyeCameras[eye];
          const auto& eyeRenderConfig = _eyeRenderConfigurations[eye];
          const auto& ovrViewAdjust = eyeRenderConfig.ViewAdjust;
          camera.viewAdjust = QVector3D(ovrViewAdjust.x, ovrViewAdjust.y, ovrViewAdjust.z);
       }
-      _coherentRenderingConfiguration = true;
+      _eyeRenderConfigurationsChanged = false;
    }
 }
 
@@ -286,14 +284,14 @@ QOculusRiftStereoRenderer::configureGL()
  * @brief Draws a scene in a specified stereoscopic configuration.
  */
 void
-QOculusRiftStereoRenderer::paintGL(const QStereoCamera&, const float&)
+QOculusRiftStereoRenderer::paintGL(const QStereoEyeCamera&, const float&)
 {}
 
 
-const QStereoCamera&
-QOculusRiftStereoRenderer::camera(const ovrEyeType& eye, const ovrPosef& headPose)
+const QStereoEyeCamera&
+QOculusRiftStereoRenderer::eyeCamera(const ovrEyeType& eye, const ovrPosef& headPose)
 {
-   auto& camera = _cameras[eye];
+   auto& camera = _eyeCameras[eye];
    const auto& eyeRenderConfig = _eyeRenderConfigurations[eye];
 
    // Calculate the view transformation matrix.
@@ -311,7 +309,7 @@ QOculusRiftStereoRenderer::camera(const ovrEyeType& eye, const ovrPosef& headPos
    }
 
    // Calculate the projection transformation matrices.
-   if (!camera.projectionCoherent())
+   if (camera.projectionChanged())
    {
       const auto& ovrFov = eyeRenderConfig.Fov;
       const auto& znear = camera.nearClippingPlane;
@@ -335,7 +333,7 @@ QOculusRiftStereoRenderer::camera(const ovrEyeType& eye, const ovrPosef& headPos
          camera.ortho(i, 2) = *ovrOrthoData++;
          camera.ortho(i, 3) = *ovrOrthoData++;
       }
-      camera.setProjectionCoherent(true);
+      camera.setProjectionChanged(false);
    }
    return camera;
 }

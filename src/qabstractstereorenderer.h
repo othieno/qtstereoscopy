@@ -31,7 +31,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QStereoCamera;
+class QStereoEyeCamera;
 template<class T> class QStereoWindow;
 
 class QAbstractStereoRenderer : public QObject, protected QOpenGLFunctions
@@ -47,16 +47,15 @@ protected:
 
    virtual void initializeWindow(const WId& windowId);
    virtual void initializeGL() = 0;
-   virtual void paintGL(const QStereoCamera& camera, const float& dt) = 0;
+   virtual void paintGL(const QStereoEyeCamera& camera, const float& dt) = 0;
 };
 
 
 template<class T> void
 QAbstractStereoRenderer::initialize(QStereoWindow<T>& window)
 {
-   initializeWindow(window.winId());
-
    initializeOpenGLFunctions();
+   initializeWindow(window.winId());
    initializeGL();
 }
 

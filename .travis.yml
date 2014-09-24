@@ -1,0 +1,9 @@
+language: cpp
+compiler:
+   - gcc
+script: ./scripts/travis/run-tests.sh
+branches:
+   only:
+      - master
+os:
+   - linux

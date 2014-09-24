@@ -26,7 +26,7 @@
 
 #include "qabstractstereorenderer.h"
 #include "qoculusrift.h"
-#include "qstereocamera.h"
+#include "qstereoeyecamera.h"
 #include <QtGui/QOpenGLFunctions>
 #include <QtGui/QMatrix4x4>
 #include <QtGui/QOpenGLFramebufferObjectFormat>
@@ -60,14 +60,15 @@ protected:
    void initializeWindow(const WId&) Q_DECL_OVERRIDE Q_DECL_FINAL;
    void initializeGL() Q_DECL_OVERRIDE;
    void configureGL();
-   void paintGL(const QStereoCamera&, const float&) Q_DECL_OVERRIDE;
-
-   const QStereoCamera& camera(const ovrEyeType& eye, const ovrPosef& headPose);
+   void paintGL(const QStereoEyeCamera&, const float&) Q_DECL_OVERRIDE;
 private:
+   const QStereoEyeCamera& eyeCamera(const ovrEyeType& eye, const ovrPosef& headPose);
+
    QOculusRift _display;
 
    QOpenGLFramebufferObjectFormat _fboFormat;
    std::unique_ptr<QOpenGLFramebufferObject> _fbo;
+   bool _fboChanged;
 
    struct ovrGLDeleter Q_DECL_FINAL
    {
@@ -78,16 +79,14 @@ private:
    std::unique_ptr<ovrGLTexture[], QOculusRiftStereoRenderer::ovrGLDeleter> _eyeTextureConfigurations;
 
    std::array<ovrEyeRenderDesc, ovrEye_Count> _eyeRenderConfigurations;
+   bool _eyeRenderConfigurationsChanged;
 
-   std::array<QStereoCamera, ovrEye_Count> _cameras;
-   std::array<ovrFovPort, ovrEye_Count> _fovs;
+   std::array<QStereoEyeCamera, ovrEye_Count> _eyeCameras;
+   std::array<ovrFovPort, ovrEye_Count> _eyeFovs;
 
    float _pixelDensity;
 
    bool _forceZeroIPD;
-
-   bool _coherentFBO;
-   bool _coherentRenderingConfiguration;
 };
 
 QT_END_NAMESPACE

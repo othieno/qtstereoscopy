@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef QSTEREOSCOPY_CUBERENDERER_H
-#define QSTEREOSCOPY_CUBERENDERER_H
+#ifndef QTSTEREOSCOPY_CUBERENDERER_H
+#define QTSTEREOSCOPY_CUBERENDERER_H
 
 #include <QOculusRiftStereoRenderer>
 
@@ -33,11 +33,11 @@ public:
    CubeRenderer();
 
    void initializeGL() Q_DECL_OVERRIDE Q_DECL_FINAL;
-   void paintGL(const QStereoCamera&, const float&) Q_DECL_OVERRIDE;
+   void paintGL(const QStereoEyeCamera&, const float&) Q_DECL_OVERRIDE;
 
    void update(const float& dt);
 private:
    GLfloat _angle;
 };
 
-#endif // QSTEREOSCOPY_CUBERENDERER_H
+#endif // QTSTEREOSCOPY_CUBERENDERER_H

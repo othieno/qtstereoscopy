@@ -34,10 +34,10 @@ CONFIG += c++11
 HEADERS +=\
    "$$QTSTEREOSCOPY_SRC/qabstractstereodisplay.h"\
    "$$QTSTEREOSCOPY_SRC/qabstractstereorenderer.h"\
-   "$$QTSTEREOSCOPY_SRC/qstereocamera.h"\
+   "$$QTSTEREOSCOPY_SRC/qstereoeyecamera.h"\
    "$$QTSTEREOSCOPY_SRC/qstereowindow.h"
 
 SOURCES +=\
    "$$QTSTEREOSCOPY_SRC/qabstractstereodisplay.cpp"\
    "$$QTSTEREOSCOPY_SRC/qabstractstereorenderer.cpp"\
-   "$$QTSTEREOSCOPY_SRC/qstereocamera.cpp"
+   "$$QTSTEREOSCOPY_SRC/qstereoeyecamera.cpp"

@@ -21,37 +21,59 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef QSTEREOCAMERA_H
-#define QSTEREOCAMERA_H
+#include "qstereoeyecamera.h"
 
-#include <QtGui/QVector3D>
-#include <QtGui/QMatrix4x4>
+float QStereoEyeCamera::nearClippingPlane = 0.01f;
+float QStereoEyeCamera::farClippingPlane = 10000.0f;
 
 
-QT_BEGIN_NAMESPACE
+QStereoEyeCamera::QStereoEyeCamera() :
+orthoDistance(0.8f),
+_hasProjectionChanged(true)
+{}
 
-class QStereoCamera
+
+
+
+
+
+
+
+/**
+ * @brief Sets the viewing frustum's clipping plane distances.
+void
+QOculusRiftStereoRenderer::setClippingPlaneDistances(const float* const near, const float* const far)
 {
-public:
-   QStereoCamera();
+   bool projectionChanged = false;
 
-   bool projectionCoherent() const;
-   void setProjectionCoherent(const bool coherent);
+   if (near != nullptr && !qFuzzyCompare(_clippingPlaneDistance.near, *near))
+   {
+      _clippingPlaneDistance.near = *near;
+      projectionChanged = true;
+   }
+   if (far != nullptr && !qFuzzyCompare(_clippingPlaneDistance.far, *far))
+   {
+      _clippingPlaneDistance.far = *far;
+      projectionChanged = true;
+   }
 
-   QMatrix4x4 view;
-   QMatrix4x4 perspective;
-   QMatrix4x4 ortho;
+   // Mark both projection transform configurations as dirty.
+   if (projectionChanged)
+      _dirty.projection.fill(true);
+}
+*/
 
-   static float nearClippingPlane;
-   static float farClippingPlane;
 
-   float orthoDistance;
-   QVector3D viewAdjust;
-   QRect viewport;
-private:
-   bool _isProjectionCoherent;
-};
 
-QT_END_NAMESPACE
+bool
+QStereoEyeCamera::projectionChanged() const
+{
+   return _hasProjectionChanged;
+}
 
-#endif // QSTEREOCAMERA_H
+
+void
+QStereoEyeCamera::setProjectionChanged(const bool changed)
+{
+   _hasProjectionChanged = changed;
+}

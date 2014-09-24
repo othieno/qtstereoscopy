@@ -71,7 +71,7 @@ CubeRenderer::update(const float& dt)
 
 
 void
-CubeRenderer::paintGL(const QStereoCamera& camera, const float& dt)
+CubeRenderer::paintGL(const QStereoEyeCamera& camera, const float& dt)
 {
    update(dt);
 
