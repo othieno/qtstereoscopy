@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- qoculusrift.qdoc -->
+  <title>QOculusRift Class | QtStereoscopy </title>
+</head>
+<body>
+<li>QOculusRift</li>
+<li id="buildversion">
+</li>
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<h1 class="title">QOculusRift Class</h1>
+<!-- $$$QOculusRift-brief -->
+<p>The QOculusRift class adds support for the Oculus Rift head-mounted display device. <a href="#details">More...</a></p>
+<!-- @@@QOculusRift -->
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> </b><tt><span class="preprocessor">#include &lt;QOculusRift&gt;</span>
+</tt></td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <a href="qabstractstereodisplay.html">QAbstractStereoDisplay</a>.</td></tr></table><ul>
+<li><a href="qoculusrift-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2>Public Functions</h2>
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#QOculusRift">QOculusRift</a></b>(const unsigned int &amp;<i> index</i> = 0)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#dtor.QOculusRift">~QOculusRift</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#cameraFrustumDepth">cameraFrustumDepth</a></b>(float * const<i> near</i>, float * const<i> far</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#cameraFrustumFov">cameraFrustumFov</a></b>(float * const<i> horizontal</i>, float * const<i> vertical</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#chromaticAberrationCorrectionEnabled">chromaticAberrationCorrectionEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#dynamicPredictionEnabled">dynamicPredictionEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enableChromaticAberrationCorrection">enableChromaticAberrationCorrection</a></b>(const bool<i> enable</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enableDynamicPrediction">enableDynamicPrediction</a></b>(const bool<i> enable</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enableLatencyTesting">enableLatencyTesting</a></b>(const bool<i> enable</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enableLowPersistence">enableLowPersistence</a></b>(const bool<i> enable</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enableTimewarp">enableTimewarp</a></b>(const bool<i> enable</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enableVignette">enableVignette</a></b>(const bool<i> enable</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enableVsync">enableVsync</a></b>(const bool<i> enable</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enableYawCorrection">enableYawCorrection</a></b>(const bool<i> enable</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const unsigned int &amp; </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enabledDistortionCapabilities">enabledDistortionCapabilities</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const unsigned int &amp; </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enabledHmdCapabilities">enabledHmdCapabilities</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const unsigned int &amp; </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enabledTrackingCapabilities">enabledTrackingCapabilities</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> std::array&lt;ovrEyeType, ovrEye_Count&gt; </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#eyeRenderOrder">eyeRenderOrder</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#firmwareVersion">firmwareVersion</a></b>(short int * const<i> major</i>, short int * const<i> minor</i>) const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const ovrHmd &amp; </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#handle">handle</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#latencyTestingEnabled">latencyTestingEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#lowPersistenceEnabled">lowPersistenceEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> std::array&lt;ovrFovPort, ovrEye_Count&gt; </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#maximumFov">maximumFov</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const short int &amp; </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#productId">productId</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> std::array&lt;ovrFovPort, ovrEye_Count&gt; </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#recommendedFov">recommendedFov</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#serialNumber">serialNumber</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> unsigned int </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#supportedDistortionCapabilities">supportedDistortionCapabilities</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> unsigned int </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#supportedHmdCapabilities">supportedHmdCapabilities</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> unsigned int </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#supportedTrackingCapabilities">supportedTrackingCapabilities</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const int &amp; </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#systemId">systemId</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QString </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#systemName">systemName</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#timewarpEnabled">timewarpEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const ovrHmdType &amp; </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#type">type</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const short int &amp; </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#vendorId">vendorId</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#vignetteEnabled">vignetteEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#vsyncEnabled">vsyncEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QPoint </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#windowPosition">windowPosition</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#yawCorrectionEnabled">yawCorrectionEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#operator-const-ovrHmd--and">operator const ovrHmd &amp;</a></b>() const</td></tr>
+</table>
+<a name="reimplemented-public-functions"></a>
+<h2>Reimplemented Public Functions</h2>
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#available">available</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enableEyeTracking">enableEyeTracking</a></b>(const bool<i> enable</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enableOrientationTracking">enableOrientationTracking</a></b>(const bool<i> enable</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#enablePositionalTracking">enablePositionalTracking</a></b>(const bool<i> enable</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual QPoint </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#eyePosition">eyePosition</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#eyeTrackingAvailable">eyeTrackingAvailable</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#eyeTrackingEnabled">eyeTrackingEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual QQuaternion </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#headOrientation">headOrientation</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual QVector3D </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#headPosition">headPosition</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual float </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#interpupillaryDistance">interpupillaryDistance</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual QString </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#manufacturerName">manufacturerName</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#orientationTrackingAvailable">orientationTrackingAvailable</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#orientationTrackingEnabled">orientationTrackingEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#positionalTrackingAvailable">positionalTrackingAvailable</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#positionalTrackingEnabled">positionalTrackingEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual QString </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#productName">productName</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual unsigned int </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#refreshRate">refreshRate</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#resetHeadOrientation">resetHeadOrientation</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#resetHeadPosition">resetHeadPosition</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual QSize </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#resolution">resolution</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#setInterpupillaryDistance">setInterpupillaryDistance</a></b>(const float &amp;<i> value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#setUserHeight">setUserHeight</a></b>(const float &amp;<i> value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual float </td><td class="memItemRight bottomAlign"><b><a href="qoculusrift.html#userHeight">userHeight</a></b>() const</td></tr>
+</table>
+<ul>
+<li class="fn">26 public functions inherited from <a href="qabstractstereodisplay.html#public-functions">QAbstractStereoDisplay</a></li>
+</ul>
+<a name="details"></a>
+<!-- $$$QOculusRift-description -->
+<div class="descr">
+<h2>Detailed Description</h2>
+<p>The QOculusRift class adds support for the Oculus Rift head-mounted display device.</p>
+</div>
+<!-- @@@QOculusRift -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$QOculusRift[overload1]$$$QOculusRiftconstunsignedint& -->
+<h3 class="fn"><a name="QOculusRift"></a>QOculusRift::<span class="name">QOculusRift</span>(const <span class="type">unsigned</span> <span class="type">int</span> &amp;<i> index</i> = 0)</h3>
+<p>Constructs a <a href="qoculusrift.html">QOculusRift</a> that is attached to a device with the specified <i>index</i>.</p>
+<!-- @@@QOculusRift -->
+<!-- $$$~QOculusRift[overload1]$$$~QOculusRift -->
+<h3 class="fn"><a name="dtor.QOculusRift"></a>QOculusRift::<span class="name">~QOculusRift</span>()</h3>
+<p>Destroys the <a href="qoculusrift.html">QOculusRift</a>.</p>
+<!-- @@@~QOculusRift -->
+<!-- $$$available[overload1]$$$available -->
+<h3 class="fn"><a name="available"></a><span class="type">bool</span> QOculusRift::<span class="name">available</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#available">QAbstractStereoDisplay::available</a>().</p>
+<!-- @@@available -->
+<!-- $$$cameraFrustumDepth[overload1]$$$cameraFrustumDepthfloat*constfloat*const -->
+<h3 class="fn"><a name="cameraFrustumDepth"></a><span class="type">void</span> QOculusRift::<span class="name">cameraFrustumDepth</span>(<span class="type">float</span> * const<i> near</i>, <span class="type">float</span> * const<i> far</i>) const</h3>
+<p>Returns the position-tracking camera's frustum's <i>near</i> and <i>far</i> depth bounds in meters.</p>
+<p>If either parameter is <tt>null</tt>, then the corresponding depth is ignored.</p>
+<!-- @@@cameraFrustumDepth -->
+<!-- $$$cameraFrustumFov[overload1]$$$cameraFrustumFovfloat*constfloat*const -->
+<h3 class="fn"><a name="cameraFrustumFov"></a><span class="type">void</span> QOculusRift::<span class="name">cameraFrustumFov</span>(<span class="type">float</span> * const<i> horizontal</i>, <span class="type">float</span> * const<i> vertical</i>) const</h3>
+<p>Returns the position-tracking camera's frustum's <i>horizontal</i> and <i>vertical</i> field of view (FOV) in radians.</p>
+<p>If either parameter is <tt>null</tt>, then the corresponding FOV is ignored.</p>
+<!-- @@@cameraFrustumFov -->
+<!-- $$$chromaticAberrationCorrectionEnabled[overload1]$$$chromaticAberrationCorrectionEnabled -->
+<h3 class="fn"><a name="chromaticAberrationCorrectionEnabled"></a><span class="type">bool</span> QOculusRift::<span class="name">chromaticAberrationCorrectionEnabled</span>() const</h3>
+<p>Returns <tt>true</tt> if chromatic aberration correction is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@chromaticAberrationCorrectionEnabled -->
+<!-- $$$dynamicPredictionEnabled[overload1]$$$dynamicPredictionEnabled -->
+<h3 class="fn"><a name="dynamicPredictionEnabled"></a><span class="type">bool</span> QOculusRift::<span class="name">dynamicPredictionEnabled</span>() const</h3>
+<p>Returns <tt>true</tt> if dynamic prediction is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@dynamicPredictionEnabled -->
+<!-- $$$enableChromaticAberrationCorrection[overload1]$$$enableChromaticAberrationCorrectionconstbool -->
+<h3 class="fn"><a name="enableChromaticAberrationCorrection"></a><span class="type">void</span> QOculusRift::<span class="name">enableChromaticAberrationCorrection</span>(const <span class="type">bool</span><i> enable</i> = true)</h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then chromatic aberration correction is enabled, otherwise it is disabled.</p>
+<!-- @@@enableChromaticAberrationCorrection -->
+<!-- $$$enableDynamicPrediction[overload1]$$$enableDynamicPredictionconstbool -->
+<h3 class="fn"><a name="enableDynamicPrediction"></a><span class="type">void</span> QOculusRift::<span class="name">enableDynamicPrediction</span>(const <span class="type">bool</span><i> enable</i> = true)</h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then dynamic prediction is enabled, otherwise it is disabled.</p>
+<!-- @@@enableDynamicPrediction -->
+<!-- $$$enableEyeTracking[overload1]$$$enableEyeTrackingconstbool -->
+<h3 class="fn"><a name="enableEyeTracking"></a><span class="type">void</span> QOculusRift::<span class="name">enableEyeTracking</span>(const <span class="type">bool</span><i> enable</i>)<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#enableEyeTracking">QAbstractStereoDisplay::enableEyeTracking</a>().</p>
+<p><span style="display:none"><i>enable</i></span></p>
+<!-- @@@enableEyeTracking -->
+<!-- $$$enableLatencyTesting[overload1]$$$enableLatencyTestingconstbool -->
+<h3 class="fn"><a name="enableLatencyTesting"></a><span class="type">void</span> QOculusRift::<span class="name">enableLatencyTesting</span>(const <span class="type">bool</span><i> enable</i> = true)</h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then latency testing is enabled, otherwise it is disabled.</p>
+<!-- @@@enableLatencyTesting -->
+<!-- $$$enableLowPersistence[overload1]$$$enableLowPersistenceconstbool -->
+<h3 class="fn"><a name="enableLowPersistence"></a><span class="type">void</span> QOculusRift::<span class="name">enableLowPersistence</span>(const <span class="type">bool</span><i> enable</i> = true)</h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then low-persistence is enabled, otherwise it is disabled.</p>
+<!-- @@@enableLowPersistence -->
+<!-- $$$enableOrientationTracking[overload1]$$$enableOrientationTrackingconstbool -->
+<h3 class="fn"><a name="enableOrientationTracking"></a><span class="type">void</span> QOculusRift::<span class="name">enableOrientationTracking</span>(const <span class="type">bool</span><i> enable</i> = true)<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#enableOrientationTracking">QAbstractStereoDisplay::enableOrientationTracking</a>().</p>
+<p><span style="display:none"><i>enable</i></span></p>
+<!-- @@@enableOrientationTracking -->
+<!-- $$$enablePositionalTracking[overload1]$$$enablePositionalTrackingconstbool -->
+<h3 class="fn"><a name="enablePositionalTracking"></a><span class="type">void</span> QOculusRift::<span class="name">enablePositionalTracking</span>(const <span class="type">bool</span><i> enable</i> = true)<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#enablePositionalTracking">QAbstractStereoDisplay::enablePositionalTracking</a>().</p>
+<p><span style="display:none"><i>enable</i></span></p>
+<!-- @@@enablePositionalTracking -->
+<!-- $$$enableTimewarp[overload1]$$$enableTimewarpconstbool -->
+<h3 class="fn"><a name="enableTimewarp"></a><span class="type">void</span> QOculusRift::<span class="name">enableTimewarp</span>(const <span class="type">bool</span><i> enable</i> = true)</h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then timewarp is enabled, otherwise it is disabled.</p>
+<!-- @@@enableTimewarp -->
+<!-- $$$enableVignette[overload1]$$$enableVignetteconstbool -->
+<h3 class="fn"><a name="enableVignette"></a><span class="type">void</span> QOculusRift::<span class="name">enableVignette</span>(const <span class="type">bool</span><i> enable</i> = true)</h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then vignetting is enabled, otherwise it is disabled.</p>
+<!-- @@@enableVignette -->
+<!-- $$$enableVsync[overload1]$$$enableVsyncconstbool -->
+<h3 class="fn"><a name="enableVsync"></a><span class="type">void</span> QOculusRift::<span class="name">enableVsync</span>(const <span class="type">bool</span><i> enable</i>)</h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then vertical synchronization (VSYNC) is enabled, otherwise it is disabled.</p>
+<p><b>Warning:</b> Disabling this feature may break VR immersion.</p>
+<!-- @@@enableVsync -->
+<!-- $$$enableYawCorrection[overload1]$$$enableYawCorrectionconstbool -->
+<h3 class="fn"><a name="enableYawCorrection"></a><span class="type">void</span> QOculusRift::<span class="name">enableYawCorrection</span>(const <span class="type">bool</span><i> enable</i> = true)</h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then yaw correction is enabled, otherwise it is disabled.</p>
+<!-- @@@enableYawCorrection -->
+<!-- $$$enabledDistortionCapabilities[overload1]$$$enabledDistortionCapabilities -->
+<h3 class="fn"><a name="enabledDistortionCapabilities"></a>const <span class="type">unsigned</span> <span class="type">int</span> &amp; QOculusRift::<span class="name">enabledDistortionCapabilities</span>() const</h3>
+<p>Returns the device's enabled distortion capability bits.</p>
+<!-- @@@enabledDistortionCapabilities -->
+<!-- $$$enabledHmdCapabilities[overload1]$$$enabledHmdCapabilities -->
+<h3 class="fn"><a name="enabledHmdCapabilities"></a>const <span class="type">unsigned</span> <span class="type">int</span> &amp; QOculusRift::<span class="name">enabledHmdCapabilities</span>() const</h3>
+<p>Returns the device's enabled HMD capability bits.</p>
+<!-- @@@enabledHmdCapabilities -->
+<!-- $$$enabledTrackingCapabilities[overload1]$$$enabledTrackingCapabilities -->
+<h3 class="fn"><a name="enabledTrackingCapabilities"></a>const <span class="type">unsigned</span> <span class="type">int</span> &amp; QOculusRift::<span class="name">enabledTrackingCapabilities</span>() const</h3>
+<p>Returns the device's enabled tracking capability bits.</p>
+<!-- @@@enabledTrackingCapabilities -->
+<!-- $$$eyePosition[overload1]$$$eyePosition -->
+<h3 class="fn"><a name="eyePosition"></a><span class="type">QPoint</span> QOculusRift::<span class="name">eyePosition</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#eyePosition">QAbstractStereoDisplay::eyePosition</a>().</p>
+<!-- @@@eyePosition -->
+<!-- $$$eyeRenderOrder[overload1]$$$eyeRenderOrder -->
+<h3 class="fn"><a name="eyeRenderOrder"></a><span class="type">std::array</span>&lt;<span class="type">ovrEyeType</span>, <span class="type">ovrEye_Count</span>&gt; QOculusRift::<span class="name">eyeRenderOrder</span>() const</h3>
+<p>Returns the device's eye render order.</p>
+<!-- @@@eyeRenderOrder -->
+<!-- $$$eyeTrackingAvailable[overload1]$$$eyeTrackingAvailable -->
+<h3 class="fn"><a name="eyeTrackingAvailable"></a><span class="type">bool</span> QOculusRift::<span class="name">eyeTrackingAvailable</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#eyeTrackingAvailable">QAbstractStereoDisplay::eyeTrackingAvailable</a>().</p>
+<!-- @@@eyeTrackingAvailable -->
+<!-- $$$eyeTrackingEnabled[overload1]$$$eyeTrackingEnabled -->
+<h3 class="fn"><a name="eyeTrackingEnabled"></a><span class="type">bool</span> QOculusRift::<span class="name">eyeTrackingEnabled</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#eyeTrackingEnabled">QAbstractStereoDisplay::eyeTrackingEnabled</a>().</p>
+<!-- @@@eyeTrackingEnabled -->
+<!-- $$$firmwareVersion[overload1]$$$firmwareVersionshortint*constshortint*const -->
+<h3 class="fn"><a name="firmwareVersion"></a><span class="type">void</span> QOculusRift::<span class="name">firmwareVersion</span>(<span class="type">short</span> <span class="type">int</span> * const<i> major</i>, <span class="type">short</span> <span class="type">int</span> * const<i> minor</i>) const</h3>
+<p>Returns the device's <i>major</i> and <i>minor</i> firmware version.</p>
+<p>If either parameter is <tt>null</tt>, then the corresponding version is ignored.</p>
+<!-- @@@firmwareVersion -->
+<!-- $$$handle[overload1]$$$handle -->
+<h3 class="fn"><a name="handle"></a>const <span class="type">ovrHmd</span> &amp; QOculusRift::<span class="name">handle</span>() const</h3>
+<p>Returns the underlying device handle.</p>
+<!-- @@@handle -->
+<!-- $$$headOrientation[overload1]$$$headOrientation -->
+<h3 class="fn"><a name="headOrientation"></a><span class="type">QQuaternion</span> QOculusRift::<span class="name">headOrientation</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#headOrientation">QAbstractStereoDisplay::headOrientation</a>().</p>
+<!-- @@@headOrientation -->
+<!-- $$$headPosition[overload1]$$$headPosition -->
+<h3 class="fn"><a name="headPosition"></a><span class="type">QVector3D</span> QOculusRift::<span class="name">headPosition</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#headPosition">QAbstractStereoDisplay::headPosition</a>().</p>
+<!-- @@@headPosition -->
+<!-- $$$interpupillaryDistance[overload1]$$$interpupillaryDistance -->
+<h3 class="fn"><a name="interpupillaryDistance"></a><span class="type">float</span> QOculusRift::<span class="name">interpupillaryDistance</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#interpupillaryDistance">QAbstractStereoDisplay::interpupillaryDistance</a>().</p>
+<p><b>See also </b><a href="qoculusrift.html#setInterpupillaryDistance">setInterpupillaryDistance</a>().</p>
+<!-- @@@interpupillaryDistance -->
+<!-- $$$latencyTestingEnabled[overload1]$$$latencyTestingEnabled -->
+<h3 class="fn"><a name="latencyTestingEnabled"></a><span class="type">bool</span> QOculusRift::<span class="name">latencyTestingEnabled</span>() const</h3>
+<p>Returns <tt>true</tt> if latency testing is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@latencyTestingEnabled -->
+<!-- $$$lowPersistenceEnabled[overload1]$$$lowPersistenceEnabled -->
+<h3 class="fn"><a name="lowPersistenceEnabled"></a><span class="type">bool</span> QOculusRift::<span class="name">lowPersistenceEnabled</span>() const</h3>
+<p>Returns <tt>true</tt> if low-persistence is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@lowPersistenceEnabled -->
+<!-- $$$manufacturerName[overload1]$$$manufacturerName -->
+<h3 class="fn"><a name="manufacturerName"></a><span class="type">QString</span> QOculusRift::<span class="name">manufacturerName</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#manufacturerName">QAbstractStereoDisplay::manufacturerName</a>().</p>
+<!-- @@@manufacturerName -->
+<!-- $$$maximumFov[overload1]$$$maximumFov -->
+<h3 class="fn"><a name="maximumFov"></a><span class="type">std::array</span>&lt;<span class="type">ovrFovPort</span>, <span class="type">ovrEye_Count</span>&gt; QOculusRift::<span class="name">maximumFov</span>() const</h3>
+<p>Returns the maximum optical field of view (FOV) for both eyes.</p>
+<!-- @@@maximumFov -->
+<!-- $$$orientationTrackingAvailable[overload1]$$$orientationTrackingAvailable -->
+<h3 class="fn"><a name="orientationTrackingAvailable"></a><span class="type">bool</span> QOculusRift::<span class="name">orientationTrackingAvailable</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#orientationTrackingAvailable">QAbstractStereoDisplay::orientationTrackingAvailable</a>().</p>
+<!-- @@@orientationTrackingAvailable -->
+<!-- $$$orientationTrackingEnabled[overload1]$$$orientationTrackingEnabled -->
+<h3 class="fn"><a name="orientationTrackingEnabled"></a><span class="type">bool</span> QOculusRift::<span class="name">orientationTrackingEnabled</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#orientationTrackingEnabled">QAbstractStereoDisplay::orientationTrackingEnabled</a>().</p>
+<!-- @@@orientationTrackingEnabled -->
+<!-- $$$positionalTrackingAvailable[overload1]$$$positionalTrackingAvailable -->
+<h3 class="fn"><a name="positionalTrackingAvailable"></a><span class="type">bool</span> QOculusRift::<span class="name">positionalTrackingAvailable</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#positionalTrackingAvailable">QAbstractStereoDisplay::positionalTrackingAvailable</a>().</p>
+<!-- @@@positionalTrackingAvailable -->
+<!-- $$$positionalTrackingEnabled[overload1]$$$positionalTrackingEnabled -->
+<h3 class="fn"><a name="positionalTrackingEnabled"></a><span class="type">bool</span> QOculusRift::<span class="name">positionalTrackingEnabled</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#positionalTrackingEnabled">QAbstractStereoDisplay::positionalTrackingEnabled</a>().</p>
+<!-- @@@positionalTrackingEnabled -->
+<!-- $$$productId[overload1]$$$productId -->
+<h3 class="fn"><a name="productId"></a>const <span class="type">short</span> <span class="type">int</span> &amp; QOculusRift::<span class="name">productId</span>() const</h3>
+<p>Returns the device's product identifier.</p>
+<!-- @@@productId -->
+<!-- $$$productName[overload1]$$$productName -->
+<h3 class="fn"><a name="productName"></a><span class="type">QString</span> QOculusRift::<span class="name">productName</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#productName">QAbstractStereoDisplay::productName</a>().</p>
+<!-- @@@productName -->
+<!-- $$$recommendedFov[overload1]$$$recommendedFov -->
+<h3 class="fn"><a name="recommendedFov"></a><span class="type">std::array</span>&lt;<span class="type">ovrFovPort</span>, <span class="type">ovrEye_Count</span>&gt; QOculusRift::<span class="name">recommendedFov</span>() const</h3>
+<p>Returns the recommended optical field of view (FOV) for both eyes.</p>
+<!-- @@@recommendedFov -->
+<!-- $$$refreshRate[overload1]$$$refreshRate -->
+<h3 class="fn"><a name="refreshRate"></a><span class="type">unsigned</span> <span class="type">int</span> QOculusRift::<span class="name">refreshRate</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#refreshRate">QAbstractStereoDisplay::refreshRate</a>().</p>
+<!-- @@@refreshRate -->
+<!-- $$$resetHeadOrientation[overload1]$$$resetHeadOrientation -->
+<h3 class="fn"><a name="resetHeadOrientation"></a><span class="type">void</span> QOculusRift::<span class="name">resetHeadOrientation</span>()<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#resetHeadOrientation">QAbstractStereoDisplay::resetHeadOrientation</a>().</p>
+<!-- @@@resetHeadOrientation -->
+<!-- $$$resetHeadPosition[overload1]$$$resetHeadPosition -->
+<h3 class="fn"><a name="resetHeadPosition"></a><span class="type">void</span> QOculusRift::<span class="name">resetHeadPosition</span>()<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#resetHeadPosition">QAbstractStereoDisplay::resetHeadPosition</a>().</p>
+<!-- @@@resetHeadPosition -->
+<!-- $$$resolution[overload1]$$$resolution -->
+<h3 class="fn"><a name="resolution"></a><span class="type">QSize</span> QOculusRift::<span class="name">resolution</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#resolution">QAbstractStereoDisplay::resolution</a>().</p>
+<!-- @@@resolution -->
+<!-- $$$serialNumber[overload1]$$$serialNumber -->
+<h3 class="fn"><a name="serialNumber"></a><span class="type">QString</span> QOculusRift::<span class="name">serialNumber</span>() const</h3>
+<p>Returns the device's serial number.</p>
+<!-- @@@serialNumber -->
+<!-- $$$setInterpupillaryDistance[overload1]$$$setInterpupillaryDistanceconstfloat& -->
+<h3 class="fn"><a name="setInterpupillaryDistance"></a><span class="type">void</span> QOculusRift::<span class="name">setInterpupillaryDistance</span>(const <span class="type">float</span> &amp;<i> value</i>)<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#setInterpupillaryDistance">QAbstractStereoDisplay::setInterpupillaryDistance</a>().</p>
+<p><span style="display:none"><i>value</i></span></p>
+<p><b>See also </b><a href="qoculusrift.html#interpupillaryDistance">interpupillaryDistance</a>().</p>
+<!-- @@@setInterpupillaryDistance -->
+<!-- $$$setUserHeight[overload1]$$$setUserHeightconstfloat& -->
+<h3 class="fn"><a name="setUserHeight"></a><span class="type">void</span> QOculusRift::<span class="name">setUserHeight</span>(const <span class="type">float</span> &amp;<i> value</i>)<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#setUserHeight">QAbstractStereoDisplay::setUserHeight</a>().</p>
+<p><span style="display:none"><i>value</i></span></p>
+<p><b>See also </b><a href="qoculusrift.html#userHeight">userHeight</a>().</p>
+<!-- @@@setUserHeight -->
+<!-- $$$supportedDistortionCapabilities[overload1]$$$supportedDistortionCapabilities -->
+<h3 class="fn"><a name="supportedDistortionCapabilities"></a><span class="type">unsigned</span> <span class="type">int</span> QOculusRift::<span class="name">supportedDistortionCapabilities</span>() const</h3>
+<p>Returns the device's supported distortion capability bits.</p>
+<!-- @@@supportedDistortionCapabilities -->
+<!-- $$$supportedHmdCapabilities[overload1]$$$supportedHmdCapabilities -->
+<h3 class="fn"><a name="supportedHmdCapabilities"></a><span class="type">unsigned</span> <span class="type">int</span> QOculusRift::<span class="name">supportedHmdCapabilities</span>() const</h3>
+<p>Returns the device's supported HMD capability bits.</p>
+<!-- @@@supportedHmdCapabilities -->
+<!-- $$$supportedTrackingCapabilities[overload1]$$$supportedTrackingCapabilities -->
+<h3 class="fn"><a name="supportedTrackingCapabilities"></a><span class="type">unsigned</span> <span class="type">int</span> QOculusRift::<span class="name">supportedTrackingCapabilities</span>() const</h3>
+<p>Returns the device's supported tracking capability bits.</p>
+<!-- @@@supportedTrackingCapabilities -->
+<!-- $$$systemId[overload1]$$$systemId -->
+<h3 class="fn"><a name="systemId"></a>const <span class="type">int</span> &amp; QOculusRift::<span class="name">systemId</span>() const</h3>
+<p>Returns the device's system specific display identifier.</p>
+<!-- @@@systemId -->
+<!-- $$$systemName[overload1]$$$systemName -->
+<h3 class="fn"><a name="systemName"></a><span class="type">QString</span> QOculusRift::<span class="name">systemName</span>() const</h3>
+<p>Returns the device's system specific display name.</p>
+<!-- @@@systemName -->
+<!-- $$$timewarpEnabled[overload1]$$$timewarpEnabled -->
+<h3 class="fn"><a name="timewarpEnabled"></a><span class="type">bool</span> QOculusRift::<span class="name">timewarpEnabled</span>() const</h3>
+<p>Returns <tt>true</tt> if timewarp is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@timewarpEnabled -->
+<!-- $$$type[overload1]$$$type -->
+<h3 class="fn"><a name="type"></a>const <span class="type">ovrHmdType</span> &amp; QOculusRift::<span class="name">type</span>() const</h3>
+<p>Returns the device type.</p>
+<!-- @@@type -->
+<!-- $$$userHeight[overload1]$$$userHeight -->
+<h3 class="fn"><a name="userHeight"></a><span class="type">float</span> QOculusRift::<span class="name">userHeight</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereodisplay.html#userHeight">QAbstractStereoDisplay::userHeight</a>().</p>
+<p><b>See also </b><a href="qoculusrift.html#setUserHeight">setUserHeight</a>().</p>
+<!-- @@@userHeight -->
+<!-- $$$vendorId[overload1]$$$vendorId -->
+<h3 class="fn"><a name="vendorId"></a>const <span class="type">short</span> <span class="type">int</span> &amp; QOculusRift::<span class="name">vendorId</span>() const</h3>
+<p>Returns the device's vendor identifier.</p>
+<!-- @@@vendorId -->
+<!-- $$$vignetteEnabled[overload1]$$$vignetteEnabled -->
+<h3 class="fn"><a name="vignetteEnabled"></a><span class="type">bool</span> QOculusRift::<span class="name">vignetteEnabled</span>() const</h3>
+<p>Returns <tt>true</tt> if vignetting is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@vignetteEnabled -->
+<!-- $$$vsyncEnabled[overload1]$$$vsyncEnabled -->
+<h3 class="fn"><a name="vsyncEnabled"></a><span class="type">bool</span> QOculusRift::<span class="name">vsyncEnabled</span>() const</h3>
+<p>Returns <tt>true</tt> if vertical synchronization (VSYNC) is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@vsyncEnabled -->
+<!-- $$$windowPosition[overload1]$$$windowPosition -->
+<h3 class="fn"><a name="windowPosition"></a><span class="type">QPoint</span> QOculusRift::<span class="name">windowPosition</span>() const</h3>
+<p>Returns the location of the monitor window on the screen.</p>
+<p>If this feature is not supported by the system, then <tt>QPoint(0, 0)</tt> is returned.</p>
+<!-- @@@windowPosition -->
+<!-- $$$yawCorrectionEnabled[overload1]$$$yawCorrectionEnabled -->
+<h3 class="fn"><a name="yawCorrectionEnabled"></a><span class="type">bool</span> QOculusRift::<span class="name">yawCorrectionEnabled</span>() const</h3>
+<p>Returns <tt>true</tt> if yaw correction is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@yawCorrectionEnabled -->
+<!-- $$$operator const ovrHmd &[overload1]$$$operator const ovrHmd & -->
+<h3 class="fn"><a name="operator-const-ovrHmd--and"></a>QOculusRift::<span class="name">operator const ovrHmd &amp;</span>() const</h3>
+<p>Converts this instance into its underlying device handle.</p>
+<p><b>See also </b><a href="qoculusrift.html#handle">handle</a>().</p>
+<!-- @@@operator const ovrHmd & -->
+</div>
+</body>
+</html>

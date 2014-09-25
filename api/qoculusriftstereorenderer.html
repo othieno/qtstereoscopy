@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- qoculusriftstereorenderer.qdoc -->
+  <title>QOculusRiftStereoRenderer Class | QtStereoscopy </title>
+</head>
+<body>
+<li>QOculusRiftStereoRenderer</li>
+<li id="buildversion">
+</li>
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#protected-functions">Protected Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<h1 class="title">QOculusRiftStereoRenderer Class</h1>
+<!-- $$$QOculusRiftStereoRenderer-brief -->
+<p>The QOculusRiftStereoRenderer class extends <a href="qabstractstereorenderer.html">QAbstractStereoRenderer</a> functionality with support for the stereo rendering model used by the Oculus SDK. <a href="#details">More...</a></p>
+<!-- @@@QOculusRiftStereoRenderer -->
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> </b><tt><span class="preprocessor">#include &lt;QOculusRiftStereoRenderer&gt;</span>
+</tt></td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> <a href="qabstractstereorenderer.html">QAbstractStereoRenderer</a>.</td></tr></table><ul>
+<li><a href="qoculusriftstereorenderer-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2>Public Functions</h2>
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#QOculusRiftStereoRenderer">QOculusRiftStereoRenderer</a></b>(const unsigned int &amp;<i> index</i> = 0)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QOculusRift &amp; </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#display">display</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#freezeEyeUpdates">freezeEyeUpdates</a></b>(const ovrEyeType &amp;<i> eye</i>, const bool<i> freeze</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> const float &amp; </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#pixelDensity">pixelDensity</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#setPixelDensity">setPixelDensity</a></b>(const float &amp;<i> value</i>)</td></tr>
+</table>
+<a name="reimplemented-public-functions"></a>
+<h2>Reimplemented Public Functions</h2>
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#apply">apply</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#autoSwapsBuffers">autoSwapsBuffers</a></b>() const</td></tr>
+</table>
+<ul>
+<li class="fn">4 public functions inherited from <a href="qabstractstereorenderer.html#public-functions">QAbstractStereoRenderer</a></li>
+</ul>
+<a name="protected-functions"></a>
+<h2>Protected Functions</h2>
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#configureGL">configureGL</a></b>()</td></tr>
+</table>
+<a name="reimplemented-protected-functions"></a>
+<h2>Reimplemented Protected Functions</h2>
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#initializeGL">initializeGL</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#initializeWindow">initializeWindow</a></b>(const WId &amp;<i> windowId</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#paintGL">paintGL</a></b>(const QStereoEyeCamera &amp;<i> camera</i>, const float &amp;<i> dt</i>)</td></tr>
+</table>
+<ul>
+<li class="fn">3 protected functions inherited from <a href="qabstractstereorenderer.html#protected-functions">QAbstractStereoRenderer</a></li>
+</ul>
+<a name="details"></a>
+<!-- $$$QOculusRiftStereoRenderer-description -->
+<div class="descr">
+<h2>Detailed Description</h2>
+<p>The QOculusRiftStereoRenderer class extends <a href="qabstractstereorenderer.html">QAbstractStereoRenderer</a> functionality with support for the stereo rendering model used by the Oculus SDK.</p>
+</div>
+<!-- @@@QOculusRiftStereoRenderer -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$QOculusRiftStereoRenderer[overload1]$$$QOculusRiftStereoRendererconstunsignedint& -->
+<h3 class="fn"><a name="QOculusRiftStereoRenderer"></a>QOculusRiftStereoRenderer::<span class="name">QOculusRiftStereoRenderer</span>(const <span class="type">unsigned</span> <span class="type">int</span> &amp;<i> index</i> = 0)</h3>
+<p>Constructs a <a href="qoculusriftstereorenderer.html">QOculusRiftStereoRenderer</a> that is attached to the Oculus Rift with the specified <i>index</i>.</p>
+<!-- @@@QOculusRiftStereoRenderer -->
+<!-- $$$apply[overload1]$$$apply -->
+<h3 class="fn"><a name="apply"></a><span class="type">void</span> QOculusRiftStereoRenderer::<span class="name">apply</span>()<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereorenderer.html#apply">QAbstractStereoRenderer::apply</a>().</p>
+<p>Draws a scene with the stereoscopic model used by the Oculus Rift.</p>
+<!-- @@@apply -->
+<!-- $$$autoSwapsBuffers[overload1]$$$autoSwapsBuffers -->
+<h3 class="fn"><a name="autoSwapsBuffers"></a><span class="type">bool</span> QOculusRiftStereoRenderer::<span class="name">autoSwapsBuffers</span>() const<tt> [virtual]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereorenderer.html#autoSwapsBuffers">QAbstractStereoRenderer::autoSwapsBuffers</a>().</p>
+<p>Returns <tt>true</tt> since the Oculus SDK handles buffer swapping (in SDK distortion mode).</p>
+<!-- @@@autoSwapsBuffers -->
+<!-- $$$configureGL[overload1]$$$configureGL -->
+<h3 class="fn"><a name="configureGL"></a><span class="type">void</span> QOculusRiftStereoRenderer::<span class="name">configureGL</span>()<tt> [protected]</tt></h3>
+<p>Configures the OpenGL context for use with the Oculus SDK.</p>
+<!-- @@@configureGL -->
+<!-- $$$display[overload1]$$$display -->
+<h3 class="fn"><a name="display"></a><span class="type"><a href="qoculusrift.html">QOculusRift</a></span> &amp; QOculusRiftStereoRenderer::<span class="name">display</span>()</h3>
+<p>Returns the Oculus Rift display device that is used by this renderer.</p>
+<!-- @@@display -->
+<!-- $$$freezeEyeUpdates[overload1]$$$freezeEyeUpdatesconstovrEyeType&constbool -->
+<h3 class="fn"><a name="freezeEyeUpdates"></a><span class="type">void</span> QOculusRiftStereoRenderer::<span class="name">freezeEyeUpdates</span>(const <span class="type">ovrEyeType</span> &amp;<i> eye</i>, const <span class="type">bool</span><i> freeze</i> = true)</h3>
+<p>If <i>freeze</i> is set to <tt>true</tt>, updates for the specified <i>eye</i> are ignored.</p>
+<!-- @@@freezeEyeUpdates -->
+<!-- $$$initializeGL[overload1]$$$initializeGL -->
+<h3 class="fn"><a name="initializeGL"></a><span class="type">void</span> QOculusRiftStereoRenderer::<span class="name">initializeGL</span>()<tt> [virtual protected]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereorenderer.html#initializeGL">QAbstractStereoRenderer::initializeGL</a>().</p>
+<!-- @@@initializeGL -->
+<!-- $$$initializeWindow[overload1]$$$initializeWindowconstWId& -->
+<h3 class="fn"><a name="initializeWindow"></a><span class="type">void</span> QOculusRiftStereoRenderer::<span class="name">initializeWindow</span>(const <span class="type">WId</span> &amp;<i> windowId</i>)<tt> [virtual protected]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereorenderer.html#initializeWindow">QAbstractStereoRenderer::initializeWindow</a>().</p>
+<p><span style="display:none"><i>windowId</i></span></p>
+<!-- @@@initializeWindow -->
+<!-- $$$paintGL[overload1]$$$paintGLconstQStereoEyeCamera&constfloat& -->
+<h3 class="fn"><a name="paintGL"></a><span class="type">void</span> QOculusRiftStereoRenderer::<span class="name">paintGL</span>(const <span class="type"><a href="qstereoeyecamera.html">QStereoEyeCamera</a></span> &amp;<i> camera</i>, const <span class="type">float</span> &amp;<i> dt</i>)<tt> [virtual protected]</tt></h3>
+<p>Reimplemented from <a href="qabstractstereorenderer.html#paintGL">QAbstractStereoRenderer::paintGL</a>().</p>
+<p><span style="display:none"><i>camera</i> <i>dt</i></span></p>
+<!-- @@@paintGL -->
+<!-- $$$pixelDensity[overload1]$$$pixelDensity -->
+<h3 class="fn"><a name="pixelDensity"></a>const <span class="type">float</span> &amp; QOculusRiftStereoRenderer::<span class="name">pixelDensity</span>() const</h3>
+<p>Returns the pixel density.</p>
+<p><b>See also </b><a href="qoculusriftstereorenderer.html#setPixelDensity">setPixelDensity</a>().</p>
+<!-- @@@pixelDensity -->
+<!-- $$$setPixelDensity[overload1]$$$setPixelDensityconstfloat& -->
+<h3 class="fn"><a name="setPixelDensity"></a><span class="type">void</span> QOculusRiftStereoRenderer::<span class="name">setPixelDensity</span>(const <span class="type">float</span> &amp;<i> value</i>)</h3>
+<p>Sets the pixel density to the specified <i>value</i>.</p>
+<p><b>See also </b><a href="qoculusriftstereorenderer.html#pixelDensity">pixelDensity</a>().</p>
+<!-- @@@setPixelDensity -->
+</div>
+</body>
+</html>

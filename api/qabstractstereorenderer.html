@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- qabstractstereorenderer.qdoc -->
+  <title>QAbstractStereoRenderer Class | QtStereoscopy </title>
+</head>
+<body>
+<li>QAbstractStereoRenderer</li>
+<li id="buildversion">
+</li>
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#protected-functions">Protected Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<h1 class="title">QAbstractStereoRenderer Class</h1>
+<!-- $$$QAbstractStereoRenderer-brief -->
+<p>The QAbstractStereoRenderer class is the base class for all stereoscopic renderer implementations. <a href="#details">More...</a></p>
+<!-- @@@QAbstractStereoRenderer -->
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> </b><tt><span class="preprocessor">#include &lt;QAbstractStereoRenderer&gt;</span>
+</tt></td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qoculusriftstereorenderer.html">QOculusRiftStereoRenderer</a>.</p>
+</td></tr></table><ul>
+<li><a href="qabstractstereorenderer-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2>Public Functions</h2>
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereorenderer.html#apply">apply</a></b>() = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereorenderer.html#autoSwapsBuffers">autoSwapsBuffers</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereorenderer.html#initialize">initialize</a></b>(QStereoWindow&lt;T&gt; &amp;<i> window</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereorenderer.html#setViewport">setViewport</a></b>(const QRect &amp;<i> viewport</i>)</td></tr>
+</table>
+<a name="protected-functions"></a>
+<h2>Protected Functions</h2>
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereorenderer.html#QAbstractStereoRenderer">QAbstractStereoRenderer</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereorenderer.html#initializeGL">initializeGL</a></b>() = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereorenderer.html#initializeWindow">initializeWindow</a></b>(const WId &amp;<i> windowId</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereorenderer.html#paintGL">paintGL</a></b>(const QStereoEyeCamera &amp;<i> camera</i>, const float &amp;<i> dt</i>) = 0</td></tr>
+</table>
+<a name="details"></a>
+<!-- $$$QAbstractStereoRenderer-description -->
+<div class="descr">
+<h2>Detailed Description</h2>
+<p>The QAbstractStereoRenderer class is the base class for all stereoscopic renderer implementations.</p>
+</div>
+<!-- @@@QAbstractStereoRenderer -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$QAbstractStereoRenderer[overload1]$$$QAbstractStereoRenderer -->
+<h3 class="fn"><a name="QAbstractStereoRenderer"></a>QAbstractStereoRenderer::<span class="name">QAbstractStereoRenderer</span>()<tt> [protected]</tt></h3>
+<p>Constructs a <a href="qabstractstereorenderer.html">QAbstractStereoRenderer</a>.</p>
+<!-- @@@QAbstractStereoRenderer -->
+<!-- $$$apply[overload1]$$$apply -->
+<h3 class="fn"><a name="apply"></a><span class="type">void</span> QAbstractStereoRenderer::<span class="name">apply</span>()<tt> [pure virtual]</tt></h3>
+<p>Applies the stereoscopic renderer's implementation.</p>
+<!-- @@@apply -->
+<!-- $$$autoSwapsBuffers[overload1]$$$autoSwapsBuffers -->
+<h3 class="fn"><a name="autoSwapsBuffers"></a><span class="type">bool</span> QAbstractStereoRenderer::<span class="name">autoSwapsBuffers</span>() const<tt> [virtual]</tt></h3>
+<p>Returns <tt>true</tt> if the renderer handles swapping the front and back buffers, <tt>false</tt> otherwise.</p>
+<!-- @@@autoSwapsBuffers -->
+<!-- $$$initialize[overload1]$$$initializeQStereoWindow<T>& -->
+<h3 class="fn"><a name="initialize"></a><span class="type">void</span> QAbstractStereoRenderer::<span class="name">initialize</span>(<span class="type"><a href="qstereowindow.html">QStereoWindow</a></span>&lt;<span class="type">T</span>&gt; &amp;<i> window</i>)</h3>
+<p>Initializes the renderer for use with the specified <i>window</i>.</p>
+<!-- @@@initialize -->
+<!-- $$$initializeGL[overload1]$$$initializeGL -->
+<h3 class="fn"><a name="initializeGL"></a><span class="type">void</span> QAbstractStereoRenderer::<span class="name">initializeGL</span>()<tt> [pure virtual protected]</tt></h3>
+<p>Initializes OpenGL.</p>
+<!-- @@@initializeGL -->
+<!-- $$$initializeWindow[overload1]$$$initializeWindowconstWId& -->
+<h3 class="fn"><a name="initializeWindow"></a><span class="type">void</span> QAbstractStereoRenderer::<span class="name">initializeWindow</span>(const <span class="type">WId</span> &amp;<i> windowId</i>)<tt> [virtual protected]</tt></h3>
+<p>Initializes the window with the specified <i>windowId</i> for use with this renderer.</p>
+<!-- @@@initializeWindow -->
+<!-- $$$paintGL[overload1]$$$paintGLconstQStereoEyeCamera&constfloat& -->
+<h3 class="fn"><a name="paintGL"></a><span class="type">void</span> QAbstractStereoRenderer::<span class="name">paintGL</span>(const <span class="type"><a href="qstereoeyecamera.html">QStereoEyeCamera</a></span> &amp;<i> camera</i>, const <span class="type">float</span> &amp;<i> dt</i>)<tt> [pure virtual protected]</tt></h3>
+<p>Draws a frame in a given stereoscopic configuration. This member function is called twice per frame for each eye, with a <i>camera</i> describing the linear transformations for a specific eye. The elapsed time since the previous frame was rendered is given in <i>dt</i>.</p>
+<!-- @@@paintGL -->
+<!-- $$$setViewport[overload1]$$$setViewportconstQRect& -->
+<h3 class="fn"><a name="setViewport"></a><span class="type">void</span> QAbstractStereoRenderer::<span class="name">setViewport</span>(const <span class="type">QRect</span> &amp;<i> viewport</i>)</h3>
+<p>Sets the viewport to <i>viewport</i>.</p>
+<!-- @@@setViewport -->
+</div>
+</body>
+</html>

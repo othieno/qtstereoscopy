@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- qabstractstereodisplay.qdoc -->
+  <title>QAbstractStereoDisplay Class | QtStereoscopy </title>
+</head>
+<body>
+<li>QAbstractStereoDisplay</li>
+<li id="buildversion">
+</li>
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<h1 class="title">QAbstractStereoDisplay Class</h1>
+<!-- $$$QAbstractStereoDisplay-brief -->
+<p>The QAbstractStereoDisplay class is the base class for all stereoscopic display device implementations. <a href="#details">More...</a></p>
+<!-- @@@QAbstractStereoDisplay -->
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> </b><tt><span class="preprocessor">#include &lt;QAbstractStereoDisplay&gt;</span>
+</tt></td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherited By:</td><td class="memItemRight bottomAlign"> <p><a href="qoculusrift.html">QOculusRift</a>.</p>
+</td></tr></table><ul>
+<li><a href="qabstractstereodisplay-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2>Public Functions</h2>
+<table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> float </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#aspectRatio">aspectRatio</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#available">available</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#enableEyeTracking">enableEyeTracking</a></b>(const bool<i> enable</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#enableOrientationTracking">enableOrientationTracking</a></b>(const bool<i> enable</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#enablePositionalTracking">enablePositionalTracking</a></b>(const bool<i> enable</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual QPoint </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#eyePosition">eyePosition</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QSize </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#eyeResolution">eyeResolution</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#eyeTrackingAvailable">eyeTrackingAvailable</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#eyeTrackingEnabled">eyeTrackingEnabled</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual QQuaternion </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#headOrientation">headOrientation</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual QVector3D </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#headPosition">headPosition</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual float </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#interpupillaryDistance">interpupillaryDistance</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual QString </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#manufacturerName">manufacturerName</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> QPointF </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#normalizedEyePosition">normalizedEyePosition</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#orientationTrackingAvailable">orientationTrackingAvailable</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#orientationTrackingEnabled">orientationTrackingEnabled</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#positionalTrackingAvailable">positionalTrackingAvailable</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual bool </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#positionalTrackingEnabled">positionalTrackingEnabled</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual QString </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#productName">productName</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual unsigned int </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#refreshRate">refreshRate</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#resetHeadOrientation">resetHeadOrientation</a></b>() = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#resetHeadPosition">resetHeadPosition</a></b>() = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual QSize </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#resolution">resolution</a></b>() const = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#setInterpupillaryDistance">setInterpupillaryDistance</a></b>(const float &amp;<i> value</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual void </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#setUserHeight">setUserHeight</a></b>(const float &amp;<i> value</i>) = 0</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> virtual float </td><td class="memItemRight bottomAlign"><b><a href="qabstractstereodisplay.html#userHeight">userHeight</a></b>() const = 0</td></tr>
+</table>
+<a name="details"></a>
+<!-- $$$QAbstractStereoDisplay-description -->
+<div class="descr">
+<h2>Detailed Description</h2>
+<p>The QAbstractStereoDisplay class is the base class for all stereoscopic display device implementations.</p>
+</div>
+<!-- @@@QAbstractStereoDisplay -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$aspectRatio[overload1]$$$aspectRatio -->
+<h3 class="fn"><a name="aspectRatio"></a><span class="type">float</span> QAbstractStereoDisplay::<span class="name">aspectRatio</span>() const</h3>
+<p>Returns the display's aspect ratio, i.e&#x2e; the ratio of horizontal to vertical resolution.</p>
+<!-- @@@aspectRatio -->
+<!-- $$$available[overload1]$$$available -->
+<h3 class="fn"><a name="available"></a><span class="type">bool</span> QAbstractStereoDisplay::<span class="name">available</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns <tt>true</tt> if the display device's hardware is available, <tt>false</tt> otherwise.</p>
+<!-- @@@available -->
+<!-- $$$enableEyeTracking[overload1]$$$enableEyeTrackingconstbool -->
+<h3 class="fn"><a name="enableEyeTracking"></a><span class="type">void</span> QAbstractStereoDisplay::<span class="name">enableEyeTracking</span>(const <span class="type">bool</span><i> enable</i>)<tt> [pure virtual]</tt></h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then eye tracking is enabled, otherwise it is disabled.</p>
+<!-- @@@enableEyeTracking -->
+<!-- $$$enableOrientationTracking[overload1]$$$enableOrientationTrackingconstbool -->
+<h3 class="fn"><a name="enableOrientationTracking"></a><span class="type">void</span> QAbstractStereoDisplay::<span class="name">enableOrientationTracking</span>(const <span class="type">bool</span><i> enable</i>)<tt> [pure virtual]</tt></h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then orientation tracking is enabled, otherwise it is disabled.</p>
+<p>If the device does not support orientation tracking, then this member function does nothing.</p>
+<!-- @@@enableOrientationTracking -->
+<!-- $$$enablePositionalTracking[overload1]$$$enablePositionalTrackingconstbool -->
+<h3 class="fn"><a name="enablePositionalTracking"></a><span class="type">void</span> QAbstractStereoDisplay::<span class="name">enablePositionalTracking</span>(const <span class="type">bool</span><i> enable</i>)<tt> [pure virtual]</tt></h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then positional tracking is enabled, otherwise it is disabled.</p>
+<!-- @@@enablePositionalTracking -->
+<!-- $$$eyePosition[overload1]$$$eyePosition -->
+<h3 class="fn"><a name="eyePosition"></a><span class="type">QPoint</span> QAbstractStereoDisplay::<span class="name">eyePosition</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns the screen-space eye position.</p>
+<!-- @@@eyePosition -->
+<!-- $$$eyeResolution[overload1]$$$eyeResolution -->
+<h3 class="fn"><a name="eyeResolution"></a><span class="type">QSize</span> QAbstractStereoDisplay::<span class="name">eyeResolution</span>() const</h3>
+<p>Returns the display's eye resolution, i.e&#x2e; half of the total resolution.</p>
+<!-- @@@eyeResolution -->
+<!-- $$$eyeTrackingAvailable[overload1]$$$eyeTrackingAvailable -->
+<h3 class="fn"><a name="eyeTrackingAvailable"></a><span class="type">bool</span> QAbstractStereoDisplay::<span class="name">eyeTrackingAvailable</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns <tt>true</tt> if eye tracking is available, <tt>false</tt> otherwise.</p>
+<!-- @@@eyeTrackingAvailable -->
+<!-- $$$eyeTrackingEnabled[overload1]$$$eyeTrackingEnabled -->
+<h3 class="fn"><a name="eyeTrackingEnabled"></a><span class="type">bool</span> QAbstractStereoDisplay::<span class="name">eyeTrackingEnabled</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns <tt>true</tt> if eye tracking is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@eyeTrackingEnabled -->
+<!-- $$$headOrientation[overload1]$$$headOrientation -->
+<h3 class="fn"><a name="headOrientation"></a><span class="type">QQuaternion</span> QAbstractStereoDisplay::<span class="name">headOrientation</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns the display device's orientation quaternion.</p>
+<!-- @@@headOrientation -->
+<!-- $$$headPosition[overload1]$$$headPosition -->
+<h3 class="fn"><a name="headPosition"></a><span class="type">QVector3D</span> QAbstractStereoDisplay::<span class="name">headPosition</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns the display device's head position. If positional tracking is disabled, then QVector3D(0, 0, 0) is returned.</p>
+<!-- @@@headPosition -->
+<!-- $$$interpupillaryDistance[overload1]$$$interpupillaryDistance -->
+<h3 class="fn"><a name="interpupillaryDistance"></a><span class="type">float</span> QAbstractStereoDisplay::<span class="name">interpupillaryDistance</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns the display's current interpupillary distance (IPD) in millimeters.</p>
+<p><b>See also </b><a href="qabstractstereodisplay.html#setInterpupillaryDistance">setInterpupillaryDistance</a>().</p>
+<!-- @@@interpupillaryDistance -->
+<!-- $$$manufacturerName[overload1]$$$manufacturerName -->
+<h3 class="fn"><a name="manufacturerName"></a><span class="type">QString</span> QAbstractStereoDisplay::<span class="name">manufacturerName</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns the display's manufacturer's name.</p>
+<!-- @@@manufacturerName -->
+<!-- $$$normalizedEyePosition[overload1]$$$normalizedEyePosition -->
+<h3 class="fn"><a name="normalizedEyePosition"></a><span class="type">QPointF</span> QAbstractStereoDisplay::<span class="name">normalizedEyePosition</span>() const</h3>
+<p>Returns the normalized screen-space eye position.</p>
+<!-- @@@normalizedEyePosition -->
+<!-- $$$orientationTrackingAvailable[overload1]$$$orientationTrackingAvailable -->
+<h3 class="fn"><a name="orientationTrackingAvailable"></a><span class="type">bool</span> QAbstractStereoDisplay::<span class="name">orientationTrackingAvailable</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns <tt>true</tt> if head orientation tracking is available, <tt>false</tt> otherwise.</p>
+<!-- @@@orientationTrackingAvailable -->
+<!-- $$$orientationTrackingEnabled[overload1]$$$orientationTrackingEnabled -->
+<h3 class="fn"><a name="orientationTrackingEnabled"></a><span class="type">bool</span> QAbstractStereoDisplay::<span class="name">orientationTrackingEnabled</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns <tt>true</tt> if head orientation tracking is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@orientationTrackingEnabled -->
+<!-- $$$positionalTrackingAvailable[overload1]$$$positionalTrackingAvailable -->
+<h3 class="fn"><a name="positionalTrackingAvailable"></a><span class="type">bool</span> QAbstractStereoDisplay::<span class="name">positionalTrackingAvailable</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns <tt>true</tt> if positional tracking is available, <tt>false</tt> otherwise.</p>
+<!-- @@@positionalTrackingAvailable -->
+<!-- $$$positionalTrackingEnabled[overload1]$$$positionalTrackingEnabled -->
+<h3 class="fn"><a name="positionalTrackingEnabled"></a><span class="type">bool</span> QAbstractStereoDisplay::<span class="name">positionalTrackingEnabled</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns <tt>true</tt> if positional tracking is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@positionalTrackingEnabled -->
+<!-- $$$productName[overload1]$$$productName -->
+<h3 class="fn"><a name="productName"></a><span class="type">QString</span> QAbstractStereoDisplay::<span class="name">productName</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns the display's product name.</p>
+<!-- @@@productName -->
+<!-- $$$refreshRate[overload1]$$$refreshRate -->
+<h3 class="fn"><a name="refreshRate"></a><span class="type">unsigned</span> <span class="type">int</span> QAbstractStereoDisplay::<span class="name">refreshRate</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns the display's refresh rate.</p>
+<!-- @@@refreshRate -->
+<!-- $$$resetHeadOrientation[overload1]$$$resetHeadOrientation -->
+<h3 class="fn"><a name="resetHeadOrientation"></a><span class="type">void</span> QAbstractStereoDisplay::<span class="name">resetHeadOrientation</span>()<tt> [pure virtual]</tt></h3>
+<p>Resets the display device's orientation.</p>
+<!-- @@@resetHeadOrientation -->
+<!-- $$$resetHeadPosition[overload1]$$$resetHeadPosition -->
+<h3 class="fn"><a name="resetHeadPosition"></a><span class="type">void</span> QAbstractStereoDisplay::<span class="name">resetHeadPosition</span>()<tt> [pure virtual]</tt></h3>
+<p>Resets the display device's position.</p>
+<!-- @@@resetHeadPosition -->
+<!-- $$$resolution[overload1]$$$resolution -->
+<h3 class="fn"><a name="resolution"></a><span class="type">QSize</span> QAbstractStereoDisplay::<span class="name">resolution</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns the display's resolution.</p>
+<!-- @@@resolution -->
+<!-- $$$setInterpupillaryDistance[overload1]$$$setInterpupillaryDistanceconstfloat& -->
+<h3 class="fn"><a name="setInterpupillaryDistance"></a><span class="type">void</span> QAbstractStereoDisplay::<span class="name">setInterpupillaryDistance</span>(const <span class="type">float</span> &amp;<i> value</i>)<tt> [pure virtual]</tt></h3>
+<p>Sets the display's interpupillary distance (IPD) to the specified <i>value</i> in millimeters.</p>
+<p><b>See also </b><a href="qabstractstereodisplay.html#interpupillaryDistance">interpupillaryDistance</a>().</p>
+<!-- @@@setInterpupillaryDistance -->
+<!-- $$$setUserHeight[overload1]$$$setUserHeightconstfloat& -->
+<h3 class="fn"><a name="setUserHeight"></a><span class="type">void</span> QAbstractStereoDisplay::<span class="name">setUserHeight</span>(const <span class="type">float</span> &amp;<i> value</i>)<tt> [pure virtual]</tt></h3>
+<p>Sets the user's height to a specified <i>value</i> in meters.</p>
+<p><b>See also </b><a href="qabstractstereodisplay.html#userHeight">userHeight</a>().</p>
+<!-- @@@setUserHeight -->
+<!-- $$$userHeight[overload1]$$$userHeight -->
+<h3 class="fn"><a name="userHeight"></a><span class="type">float</span> QAbstractStereoDisplay::<span class="name">userHeight</span>() const<tt> [pure virtual]</tt></h3>
+<p>Returns the user's height in meters.</p>
+<p><b>See also </b><a href="qabstractstereodisplay.html#setUserHeight">setUserHeight</a>().</p>
+<!-- @@@userHeight -->
+</div>
+</body>
+</html>

@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>QtStereoscopy by supranove</title>
-
+    <title>QtStereoscopy Documentation</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -17,61 +16,32 @@
       <header>
         <h1>QtStereoscopy</h1>
         <p>A Qt module that adds support for stereoscopic displays.</p>
-
         <p class="view"><a href="https://github.com/supranove/qtstereoscopy">View the Project on GitHub <small>supranove/qtstereoscopy</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/supranove/qtstereoscopy/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/supranove/qtstereoscopy/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/supranove/qtstereoscopy">View On <strong>GitHub</strong></a></li>
-        </ul>
+        <p>Downloads&nbsp;&mdash;&nbsp;<small><a href="https://github.com/supranove/qtstereoscopy/tarball/master"><strong>TAR</strong></a></small>&nbsp;&bull;&nbsp;<small><a href="https://github.com/supranove/qtstereoscopy/zipball/master"><strong>ZIP</strong></a></small></p>
       </header>
       <section>
-        <p>The QtStereoscopy module aims to provide support for stereoscopic  display devices
-to Qt applications. The full reference documentation, which includes a much more
-detailed description, can be found <a href="https://supranove.github.io/qtstereoscopy">here</a></p>
+        <h3><a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API Reference Documentation</h3>
+        <p>The QtStereoscopy module provides support for a multitude of stereoscopic display devices to Qt applications. The module's API reference documentation can be found <a href="api/qtstereoscopy-module.html">here</a>.</p>
 
-<h3>
-<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h3>
+        <h3><a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h3>
+        <p>QtStereoscopy extends functionality added to the revised <a href="http://qt-project.org/doc/qt-5/qtgui-index.html">QtGui</a> module introduced in Qt5. As such, prior versions of the Qt library are not supported. While the new QtGui module provides a modern way of using the OpenGL API, it is still relatively new (as of September 2014) and a few features that exist in prior versions of Qt are still not fully implemented. One such feature is a set of API calls that allows for access to the native display device (required by the Oculus SDK, for example). The current workaround is to use a part of the <a href="http://qt-project.org/wiki/Qt-Platform-Abstraction">Qt Platform Abstraction</a> (QPA) which is currently strongly-coupled to the version of Qt it is built against. Ergo, this is not a portable solution but will very likely become one as the QPA API matures.</p>
+        <p>Additionally, the C++11 standard is heavily used. It stands to reason that a compiler that implements the said standard, at least, is necessary.</p>
 
-<p>QtStereoscopy extends functionality added to the revised <a href="http://qt-project.org/doc/qt-5/qtgui-index.html">QtGui</a> module introduced in Qt5.
-As such, prior versions of the Qt library are not supported. While the new QtGui module
-provides a modern way of using the OpenGL API, it is still relatively new (as of September 2014)
-and a few features that exist in prior versions of Qt are still not fully implemented.
-One such feature is a set of API calls that allows for access to the native display
-device (required by the Oculus SDK, for example). The current workaround is to use a part
-of the <a href="http://qt-project.org/wiki/Qt-Platform-Abstraction">Qt Platform Abstraction</a> (QPA) which is currently strongly-coupled to the
-version of Qt it is built against. Ergo, this is not a portable solution but will very likely
-become one as the QPA API matures.</p>
+        <h3><a name="installing-qtstereoscopy" class="anchor" href="#installing-qtstereoscopy"><span class="octicon octicon-link"></span></a>Installing QtStereoscopy</h3>
+        <p>QtStereoscopy's build process is still not tied to Qt which means the usual way a Qt module is integrated into a project will not work. Instead, it relies on a set of project include files (*.pri), each of which specifies the build configuration for a specific set of stereoscopic display devices.</p>
+        <p>Start by cloning the qtstereoscopy project then include one or more project include files (found in the <code>install</code> directory) to a project file (*.pro). For example, to add support for Oculus VR devices, prepend <code>include(&lt;/path/to/qtstereoscopy&gt;/install/oculusvr.pri)</code> where <code>&lt;/path/to/qtstereoscopy&gt;</code> is qtstereoscopy's location.</p>
+        <p>Once this is done, simply include the header files (see <a href="#api">API documentation</a>) into your project, like you would a regular Qt module; the build process will take care of the rest.</p>
 
-<p>Additionally, the C++11 standard is heavily used. It stands to reason that a compiler that
-implements the said standard, at least, is necessary.</p>
-
-<h3>
-<a name="installing-qtstereoscopy" class="anchor" href="#installing-qtstereoscopy"><span class="octicon octicon-link"></span></a>Installing QtStereoscopy</h3>
-
-<p>QtStereoscopy's build process is still not tied to Qt which means the usual way a Qt module
-is integrated into a project will not work. Instead, it relies on a set of project include
-files (*.pri), each of which specifies the build configuration for a specific set of
-stereoscopic display devices.</p>
-
-<p>Start by cloning the qtstereoscopy project then include one or more project include files (found in
-the <code>install</code> directory) to a project file (*.pro). For example, to add support for Oculus VR devices,
-prepend <code>include(&lt;/path/to/qtstereoscopy&gt;/install/oculusvr.pri)</code> where <code>&lt;/path/to/qtstereoscopy&gt;</code> is
-qtstereoscopy's location.</p>
-
-<p>Once this is done, simply include the header files (see <a href="https://supranove.github.io/qtstereoscopy">documentation</a>) into your project,
-like you would a regular Qt module; the build process will take care of the rest.</p>
-
-<p>Check out the examples to see QtStereoscopy in action.</p>
+        <h3><a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>The MIT License</h3>
+        <p>Copyright &copy; 2014 Jeremy Othieno.</p>
+        <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+        <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+        <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/supranove">supranove</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        <p>This project is maintained by <a href="https://github.com/supranove">supranove</a>.</p>
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
   </body>
 </html>
