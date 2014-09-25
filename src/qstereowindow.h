@@ -40,16 +40,16 @@ class QStereoWindow Q_DECL_FINAL : public QWindow
    static_assert(std::is_default_constructible<Renderer>::value, "Renderer requires a default constructor.");
 public:
    explicit QStereoWindow(QStereoWindow* const parent = nullptr);
-   explicit QStereoWindow(const QStereoWindow&) = delete;
 
    QStereoWindow(const QString& title, QStereoWindow* const parent = nullptr);
    QStereoWindow(Renderer& renderer, QStereoWindow* const parent = nullptr);
    QStereoWindow(Renderer& renderer, const QString& title, QStereoWindow* const parent = nullptr);
-
-   QStereoWindow& operator=(const QStereoWindow&) = delete;
 private:
    QStereoWindow(Renderer* const renderer, QStereoWindow* const parent);
    QStereoWindow(Renderer* const renderer, const QString& title, QStereoWindow* const parent);
+
+   explicit QStereoWindow(const QStereoWindow&) = delete;
+   QStereoWindow& operator=(const QStereoWindow&) = delete;
 
    void update();
    void paintGL();
@@ -120,6 +120,9 @@ QStereoWindow(renderer, parent)
 template<class T> void
 QStereoWindow<T>::update()
 {
+   // Post an update request event in the event pool. Since overflowing the
+   // pool is a bad idea, coalesce update requests by adding the aforementioned
+   // event iff no prior events of the same kind are pending.
    if (!_updateRequestPending)
    {
       _updateRequestPending = true;
@@ -140,11 +143,11 @@ QStereoWindow<T>::paintGL()
 template<class T> bool
 QStereoWindow<T>::event(QEvent* const e)
 {
-   if (e->type() == QEvent::UpdateRequest && _updateRequestPending && _context.makeCurrent(this))
+   // When an update request is received, this means it is time to draw a new frame. Perform said
+   // action and make another update request (or else no more draw calls are performed.)
+   if (e->type() == QEvent::UpdateRequest && _context.makeCurrent(this))
    {
-      _updateRequestPending = false;
-
-      // Draw a new frame and make an update request (or else drawing ends after the call to paintGL).
+      _updateRequestPending = false; // The pending request is being handled.
       paintGL();
       update();
    }

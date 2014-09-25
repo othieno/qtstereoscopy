@@ -1,0 +1,49 @@
+/*!
+   \class QOculusRiftStereoRenderer
+   \inmodule QtStereoscopy
+   \brief The QOculusRiftStereoRenderer class extends QAbstractStereoRenderer functionality with support for the
+   stereo rendering model used by the Oculus SDK.
+*/
+/*!
+   \fn QOculusRiftStereoRenderer::QOculusRiftStereoRenderer(const unsigned int& index = 0)
+   \brief Constructs a QOculusRiftStereoRenderer that is attached to the Oculus Rift with the specified \a index.
+*/
+/*!
+   \fn void QOculusRiftStereoRenderer::apply()
+   \brief Draws a scene with the stereoscopic model used by the Oculus Rift.
+*/
+/*!
+   \fn bool QOculusRiftStereoRenderer::autoSwapsBuffers() const
+   \brief Returns \c true since the Oculus SDK handles buffer swapping (in SDK distortion mode).
+*/
+/*!
+   \fn QOculusRift& QOculusRiftStereoRenderer::display();
+   \brief Returns the Oculus Rift display device that is used by this renderer.
+*/
+/*!
+   \fn const float& QOculusRiftStereoRenderer::pixelDensity() const;
+   \brief Returns the pixel density.
+*/
+/*!
+   \fn void QOculusRiftStereoRenderer::setPixelDensity(const float& value)
+   \brief Sets the pixel density to the specified \a value.
+*/
+/*!
+   \fn void QOculusRiftStereoRenderer::freezeEyeUpdates(const ovrEyeType& eye, const bool freeze = true)
+   \brief If \a freeze is set to \c true, updates for the specified \a eye are ignored.
+*/
+/*!
+   \fn void QOculusRiftStereoRenderer::initializeWindow(const WId& windowId)
+   \span {style="display:none"}{\a windowId}
+*/
+/*!
+   \fn void QOculusRiftStereoRenderer::initializeGL()
+*/
+/*!
+   \fn void QOculusRiftStereoRenderer::configureGL()
+   \brief Configures the OpenGL context for use with the Oculus SDK.
+*/
+/*!
+   \fn void QOculusRiftStereoRenderer::paintGL(const QStereoEyeCamera& camera, const float& dt)
+   \span {style="display:none"}{\a camera \a dt}
+*/

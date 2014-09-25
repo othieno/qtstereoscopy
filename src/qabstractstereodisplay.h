@@ -64,7 +64,7 @@ public:
    virtual bool eyeTrackingEnabled() const = 0;
    virtual void enableEyeTracking(const bool enable) = 0;
    virtual QPoint eyePosition() const = 0;
-//TODO Add           QPointF normalizedEyePosition() const;
+           QPointF normalizedEyePosition() const;
 
    virtual bool available() const = 0;
 };

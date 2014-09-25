@@ -36,10 +36,7 @@
 #include <OVR_CAPI_GL.h>
 #include <OVR.h>
 
-/**
- * @brief Constructs a QOculusRiftStereoRenderer that is attached to the Oculus Rift at the specified index.
- * @param index the Oculus Rift HMD device's index.
- */
+
 QOculusRiftStereoRenderer::QOculusRiftStereoRenderer(const unsigned int& index) :
 _display(index),
 _fbo(nullptr),
@@ -68,9 +65,6 @@ _forceZeroIPD(false)
 }
 
 
-/**
- * @brief Draws a scene with the stereoscopic model used by the Oculus Rift.
- */
 void
 QOculusRiftStereoRenderer::apply()
 {
@@ -108,9 +102,6 @@ QOculusRiftStereoRenderer::autoSwapsBuffers() const
 }
 
 
-/**
- * @brief Returns the Oculus Rift display.
- */
 QOculusRift&
 QOculusRiftStereoRenderer::display()
 {
@@ -118,28 +109,13 @@ QOculusRiftStereoRenderer::display()
 }
 
 
-/**
- * @brief Freeze updates for a specified eye.
- */
-void
-QOculusRiftStereoRenderer::freezeEyeUpdates(const ovrEyeType&, const bool)
-{
-   qFatal("[QtStereoscopy] Implement QOculusRiftStereoRenderer::freezeEyeUpdates.");
-}
-
-/**
- * @brief Return the pixel density.
- */
 const float&
 QOculusRiftStereoRenderer::pixelDensity() const
 {
    return _pixelDensity;
 }
 
-/**
- * @brief Set the pixel density.
- * @param density the pixel density to set.
- */
+
 void
 QOculusRiftStereoRenderer::setPixelDensity(const float& density)
 {
@@ -149,6 +125,13 @@ QOculusRiftStereoRenderer::setPixelDensity(const float& density)
       _pixelDensity = density;
       _fboChanged = true;
    }
+}
+
+
+void
+QOculusRiftStereoRenderer::freezeEyeUpdates(const ovrEyeType&, const bool)
+{
+   qFatal("[QtStereoscopy] Implement QOculusRiftStereoRenderer::freezeEyeUpdates.");
 }
 
 
@@ -178,9 +161,7 @@ void
 QOculusRiftStereoRenderer::initializeGL()
 {}
 
-/**
- * @brief Configures the window's OpenGL context for use with the Oculus SDK.
- */
+
 void
 QOculusRiftStereoRenderer::configureGL()
 {
@@ -280,10 +261,6 @@ QOculusRiftStereoRenderer::configureGL()
 }
 
 
-/**
- * @brief Draws a scene in a specified stereoscopic configuration.
- */
-void
 QOculusRiftStereoRenderer::paintGL(const QStereoEyeCamera&, const float&)
 {}
 

@@ -30,9 +30,8 @@
 
 QT_BEGIN_NAMESPACE
 
-class QStereoEyeCamera
+struct QStereoEyeCamera
 {
-public:
    QStereoEyeCamera();
 
    bool projectionChanged() const;

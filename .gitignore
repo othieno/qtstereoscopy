@@ -8,7 +8,6 @@ build
 /doc/html
 
 # Temporarily ignore these files.
-doc
 modules
 qtstereoscopy.pro
 sync.profile

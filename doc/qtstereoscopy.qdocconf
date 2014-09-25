@@ -1,0 +1,27 @@
+# include($QT_INSTALL_DOCS/global/qt-module-defaults.qdocconf)
+
+project                    = QtStereoscopy
+description                = "QtStereoscopy API Reference Documentation"
+# depends                   += qtgui
+# version                    = $QT_VERSION
+# url                        = http://qt-project.org/doc/qt-$QT_VER/qtstereoscopy
+examplesinstallpath        = stereoscopy
+
+Cpp.ignoretokens          += QT_BEGIN_NAMESPACE\
+                             QT_END_NAMESPACE\
+                             Q_DECL_OVERRIDE\
+                             Q_DECL_FINAL
+
+sourcedirs                 = ./src\
+                             ../src\
+                             ../src/oculusvr
+headerdirs                 = ../src\
+                             ../src/oculusvr
+exampledirs                = ../examples/
+
+sources.fileextensions     = "*.cpp *.qdoc"
+headers.fileextensions     = "*.h"
+examples.fileextensions    = "*.h *.cpp"
+
+outputdir                  = html
+outputformats              = HTML

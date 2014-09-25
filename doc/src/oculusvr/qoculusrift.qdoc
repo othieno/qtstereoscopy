@@ -1,0 +1,275 @@
+/*!
+   \class QOculusRift
+   \inmodule QtStereoscopy
+
+   \brief The QOculusRift class adds support for the Oculus Rift head-mounted display device.
+*/
+/*!
+   \fn QOculusRift::QOculusRift(const unsigned int& index)
+   \brief Constructs a QOculusRift that is attached to a device with the specified \a index.
+*/
+/*!
+   \fn QOculusRift::~QOculusRift()
+   \brief Destroys the QOculusRift.
+*/
+/*!
+   \fn QString QOculusRift::productName() const
+*/
+/*!
+   \fn QString QOculusRift::manufacturerName() const
+*/
+/*!
+   \fn QSize QOculusRift::resolution() const
+*/
+/*!
+   \fn unsigned int QOculusRift::refreshRate() const
+*/
+/*!
+   \fn float QOculusRift::interpupillaryDistance() const
+*/
+/*!
+   \fn voiid QOculusRift::setInterpupillaryDistance(const float& value)
+   \span {style="display:none"}{\a value}
+*/
+/*!
+   \fn float QOculusRift::userHeight() const
+*/
+/*!
+   \fn voiid QOculusRift::setUserHeight(const float& value)
+   \span {style="display:none"}{\a value}
+*/
+/*!
+   \fn bool QOculusRift::orientationTrackingAvailable() const
+*/
+/*!
+   \fn bool QOculusRift::orientationTrackingEnabled() const
+*/
+/*!
+   \fn void QOculusRift::enableOrientationTracking(const bool enable)
+   \span {style="display:none"}{\a enable}
+*/
+/*!
+   \fn QQuaternion QOculusRift::headOrientation() const
+*/
+/*!
+   \fn void QOculusRift::resetHeadOrientation()
+*/
+/*!
+   \fn bool QOculusRift::positionalTrackingAvailable() const
+*/
+/*!
+   \fn bool QOculusRift::positionalTrackingEnabled() const
+*/
+/*!
+   \fn void QOculusRift::enablePositionalTracking(const bool enable)
+   \span {style="display:none"}{\a enable}
+*/
+/*!
+   \fn QVector3D QOculusRift::headPosition() const
+*/
+/*!
+   \fn void QOculusRift::resetHeadPosition()
+*/
+
+
+
+
+
+
+
+
+
+
+
+/*!
+   \fn bool QOculusRift::eyeTrackingAvailable() const
+*/
+/*!
+   \fn bool QOculusRift::eyeTrackingEnabled() const
+*/
+/*!
+   \fn void QOculusRift::enableEyeTracking(const bool enable)
+   \span {style="display:none"}{\a enable}
+*/
+/*!
+   \fn QPoint QOculusRift::eyePosition() const
+*/
+/*!
+   \fn bool QOculusRift::available() const
+*/
+/*!
+   \fn bool QOculusRift::vsyncEnabled() const
+   \brief Returns \c true if vertical synchronization (VSYNC) is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRift::enableVsync(const bool enable)
+   \brief If \a enable is set to \c true then vertical synchronization (VSYNC) is enabled, otherwise it is disabled.
+   \warning Disabling this feature may break VR immersion.
+*/
+/*!
+   \fn bool QOculusRift::yawCorrectionEnabled() const
+   \brief Returns \c true if yaw correction is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRift::enableYawCorrection(const bool enable)
+   \brief If \a enable is set to \c true then yaw correction is enabled, otherwise it is disabled.
+*/
+/*!
+   \fn bool QOculusRift::lowPersistenceEnabled() const
+   \brief Returns \c true if low-persistence is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRift::enableLowPersistence(const bool enable)
+   \brief If \a enable is set to \c true then low-persistence is enabled, otherwise it is disabled.
+*/
+/*!
+   \fn bool QOculusRift::latencyTestingEnabled() const
+   \brief Returns \c true if latency testing is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRift::enableLatencyTesting(const bool enable)
+   \brief If \a enable is set to \c true then latency testing is enabled, otherwise it is disabled.
+*/
+/*!
+   \fn bool QOculusRift::dynamicPredictionEnabled() const
+   \brief Returns \c true if dynamic prediction is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRift::enableDynamicPrediction(const bool enable)
+   \brief If \a enable is set to \c true then dynamic prediction is enabled, otherwise it is disabled.
+*/
+/*!
+   \fn bool QOculusRift::chromaticAberrationCorrectionEnabled() const
+   \brief Returns \c true if chromatic aberration correction is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRift::enableChromaticAberrationCorrection(const bool enable)
+   \brief If \a enable is set to \c true then chromatic aberration correction is enabled, otherwise it is disabled.
+*/
+/*!
+   \fn bool QOculusRift::timewarpEnabled() const
+   \brief Returns \c true if timewarp is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRift::enableTimewarp(const bool enable)
+   \brief If \a enable is set to \c true then timewarp is enabled, otherwise it is disabled.
+*/
+/*!
+   \fn bool QOculusRift::vignetteEnabled() const
+   \brief Returns \c true if vignetting is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRift::enableVignette(const bool enable)
+   \brief If \a enable is set to \c true then vignetting is enabled, otherwise it is disabled.
+*/
+/*!
+   \fn const ovrHmd& QOculusRift::handle() const
+   \brief Returns the underlying device handle.
+*/
+/*!
+   \fn QOculusRift::operator const ovrHmd&() const
+   \sa handle()
+   \brief Converts this instance into its underlying device handle.
+*/
+/*!
+   \fn const ovrHmdType& QOculusRift::type() const
+   \brief Returns the device type.
+*/
+/*!
+   \fn const short int& QOculusRift::vendorId() const
+   \brief Returns the device's vendor identifier.
+*/
+/*!
+   \fn const short int& QOculusRift::productId() const
+   \brief Returns the device's product identifier.
+*/
+/*!
+   \fn QString QOculusRift::serialNumber() const
+   \brief Returns the device's serial number.
+*/
+/*!
+   \fn void QOculusRift::firmwareVersion(short int* const major, short int* const minor) const
+   \brief Returns the device's \a major and \a minor firmware version.
+
+   If either parameter is \c null, then the corresponding version is ignored.
+*/
+/*!
+   \fn void QOculusRift::cameraFrustumFov(float* const horizontal, float* const vertical) const
+   \brief Returns the position-tracking camera's frustum's \a horizontal and \a vertical field of view (FOV) in radians.
+
+   If either parameter is \c null, then the corresponding FOV is ignored.
+*/
+/*!
+   \fn void QOculusRift::cameraFrustumDepth(float* const near, float* const far) const
+   \brief Returns the position-tracking camera's frustum's \a near and \a far depth bounds in meters.
+
+   If either parameter is \c null, then the corresponding depth is ignored.
+*/
+/*!
+   \fn unsigned int QOculusRift::supportedHmdCapabilities() const
+   \brief Returns the device's supported HMD capability bits.
+*/
+/*!
+   \fn const unsigned int& QOculusRift::enabledHmdCapabilities() const
+   \brief Returns the device's enabled HMD capability bits.
+*/
+/*!
+   \fn unsigned int QOculusRift::supportedTrackingCapabilities() const
+   \brief Returns the device's supported tracking capability bits.
+*/
+/*!
+   \fn const unsigned int& QOculusRift::enabledTrackingCapabilities() const
+   \brief Returns the device's enabled tracking capability bits.
+*/
+/*!
+   \fn unsigned int QOculusRift::supportedDistortionCapabilities() const
+   \brief Returns the device's supported distortion capability bits.
+*/
+/*!
+   \fn const unsigned int& QOculusRift::enabledDistortionCapabilities() const
+   \brief Returns the device's enabled distortion capability bits.
+*/
+/*!
+   \fn QPoint QOculusRift::windowPosition() const
+   \brief Returns the location of the monitor window on the screen.
+
+   If this feature is not supported by the system, then \c {QPoint(0, 0)} is returned.
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*!
+   \fn std::array<ovrFovPort, ovrEye_Count> QOculusRift::recommendedFov() const
+   \brief Returns the recommended optical field of view (FOV) for both eyes.
+*/
+/*!
+   \fn std::array<ovrFovPort, ovrEye_Count> QOculusRift::maximumFov() const
+   \brief Returns the maximum optical field of view (FOV) for both eyes.
+*/
+/*!
+   \fn std::array<ovrEyeType, ovrEye_Count> QOculusRift::eyeRenderOrder() const
+   \brief Returns the device's eye render order.
+*/
+/*!
+   \fn QString QOculusRift::systemName() const
+   \brief Returns the device's system specific display name.
+*/
+/*!
+   \fn const int& QOculusRift::systemId() const
+   \brief Returns the device's system specific display identifier.
+*/

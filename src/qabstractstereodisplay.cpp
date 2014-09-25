@@ -36,3 +36,18 @@ QAbstractStereoDisplay::aspectRatio() const
 {
    return static_cast<float>(resolution().width()) / static_cast<float>(resolution().height());
 }
+
+
+QPointF
+QAbstractStereoDisplay::normalizedEyePosition() const
+{
+   qreal x = 0;
+   qreal y = 0;
+
+   if (eyeTrackingEnabled())
+   {
+      x = static_cast<qreal>(eyePosition().x()) / static_cast<qreal>(resolution().width());
+      y = static_cast<qreal>(eyePosition().y()) / static_cast<qreal>(resolution().height());
+   }
+   return QPointF(x, y);
+}
