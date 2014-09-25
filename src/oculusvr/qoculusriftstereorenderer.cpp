@@ -261,6 +261,7 @@ QOculusRiftStereoRenderer::configureGL()
 }
 
 
+void
 QOculusRiftStereoRenderer::paintGL(const QStereoEyeCamera&, const float&)
 {}
 
