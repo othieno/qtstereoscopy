@@ -44,6 +44,9 @@ public:
    QStereoWindow(const QString& title, QStereoWindow* const parent = nullptr);
    QStereoWindow(Renderer& renderer, QStereoWindow* const parent = nullptr);
    QStereoWindow(Renderer& renderer, const QString& title, QStereoWindow* const parent = nullptr);
+
+   QOpenGLContext& context();
+   Renderer& renderer();
 private:
    QStereoWindow(Renderer* const renderer, QStereoWindow* const parent);
    QStereoWindow(Renderer* const renderer, const QString& title, QStereoWindow* const parent);
@@ -114,6 +117,20 @@ QStereoWindow<T>::QStereoWindow(T* const renderer, const QString& title, QStereo
 QStereoWindow(renderer, parent)
 {
    setTitle(title);
+}
+
+
+template<class T> QOpenGLContext&
+QStereoWindow<T>::context()
+{
+   return _context;
+}
+
+
+template<class T> T&
+QStereoWindow<T>::renderer()
+{
+   return *_renderer;
 }
 
 

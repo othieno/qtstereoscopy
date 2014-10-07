@@ -29,6 +29,30 @@
    \brief Sets the pixel density to the specified \a value.
 */
 /*!
+   \fn bool QOculusRiftStereoRenderer::chromaticAberrationCorrectionEnabled() const
+   \brief Returns \c true if chromatic aberration correction is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRiftStereoRenderer::enableChromaticAberrationCorrection(const bool enable)
+   \brief If \a enable is set to \c true then chromatic aberration correction is enabled, otherwise it is disabled.
+*/
+/*!
+   \fn bool QOculusRiftStereoRenderer::timewarpEnabled() const
+   \brief Returns \c true if timewarp is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRiftStereoRenderer::enableTimewarp(const bool enable)
+   \brief If \a enable is set to \c true then timewarp is enabled, otherwise it is disabled.
+*/
+/*!
+   \fn bool QOculusRiftStereoRenderer::vignetteEnabled() const
+   \brief Returns \c true if vignetting is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRiftStereoRenderer::enableVignette(const bool enable)
+   \brief If \a enable is set to \c true then vignetting is enabled, otherwise it is disabled.
+*/
+/*!
    \fn void QOculusRiftStereoRenderer::freezeEyeUpdates(const ovrEyeType& eye, const bool freeze = true)
    \brief If \a freeze is set to \c true, updates for the specified \a eye are ignored.
 */

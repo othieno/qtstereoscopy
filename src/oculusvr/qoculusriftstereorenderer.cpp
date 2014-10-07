@@ -45,6 +45,7 @@ _apiConfiguration(new ovrGLConfig),
 _eyeTextureConfigurations(new ovrGLTexture[ovrEye_Count]),
 _eyeRenderConfigurationsChanged(true),
 _eyeFovs(_display.recommendedFov()),
+_enabledDistortionCapabilities(_display.supportedDistortionCapabilities()),
 _pixelDensity(1.0f),
 _forceZeroIPD(false)
 {
@@ -76,7 +77,7 @@ QOculusRiftStereoRenderer::apply()
    _fbo->bind();
 
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-   for (const auto& eye : _display.eyeRenderOrder())
+   for (const auto& eye : _display.descriptor().EyeRenderOrder)
    {
       const auto& pose = ovrHmd_BeginEyeRender(_display, eye);
       paintGL(eyeCamera(eye, pose), frameTiming.DeltaSeconds);
@@ -128,10 +129,76 @@ QOculusRiftStereoRenderer::setPixelDensity(const float& density)
 }
 
 
+bool
+QOculusRiftStereoRenderer::chromaticAberrationCorrectionEnabled() const
+{
+   return (_enabledDistortionCapabilities & ovrDistortionCap_Chromatic) == ovrDistortionCap_Chromatic;
+}
+
+
+void
+QOculusRiftStereoRenderer::enableChromaticAberrationCorrection(const bool enable)
+{
+   if (enable != chromaticAberrationCorrectionEnabled())
+   {
+      if (enable)
+         _enabledDistortionCapabilities |= ovrDistortionCap_Chromatic;
+      else
+         _enabledDistortionCapabilities &= ~ovrDistortionCap_Chromatic;
+
+      _eyeRenderConfigurationsChanged = true;
+   }
+}
+
+
+bool
+QOculusRiftStereoRenderer::timewarpEnabled() const
+{
+   return (_enabledDistortionCapabilities & ovrDistortionCap_TimeWarp) == ovrDistortionCap_TimeWarp;
+}
+
+
+void
+QOculusRiftStereoRenderer::enableTimewarp(const bool enable)
+{
+   if (enable != timewarpEnabled())
+   {
+      if (enable)
+         _enabledDistortionCapabilities |= ovrDistortionCap_TimeWarp;
+      else
+         _enabledDistortionCapabilities &= ~ovrDistortionCap_TimeWarp;
+
+      _eyeRenderConfigurationsChanged = true;
+   }
+}
+
+
+bool
+QOculusRiftStereoRenderer::vignetteEnabled() const
+{
+   return (_enabledDistortionCapabilities & ovrDistortionCap_Vignette) == ovrDistortionCap_Vignette;
+}
+
+
+void
+QOculusRiftStereoRenderer::enableVignette(const bool enable)
+{
+   if (enable != vignetteEnabled())
+   {
+      if (enable)
+         _enabledDistortionCapabilities |= ovrDistortionCap_Vignette;
+      else
+         _enabledDistortionCapabilities &= ~ovrDistortionCap_Vignette;
+
+      _eyeRenderConfigurationsChanged = true;
+   }
+}
+
+
 void
 QOculusRiftStereoRenderer::freezeEyeUpdates(const ovrEyeType&, const bool)
 {
-   qFatal("[QtStereoscopy] Implement QOculusRiftStereoRenderer::freezeEyeUpdates.");
+   qCritical("[QtStereoscopy] Implement QOculusRiftStereoRenderer::freezeEyeUpdates.");
 }
 
 
@@ -226,7 +293,7 @@ QOculusRiftStereoRenderer::configureGL()
          }
       }
 
-      // Mark the framebuffer as coherent, however since it has been resized, the
+      // Mark the framebuffer as usable, however since it has been resized, the
       // rendering configuration needs to be updated.
       _fboChanged = false;
       _eyeRenderConfigurationsChanged = true;
@@ -237,9 +304,8 @@ QOculusRiftStereoRenderer::configureGL()
    {
       const ovrFovPort* const fovs = _eyeFovs.data();
       const ovrRenderAPIConfig* const apiConfig = &(_apiConfiguration->Config);
-      const unsigned int& distortionCapabilities = _display.enabledDistortionCapabilities();
       ovrEyeRenderDesc* const renderConfigs = _eyeRenderConfigurations.data();
-      if (!ovrHmd_ConfigureRendering(_display, apiConfig, distortionCapabilities, fovs, renderConfigs))
+      if (!ovrHmd_ConfigureRendering(_display, apiConfig, _enabledDistortionCapabilities, fovs, renderConfigs))
          qFatal("[QtStereoscopy] Error: Could not update the render configuration.");
 
       if (_forceZeroIPD)
@@ -249,7 +315,7 @@ QOculusRiftStereoRenderer::configureGL()
       }
 
       // Set the view adjust vectors.
-      for (const auto& eye : _display.eyeRenderOrder())
+      for (const auto& eye : _display.descriptor().EyeRenderOrder)
       {
          auto& camera = _eyeCameras[eye];
          const auto& eyeRenderConfig = _eyeRenderConfigurations[eye];

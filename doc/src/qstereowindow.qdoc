@@ -20,22 +20,11 @@
    \fn QStereoWindow::QStereoWindow(Renderer& renderer, const QString& title, QStereoWindow* const parent = nullptr)
    \brief Constructs a window with a given \a title, that uses the specified \a renderer, and is a child of the specified \a parent window.
 */
-
-
-
-
-
-/*
-   \fn bool QStereoWindow::event(QEvent* const event)
-   \brief Handles an \a event and returns \c true if it was recognised and processed, \c false otherwise.
-
-   This implementation of the generic event handler specifically processes update
-   requests that are meant to render a new frame.
+/*!
+   \fn QOpenGLContext& QStereoWindow::context()
+   \brief Returns the window's OpenGL context.
 */
-/*
-   \fn void QStereoWindow::exposeEvent(QExposeEvent* const event)
-   \brief Handles the expose \a event.
-
-   This implementation of the expose event handler is used to initialize the QAbstractStereoWindow's
-   OpenGL context when it exposed for the first time.
+/*!
+   \fn Renderer& QStereoWindow::renderer()
+   \brief Returns the stereoscopic renderer attached to this window.
 */

@@ -55,6 +55,15 @@ public:
    const float& pixelDensity() const;
    void setPixelDensity(const float& density);
 
+   bool chromaticAberrationCorrectionEnabled() const;
+   void enableChromaticAberrationCorrection(const bool enable = true);
+
+   bool timewarpEnabled() const;
+   void enableTimewarp(const bool enable = true);
+
+   bool vignetteEnabled() const;
+   void enableVignette(const bool enable = true);
+
    void freezeEyeUpdates(const ovrEyeType& eye, const bool freeze = true);
 protected:
    void initializeWindow(const WId&) Q_DECL_OVERRIDE Q_DECL_FINAL;
@@ -83,6 +92,8 @@ private:
 
    std::array<QStereoEyeCamera, ovrEye_Count> _eyeCameras;
    std::array<ovrFovPort, ovrEye_Count> _eyeFovs;
+
+   unsigned int _enabledDistortionCapabilities;
 
    float _pixelDensity;
 

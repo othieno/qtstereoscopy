@@ -41,6 +41,8 @@ struct QStereoEyeCamera
    QMatrix4x4 perspective;
    QMatrix4x4 ortho;
 
+   QPointF pointOfInterest;
+
    static float nearClippingPlane;
    static float farClippingPlane;
 

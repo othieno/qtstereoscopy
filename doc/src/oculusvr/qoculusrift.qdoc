@@ -25,6 +25,15 @@
    \fn unsigned int QOculusRift::refreshRate() const
 */
 /*!
+   \fn bool QOculusRift::vsyncEnabled() const
+   \brief Returns \c true if vertical synchronization (VSYNC) is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRift::enableVsync(const bool enable)
+   \brief If \a enable is set to \c true then vertical synchronization (VSYNC) is enabled, otherwise it is disabled.
+   \warning Disabling this feature may break VR immersion.
+*/
+/*!
    \fn float QOculusRift::interpupillaryDistance() const
 */
 /*!
@@ -37,6 +46,20 @@
 /*!
    \fn voiid QOculusRift::setUserHeight(const float& value)
    \span {style="display:none"}{\a value}
+*/
+/*!
+   \fn bool QOculusRift::trackingAvailable() const
+*/
+/*!
+   \fn bool QOculusRift::trackingCameraAvailable() const
+   \brief Returns true if the positional tracking camera is available and can be used by this application; false otherwise.
+*/
+/*!
+   \fn void QOculusRift::resetTracking()
+   \brief Resets the tracking origin to the headset's current location and sets the yaw origin to the current headset yaw value.
+
+   Note that the tracking origin is set on a per-application basis and so switching focus between different applications will
+   switch the tracking origin too.
 */
 /*!
    \fn bool QOculusRift::orientationTrackingAvailable() const
@@ -52,9 +75,6 @@
    \fn QQuaternion QOculusRift::headOrientation() const
 */
 /*!
-   \fn void QOculusRift::resetHeadOrientation()
-*/
-/*!
    \fn bool QOculusRift::positionalTrackingAvailable() const
 */
 /*!
@@ -68,19 +88,12 @@
    \fn QVector3D QOculusRift::headPosition() const
 */
 /*!
-   \fn void QOculusRift::resetHeadPosition()
+   \fn void QOculusRift::positionalTrackingFrustum(float* const horizontal, float* const vertical, float* const near, float* const far) const
+   \brief Returns the positional tracking frustum's \a horizontal and \a vertical FOV in radians, as well as its \a near
+   and \a far clipping plane distances in meters.
+
+   If any parameter is \c null, then the corresponding field is ignored.
 */
-
-
-
-
-
-
-
-
-
-
-
 /*!
    \fn bool QOculusRift::eyeTrackingAvailable() const
 */
@@ -93,18 +106,6 @@
 */
 /*!
    \fn QPoint QOculusRift::eyePosition() const
-*/
-/*!
-   \fn bool QOculusRift::available() const
-*/
-/*!
-   \fn bool QOculusRift::vsyncEnabled() const
-   \brief Returns \c true if vertical synchronization (VSYNC) is enabled, \c false otherwise.
-*/
-/*!
-   \fn void QOculusRift::enableVsync(const bool enable)
-   \brief If \a enable is set to \c true then vertical synchronization (VSYNC) is enabled, otherwise it is disabled.
-   \warning Disabling this feature may break VR immersion.
 */
 /*!
    \fn bool QOculusRift::yawCorrectionEnabled() const
@@ -139,28 +140,12 @@
    \brief If \a enable is set to \c true then dynamic prediction is enabled, otherwise it is disabled.
 */
 /*!
-   \fn bool QOculusRift::chromaticAberrationCorrectionEnabled() const
-   \brief Returns \c true if chromatic aberration correction is enabled, \c false otherwise.
+   \fn const ovrHmdDesc& QOculusRift::descriptor() const
+   \brief Returns the device descriptor.
 */
 /*!
-   \fn void QOculusRift::enableChromaticAberrationCorrection(const bool enable)
-   \brief If \a enable is set to \c true then chromatic aberration correction is enabled, otherwise it is disabled.
-*/
-/*!
-   \fn bool QOculusRift::timewarpEnabled() const
-   \brief Returns \c true if timewarp is enabled, \c false otherwise.
-*/
-/*!
-   \fn void QOculusRift::enableTimewarp(const bool enable)
-   \brief If \a enable is set to \c true then timewarp is enabled, otherwise it is disabled.
-*/
-/*!
-   \fn bool QOculusRift::vignetteEnabled() const
-   \brief Returns \c true if vignetting is enabled, \c false otherwise.
-*/
-/*!
-   \fn void QOculusRift::enableVignette(const bool enable)
-   \brief If \a enable is set to \c true then vignetting is enabled, otherwise it is disabled.
+   \fn const ovrHmdType& QOculusRift::type() const
+   \brief Returns the device type.
 */
 /*!
    \fn const ovrHmd& QOculusRift::handle() const
@@ -170,10 +155,6 @@
    \fn QOculusRift::operator const ovrHmd&() const
    \sa handle()
    \brief Converts this instance into its underlying device handle.
-*/
-/*!
-   \fn const ovrHmdType& QOculusRift::type() const
-   \brief Returns the device type.
 */
 /*!
    \fn const short int& QOculusRift::vendorId() const
@@ -194,40 +175,16 @@
    If either parameter is \c null, then the corresponding version is ignored.
 */
 /*!
-   \fn void QOculusRift::cameraFrustumFov(float* const horizontal, float* const vertical) const
-   \brief Returns the position-tracking camera's frustum's \a horizontal and \a vertical field of view (FOV) in radians.
-
-   If either parameter is \c null, then the corresponding FOV is ignored.
-*/
-/*!
-   \fn void QOculusRift::cameraFrustumDepth(float* const near, float* const far) const
-   \brief Returns the position-tracking camera's frustum's \a near and \a far depth bounds in meters.
-
-   If either parameter is \c null, then the corresponding depth is ignored.
-*/
-/*!
    \fn unsigned int QOculusRift::supportedHmdCapabilities() const
    \brief Returns the device's supported HMD capability bits.
-*/
-/*!
-   \fn const unsigned int& QOculusRift::enabledHmdCapabilities() const
-   \brief Returns the device's enabled HMD capability bits.
 */
 /*!
    \fn unsigned int QOculusRift::supportedTrackingCapabilities() const
    \brief Returns the device's supported tracking capability bits.
 */
 /*!
-   \fn const unsigned int& QOculusRift::enabledTrackingCapabilities() const
-   \brief Returns the device's enabled tracking capability bits.
-*/
-/*!
    \fn unsigned int QOculusRift::supportedDistortionCapabilities() const
    \brief Returns the device's supported distortion capability bits.
-*/
-/*!
-   \fn const unsigned int& QOculusRift::enabledDistortionCapabilities() const
-   \brief Returns the device's enabled distortion capability bits.
 */
 /*!
    \fn QPoint QOculusRift::windowPosition() const
@@ -235,35 +192,13 @@
 
    If this feature is not supported by the system, then \c {QPoint(0, 0)} is returned.
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*!
    \fn std::array<ovrFovPort, ovrEye_Count> QOculusRift::recommendedFov() const
-   \brief Returns the recommended optical field of view (FOV) for both eyes.
+   \brief Returns the recommended optical field of view (FOV) for each eyes.
 */
 /*!
    \fn std::array<ovrFovPort, ovrEye_Count> QOculusRift::maximumFov() const
-   \brief Returns the maximum optical field of view (FOV) for both eyes.
-*/
-/*!
-   \fn std::array<ovrEyeType, ovrEye_Count> QOculusRift::eyeRenderOrder() const
-   \brief Returns the device's eye render order.
+   \brief Returns the maximum optical field of view (FOV) for each eyes.
 */
 /*!
    \fn QString QOculusRift::systemName() const

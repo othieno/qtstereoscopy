@@ -21,18 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "qabstractstereodisplay.h"
+#ifndef TESTQOCULUSRIFTSTEREORENDERER_H
+#define TESTQOCULUSRIFTSTEREORENDERER_H
+
+#include <QtTest/QtTest>
 
 
-QSize
-QAbstractStereoDisplay::eyeResolution() const
+QT_BEGIN_NAMESPACE
+
+class TestQOculusRiftStereoRenderer : public QObject
 {
-   return QSize(resolution().width() / 2, resolution().height() / 2);
-}
+};
 
+QT_END_NAMESPACE
 
-float
-QAbstractStereoDisplay::aspectRatio() const
-{
-   return static_cast<float>(resolution().width()) / static_cast<float>(resolution().height());
-}
+#endif // TESTQOCULUSRIFTSTEREORENDERER_H

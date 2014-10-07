@@ -4,6 +4,7 @@ compiler:
 script: ./scripts/travis/run-tests.sh
 branches:
    only:
+      - experimental
       - master
 os:
    - linux

@@ -21,18 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "qabstractstereodisplay.h"
-
-
-QSize
-QAbstractStereoDisplay::eyeResolution() const
-{
-   return QSize(resolution().width() / 2, resolution().height() / 2);
-}
-
-
-float
-QAbstractStereoDisplay::aspectRatio() const
-{
-   return static_cast<float>(resolution().width()) / static_cast<float>(resolution().height());
-}
+#include "testqoculusriftstereorenderer.h"

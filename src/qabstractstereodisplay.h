@@ -42,31 +42,31 @@ public:
            float aspectRatio() const;
    virtual unsigned int refreshRate() const = 0;
 
+   virtual bool vsyncEnabled() const = 0;
+   virtual void enableVsync(const bool enable) = 0;
+
    virtual float interpupillaryDistance() const = 0;
    virtual void setInterpupillaryDistance(const float& distance) = 0;
 
    virtual float userHeight() const = 0;
    virtual void setUserHeight(const float& height) = 0;
 
+   virtual bool trackingAvailable() const = 0;
+
    virtual bool orientationTrackingAvailable() const = 0;
    virtual bool orientationTrackingEnabled() const = 0;
    virtual void enableOrientationTracking(const bool enable) = 0;
    virtual QQuaternion headOrientation() const = 0;
-   virtual void resetHeadOrientation() = 0;
 
    virtual bool positionalTrackingAvailable() const = 0;
    virtual bool positionalTrackingEnabled() const = 0;
    virtual void enablePositionalTracking(const bool enable) = 0;
    virtual QVector3D headPosition() const = 0;
-   virtual void resetHeadPosition() = 0;
 
    virtual bool eyeTrackingAvailable() const = 0;
    virtual bool eyeTrackingEnabled() const = 0;
    virtual void enableEyeTracking(const bool enable) = 0;
-   virtual QPoint eyePosition() const = 0;
-           QPointF normalizedEyePosition() const;
-
-   virtual bool available() const = 0;
+   virtual QPointF eyePosition() const = 0;
 };
 
 QT_END_NAMESPACE

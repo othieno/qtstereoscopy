@@ -1,21 +1,5 @@
 #!/bin/bash
 #
-# This script performs software testing and verification. It fails if any one
-# of the following commands has an exit status that is not zero (failure).
-set -e
-set -o pipefail
-
-BASEDIR="$(git rev-parse --show-toplevel)"
-
-# Perform static analysis.
-cppcheck "$BASEDIR/src" --enable=warning,style,performance,portability --language=c++ -q --error-exitcode=1
-
-# Make sure the documentation can be built without any errors. We can't rely on qdoc's exit
-# code because it returns zero even when warnings are issued. Instead, we check whether
-# qdoc's output is an empty string (success) or not (failure).
-QDOC_OUTPUT=$(qdoc -redirect-documentation-to-dev-null "$BASEDIR/doc/qtstereoscopy.qdocconf" 2>&1)
-if [ ! -z "$QDOC_OUTPUT" ]
-then
-	echo "Could not build documentation without any warnings/errors."
-	exit 1
-fi
+# Run the Travis CI script that performs software testing and verification.
+echo "Running pre-commit hook..."
+source "$(git rev-parse --show-toplevel)"/scripts/travis/run-tests.sh > /dev/null

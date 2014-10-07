@@ -21,18 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "qabstractstereodisplay.h"
+#include <QOculusRift>
+#include <iostream>
 
 
-QSize
-QAbstractStereoDisplay::eyeResolution() const
+int main(int, char**)
 {
-   return QSize(resolution().width() / 2, resolution().height() / 2);
-}
+   QOculusRift rift;
 
+   const auto& trackingAvailable = rift.trackingAvailable();
 
-float
-QAbstractStereoDisplay::aspectRatio() const
-{
-   return static_cast<float>(resolution().width()) / static_cast<float>(resolution().height());
+   std::cout << std::boolalpha
+   << "Low persistence enabled: " << rift.lowPersistenceEnabled() << std::endl
+   << "Latency testing enabled: " << rift.latencyTestingEnabled() << std::endl
+   << "Tracking available: " << trackingAvailable << std::endl;
+
+   if (trackingAvailable)
+   {
+      std::cout
+      << "Orientation tracking enabled: " << rift.orientationTrackingEnabled() << std::endl
+      << "Magnetic yaw correction enabled: " << rift.yawCorrectionEnabled() << std::endl
+      << "Positional tracking enabled: " << rift.positionalTrackingEnabled() << std::endl;
+
+      while (true)
+      {
+         //TODO COMPLETE ME
+      }
+   }
+   return 0;
 }

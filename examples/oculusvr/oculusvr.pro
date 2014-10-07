@@ -1,2 +1,2 @@
 TEMPLATE = subdirs
-SUBDIRS = cube
+SUBDIRS = cube tracking

@@ -21,18 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "qabstractstereodisplay.h"
+#include "testqoculusrift.h"
+#include "testqoculusriftstereorenderer.h"
 
 
-QSize
-QAbstractStereoDisplay::eyeResolution() const
+int main(int argc, char** argv)
 {
-   return QSize(resolution().width() / 2, resolution().height() / 2);
-}
+   QVector<QObject*> tests =
+   {
+      new TestQOculusRift,
+      new TestQOculusRiftStereoRenderer,
+   };
 
-
-float
-QAbstractStereoDisplay::aspectRatio() const
-{
-   return static_cast<float>(resolution().width()) / static_cast<float>(resolution().height());
+   // Run each test, but break the loop when a single one of them fails.
+   for (auto* const t : tests)
+   {
+      if (QTest::qExec(t, argc, argv))
+         return 1;
+   }
+   return 0;
 }

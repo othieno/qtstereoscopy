@@ -34,6 +34,11 @@
 #include <OVR_CAPI_GL.h>
 
 
+//TODO Remove these after upgrading to SDK 0.4
+#define ovr_GetTimeInSeconds() 0.0
+#define ovrHmd_GetTrackingState ovrHmd_GetSensorState
+
+
 // The number of instances signals when LibOVR is initialized and destroyed.
 static std::atomic<unsigned int> _NUM_INSTANCES(0);
 
@@ -41,8 +46,7 @@ static std::atomic<unsigned int> _NUM_INSTANCES(0);
 QOculusRift::QOculusRift(const unsigned int& index) :
 _descriptor(),
 _enabledHmdCapabilities(0),
-_enabledTrackingCapabilities(0),
-_enabledDistortionCapabilities(0)
+_enabledTrackingCapabilities(0)
 {
    // Initialize LibOVR iff this is the first instance.
    if (!_NUM_INSTANCES++)
@@ -67,14 +71,24 @@ _enabledDistortionCapabilities(0)
          qWarning("[QtStereoscopy] Warning: Created a debug device. Certain features may not be available.");
    }
 
-   // Populate the descriptor and enable all supported capabilities.
+   // Populate the descriptor.
    ovrHmd_GetDesc(deviceHandle, const_cast<ovrHmdDesc*>(&_descriptor));
 
-   _enabledHmdCapabilities = supportedHmdCapabilities();
+   // Correct supported tracking capabilities.
+   // TODO Check if this has been modified in SDK 0.4
+   if (trackingAvailable() && _descriptor.Type == ovrHmd_DK1)
+   {
+      auto& caps = const_cast<unsigned int&>(_descriptor.SensorCaps);
+      caps = caps & ~ovrSensorCap_Position & ~ovrSensorCap_YawCorrection;
+   }
+
+   // Enable all HMD capabilities, but do not disable VSYNC!
+   _enabledHmdCapabilities = supportedHmdCapabilities() & ~ovrHmdCap_NoVSync;
+   _enabledHmdCapabilities |= ovrHmdCap_LowPersistence; //TODO Remove statement after upgrading to SDK 0.4.
    updateHmdCapabilities();
+
    _enabledTrackingCapabilities = supportedTrackingCapabilities();
    updateTrackingCapabilities();
-   _enabledDistortionCapabilities = supportedDistortionCapabilities();
 }
 
 
@@ -130,6 +144,28 @@ QOculusRift::refreshRate() const
 }
 
 
+bool
+QOculusRift::vsyncEnabled() const
+{
+   return (_enabledHmdCapabilities & ovrHmdCap_NoVSync) != ovrHmdCap_NoVSync;
+}
+
+
+void
+QOculusRift::enableVsync(const bool enable)
+{
+   if (enable != vsyncEnabled())
+   {
+      if (enable)
+         _enabledHmdCapabilities &= ~ovrHmdCap_NoVSync;
+      else
+         _enabledHmdCapabilities |= ovrHmdCap_NoVSync;
+
+      updateHmdCapabilities();
+   }
+}
+
+
 float
 QOculusRift::interpupillaryDistance() const
 {
@@ -161,10 +197,43 @@ QOculusRift::setUserHeight(const float& height)
 
 
 bool
+QOculusRift::trackingAvailable() const
+{
+   // There's no sensor hardware for debug devices.
+   if (_descriptor.Type == ovrHmd_Other)
+      return false;
+   else
+   {
+      qCritical("[QtStereoscopy] Implement QOculusRift::trackingAvailable.");
+      return true;
+   }
+}
+
+
+bool
+QOculusRift::trackingCameraAvailable() const
+{
+   qCritical("[QtStereoscopy] Implement QOculusRift::trackingCameraAvailable.");
+   return false;
+}
+
+
+void
+QOculusRift::resetTracking()
+{
+   qCritical("[QtStereoscopy] Implement QOculusRift::resetTracking.");
+
+   if (trackingAvailable())
+      ovrHmd_ResetSensor(_descriptor.Handle);
+}
+
+
+bool
 QOculusRift::orientationTrackingAvailable() const
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::orientationTrackingAvailable.");
-   return false;
+   // Since all Rifts support orientation tracking, all we need to check is
+   // whether or not tracking is available.
+   return trackingAvailable();
 }
 
 
@@ -173,11 +242,10 @@ QOculusRift::orientationTrackingEnabled() const
 {
    if (orientationTrackingAvailable())
    {
-      qCritical("[QtStereoscopy] Implement QOculusRift::orientationTrackingEnabled.");
-      return false;
+      const auto& trackingState = ovrHmd_GetTrackingState(_descriptor.Handle, ovr_GetTimeInSeconds());
+      return trackingState.StatusFlags & (ovrStatus_OrientationTracked);
    }
-   else
-      return false;
+   return false;
 }
 
 
@@ -186,7 +254,11 @@ QOculusRift::enableOrientationTracking(const bool enable)
 {
    if (orientationTrackingAvailable() && enable != orientationTrackingEnabled())
    {
-      qCritical("[QtStereoscopy] Implement QOculusRift::enableOrientationTracking.");
+      if (enable)
+         _enabledTrackingCapabilities |= ovrSensorCap_Orientation;
+      else
+         _enabledTrackingCapabilities &= ~ovrSensorCap_Orientation;
+
       updateTrackingCapabilities();
    }
 }
@@ -195,31 +267,25 @@ QOculusRift::enableOrientationTracking(const bool enable)
 QQuaternion
 QOculusRift::headOrientation() const
 {
+   //TODO Make sure the quaternion is correct!
    if (orientationTrackingAvailable())
    {
-      qCritical("[QtStereoscopy] Implement QOculusRift::headOrientation.");
-      return QQuaternion(0.0, 0.0, 0.0, 0.0);
+      const auto& trackingState = ovrHmd_GetTrackingState(_descriptor.Handle, ovr_GetTimeInSeconds());
+      if (trackingState.StatusFlags & (ovrStatus_OrientationTracked))
+      {
+         const auto& orientation = trackingState.Predicted.Pose.Orientation;
+         return QQuaternion(orientation.w, orientation.x, orientation.y, orientation.z);
+      }
    }
-   else
-      return QQuaternion(0.0, 0.0, 0.0, 0.0);
-}
-
-
-void
-QOculusRift::resetHeadOrientation()
-{
-   if (orientationTrackingEnabled())
-   {
-      qCritical("[QtStereoscopy] Implement QOculusRift::resetHeadOrientation.");
-   }
+   return QQuaternion(1.0, 0.0, 0.0, 0.0);
 }
 
 
 bool
 QOculusRift::positionalTrackingAvailable() const
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::positionalTrackingAvailable.");
-   return false;
+   // If the tracking sensor is available and this device is not a DK1, then positional tracking is supported.
+   return trackingAvailable() && _descriptor.Type != ovrHmd_DK1;
 }
 
 
@@ -228,11 +294,10 @@ QOculusRift::positionalTrackingEnabled() const
 {
    if (positionalTrackingAvailable())
    {
-      qCritical("[QtStereoscopy] Implement QOculusRift::positionalTrackingEnabled.");
-      return false;
+      const auto& trackingState = ovrHmd_GetTrackingState(_descriptor.Handle, ovr_GetTimeInSeconds());
+      return trackingState.StatusFlags & (ovrStatus_PositionTracked);
    }
-   else
-      return false;
+   return false;
 }
 
 
@@ -241,7 +306,11 @@ QOculusRift::enablePositionalTracking(const bool enable)
 {
    if (positionalTrackingAvailable() && enable != positionalTrackingEnabled())
    {
-      qCritical("[QtStereoscopy] Implement QOculusRift::enablePositionalTracking.");
+      if (enable)
+         _enabledTrackingCapabilities |= ovrSensorCap_Position;
+      else
+         _enabledTrackingCapabilities &= ~ovrSensorCap_Position;
+
       updateTrackingCapabilities();
    }
 }
@@ -252,28 +321,39 @@ QOculusRift::headPosition() const
 {
    if (positionalTrackingAvailable())
    {
-      qCritical("[QtStereoscopy] Implement QOculusRift::headPosition.");
-      return QVector3D(0, 0, 0);
+      const auto& trackingState = ovrHmd_GetTrackingState(_descriptor.Handle, ovr_GetTimeInSeconds());
+      if (trackingState.StatusFlags & (ovrStatus_PositionTracked))
+      {
+         const auto& position = trackingState.Predicted.Pose.Position;
+         return QVector3D(position.x, position.y, position.z);
+      }
    }
-   else
-      return QVector3D(0, 0, 0);
+   return QVector3D(0, 0, 0);
 }
 
 
 void
-QOculusRift::resetHeadPosition()
+QOculusRift::positionalTrackingFrustum(float* const hFov, float* const vFov, float* const near, float* const far) const
 {
-   if (positionalTrackingEnabled())
-   {
-      qCritical("[QtStereoscopy] Implement QOculusRift::resetHeadPosition.");
-   }
+   qCritical("[QtStereoscopy] Implement QOculusRift::positionalTrackingFrustum.");
+
+   if (hFov != nullptr)
+      *hFov = 0.0f;
+
+   if (vFov != nullptr)
+      *vFov = 0.0f;
+
+   if (near != nullptr)
+      *near = 0.0f;
+
+   if (far != nullptr)
+      *far = 0.0f;
 }
 
 
 bool
 QOculusRift::eyeTrackingAvailable() const
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::eyeTrackingAvailable.");
    return false;
 }
 
@@ -281,178 +361,115 @@ QOculusRift::eyeTrackingAvailable() const
 bool
 QOculusRift::eyeTrackingEnabled() const
 {
-   if (eyeTrackingAvailable())
-   {
-      qCritical("[QtStereoscopy] Implement QOculusRift::eyeTrackingEnabled.");
-      return false;
-   }
-   else
-      return false;
-}
-
-
-void
-QOculusRift::enableEyeTracking(const bool enable)
-{
-   if (eyeTrackingAvailable() && enable != eyeTrackingEnabled())
-   {
-      qCritical("[QtStereoscopy] Implement QOculusRift::enableEyeTracking.");
-      updateTrackingCapabilities();
-   }
-}
-
-
-QPoint
-QOculusRift::eyePosition() const
-{
-   if (eyeTrackingEnabled())
-   {
-      qCritical("[QtStereoscopy] Implement QOculusRift::getEyePosition.");
-      return QPoint(0, 0);
-   }
-   else
-      return QPoint(0, 0);
-}
-
-
-bool
-QOculusRift::available() const
-{
-   qCritical("[QtStereoscopy] Implement QOculusRift::available.");
-   return true;
-}
-
-
-bool
-QOculusRift::vsyncEnabled() const
-{
-   qCritical("[QtStereoscopy] Implement QOculusRift::vsyncEnabled.");
    return false;
 }
 
 
 void
-QOculusRift::enableVsync(const bool)
+QOculusRift::enableEyeTracking(const bool)
+{}
+
+
+QPointF
+QOculusRift::eyePosition() const
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::enableVsync.");
-   updateHmdCapabilities();
+   return QPointF(0, 0);
 }
 
 
 bool
 QOculusRift::yawCorrectionEnabled() const
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::yawCorrectionEnabled.");
-   return false;
+   return positionalTrackingEnabled() &&
+   (_enabledTrackingCapabilities & ovrSensorCap_YawCorrection) != ovrSensorCap_YawCorrection;
 }
 
 
 void
-QOculusRift::enableYawCorrection(const bool)
+QOculusRift::enableYawCorrection(const bool enable)
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::enableYawCorrection.");
-   updateTrackingCapabilities();
+   if (enable != yawCorrectionEnabled())
+   {
+      if (enable)
+         _enabledTrackingCapabilities &= ~ovrSensorCap_YawCorrection;
+      else
+         _enabledTrackingCapabilities |= ovrSensorCap_YawCorrection;
+
+      updateTrackingCapabilities();
+   }
 }
 
 
 bool
 QOculusRift::lowPersistenceEnabled() const
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::lowPersistenceEnabled.");
-   return false;
+   return (_enabledHmdCapabilities & ovrHmdCap_LowPersistence) == ovrHmdCap_LowPersistence;
 }
 
 
 void
-QOculusRift::enableLowPersistence(const bool)
+QOculusRift::enableLowPersistence(const bool enable)
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::enableLowPersistence.");
-   updateHmdCapabilities();
+   if (enable != lowPersistenceEnabled())
+   {
+      if (enable)
+         _enabledHmdCapabilities |= ovrHmdCap_LowPersistence;
+      else
+         _enabledHmdCapabilities &= ~ovrHmdCap_LowPersistence;
+
+      updateHmdCapabilities();
+   }
 }
 
 
 bool
 QOculusRift::latencyTestingEnabled() const
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::latencyTestingEnabled.");
-   return false;
+   return (_enabledHmdCapabilities & ovrHmdCap_LatencyTest) == ovrHmdCap_LatencyTest;
 }
 
 
 void
-QOculusRift::enableLatencyTesting(const bool)
+QOculusRift::enableLatencyTesting(const bool enable)
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::enableLatencyTesting.");
-   updateHmdCapabilities();
+   if (enable != latencyTestingEnabled())
+   {
+      if (enable)
+         _enabledHmdCapabilities |= ovrHmdCap_LatencyTest;
+      else
+         _enabledHmdCapabilities &= ~ovrHmdCap_LatencyTest;
+
+      updateHmdCapabilities();
+   }
 }
 
 
 bool
 QOculusRift::dynamicPredictionEnabled() const
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::dynamicPredictionEnabled.");
-   return false;
+   return (_enabledHmdCapabilities & ovrHmdCap_DynamicPrediction) == ovrHmdCap_DynamicPrediction;
 }
 
 
 void
-QOculusRift::enableDynamicPrediction(const bool)
+QOculusRift::enableDynamicPrediction(const bool enable)
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::enableDynamicPrediction.");
-   updateHmdCapabilities();
+   if (enable != dynamicPredictionEnabled())
+   {
+      if (enable)
+         _enabledHmdCapabilities |= ovrHmdCap_DynamicPrediction;
+      else
+         _enabledHmdCapabilities &= ~ovrHmdCap_DynamicPrediction;
+
+      updateHmdCapabilities();
+   }
 }
 
 
-bool
-QOculusRift::chromaticAberrationCorrectionEnabled() const
+const ovrHmdDesc&
+QOculusRift::descriptor() const
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::chromaticAberrationCorrectionEnabled.");
-   return false;
-}
-
-
-void
-QOculusRift::enableChromaticAberrationCorrection(const bool)
-{
-   qCritical("[QtStereoscopy] Implement QOculusRift::enableChromaticAberrationCorrection.");
-}
-
-
-bool
-QOculusRift::timewarpEnabled() const
-{
-   qCritical("[QtStereoscopy] Implement QOculusRift::timewarpEnabled.");
-   return false;
-}
-
-
-void
-QOculusRift::enableTimewarp(const bool)
-{
-   qCritical("[QtStereoscopy] Implement QOculusRift::enableTimewarp.");
-}
-
-
-bool
-QOculusRift::vignetteEnabled() const
-{
-   qCritical("[QtStereoscopy] Implement QOculusRift::vignetteEnabled.");
-   return false;
-}
-
-
-void
-QOculusRift::enableVignette(const bool)
-{
-   qCritical("[QtStereoscopy] Implement QOculusRift::enableVignette.");
-}
-
-
-
-const ovrHmd&
-QOculusRift::handle() const
-{
-   return _descriptor.Handle;
+   return _descriptor;
 }
 
 
@@ -460,6 +477,13 @@ const ovrHmdType&
 QOculusRift::type() const
 {
    return _descriptor.Type;
+}
+
+
+const ovrHmd&
+QOculusRift::handle() const
+{
+   return _descriptor.Handle;
 }
 
 
@@ -496,21 +520,7 @@ QOculusRift::firmwareVersion(short int* const, short int* const) const
 }
 
 
-void
-QOculusRift::cameraFrustumFov(float* const, float* const) const
-{
-   qCritical("[QtStereoscopy] Implement QOculusRift::getCameraFrustumFov.");
-}
-
-
-void
-QOculusRift::cameraFrustumDepth(float* const, float* const) const
-{
-   qCritical("[QtStereoscopy] Implement QOculusRift::getCameraFrustumDepth.");
-}
-
-
-unsigned int
+const unsigned int&
 QOculusRift::supportedHmdCapabilities() const
 {
    return _descriptor.HmdCaps;
@@ -518,55 +528,16 @@ QOculusRift::supportedHmdCapabilities() const
 
 
 const unsigned int&
-QOculusRift::enabledHmdCapabilities() const
-{
-   return _enabledHmdCapabilities;
-}
-
-
-unsigned int
 QOculusRift::supportedTrackingCapabilities() const
 {
-   qCritical("[QtStereoscopy] Implement QOculusRift::supportedTrackingCapabilities.");
-   return 0;
-/*
-   // Enable tracking capabilities if the hardware is available.
-   if (isTrackingAvailable())
-   {
-      switch (_descriptor.Type)
-      {
-         // Positional tracking and yaw correction are not supported by the debug device or the DK1.
-         case ovrHmd_Other:
-         case ovrHmd_DK1:
-            return _descriptor.SensorCaps & ~ovrSensorCap_Position & ~ovrSensorCap_YawCorrection;
-         default:
-            return _descriptor.SensorCaps;
-      }
-   }
-   else
-      return 0;
-*/
+   return _descriptor.SensorCaps;
 }
 
 
 const unsigned int&
-QOculusRift::enabledTrackingCapabilities() const
-{
-   return _enabledTrackingCapabilities;
-}
-
-
-unsigned int
 QOculusRift::supportedDistortionCapabilities() const
 {
    return _descriptor.DistortionCaps;
-}
-
-
-const unsigned int&
-QOculusRift::enabledDistortionCapabilities() const
-{
-   return _enabledDistortionCapabilities;
 }
 
 
@@ -595,15 +566,6 @@ QOculusRift::maximumFov() const
 }
 
 
-std::array<ovrEyeType, ovrEye_Count>
-QOculusRift::eyeRenderOrder() const
-{
-   std::array<ovrEyeType, ovrEye_Count> order;
-   std::copy(std::begin(_descriptor.EyeRenderOrder), std::end(_descriptor.EyeRenderOrder), order.begin());
-   return order;
-}
-
-
 QString
 QOculusRift::systemName() const
 {
@@ -628,13 +590,16 @@ QOculusRift::updateHmdCapabilities()
 void
 QOculusRift::updateTrackingCapabilities()
 {
-   // If no tracking capabilities are activated, turn off the sensor. If, on the other hand, certain
-   // tracking capabilities are set, and tracking is available, configure the sensor appropriately.
-   if (!_enabledTrackingCapabilities)
-      ovrHmd_StopSensor(_descriptor.Handle);
-   else
+   if (trackingAvailable())
    {
-      if (!ovrHmd_StartSensor(_descriptor.Handle, supportedTrackingCapabilities(), _enabledTrackingCapabilities))
-         qFatal("[QtStereoscopy] Error: Could not initialize the device's tracking sensor.");
+      // If no tracking capabilities are activated, turn off the sensor. If, on the other hand, certain
+      // tracking capabilities are set, and tracking is available, configure the sensor appropriately.
+      if (!_enabledTrackingCapabilities)
+         ovrHmd_StopSensor(_descriptor.Handle);
+      else
+      {
+         if (!ovrHmd_StartSensor(_descriptor.Handle, supportedTrackingCapabilities(), _enabledTrackingCapabilities))
+            qFatal("[QtStereoscopy] Error: Could not initialize the device's tracking sensors.");
+      }
    }
 }

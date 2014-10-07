@@ -29,6 +29,14 @@
    \brief Returns the display's refresh rate.
 */
 /*!
+   \fn bool QAbstractStereoDisplay::vsyncEnabled() const
+   \brief Returns true if vertical synchronization (VSYNC) is enabled, false otherwise.
+*/
+/*!
+   \fn void QAbstractStereoDisplay::enableVsync(const bool enable)
+   \brief If \a enable is set to \c true, then vertical synchronization (VSYNC) is enabled.
+*/
+/*!
    \fn float QAbstractStereoDisplay::interpupillaryDistance() const
    \brief Returns the display's current interpupillary distance (IPD) in millimeters.
 */
@@ -43,6 +51,10 @@
 /*!
    \fn void QAbstractStereoDisplay::setUserHeight(const float& value)
    \brief Sets the user's height to a specified \a value in meters.
+*/
+/*!
+   \fn bool QAbstractStereoDisplay::trackingAvailable() const
+   \brief Returns true if the display device is equipped with tracking sensors; false otherwise.
 */
 /*!
    \fn bool QAbstractStereoDisplay::orientationTrackingAvailable() const
@@ -63,10 +75,6 @@
    \brief Returns the display device's orientation quaternion.
 */
 /*!
-   \fn void QAbstractStereoDisplay::resetHeadOrientation()
-   \brief Resets the display device's orientation.
-*/
-/*!
    \fn bool QAbstractStereoDisplay::positionalTrackingAvailable() const
    \brief Returns \c true if positional tracking is available, \c false otherwise.
 */
@@ -83,10 +91,6 @@
    \brief Returns the display device's head position. If positional tracking is disabled, then QVector3D(0, 0, 0) is returned.
 */
 /*!
-   \fn void QAbstractStereoDisplay::resetHeadPosition()
-   \brief Resets the display device's position.
-*/
-/*!
    \fn bool QAbstractStereoDisplay::eyeTrackingAvailable() const
    \brief Returns \c true if eye tracking is available, \c false otherwise.
 */
@@ -99,14 +103,6 @@
    \brief If \a enable is set to \c true then eye tracking is enabled, otherwise it is disabled.
 */
 /*!
-   \fn QPoint QAbstractStereoDisplay::eyePosition() const
-   \brief Returns the screen-space eye position.
-*/
-/*!
-   \fn QPointF QAbstractStereoDisplay::normalizedEyePosition() const
+   \fn QPointF QAbstractStereoDisplay::eyePosition() const
    \brief Returns the normalized screen-space eye position.
-*/
-/*!
-   \fn bool QAbstractStereoDisplay::available() const
-   \brief Returns \c true if the display device's hardware is available, \c false otherwise.
 */
