@@ -31,10 +31,16 @@
 <h2>Public Functions</h2>
 <table class="alignedsummary">
 <tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#QOculusRiftStereoRenderer">QOculusRiftStereoRenderer</a></b>(const unsigned int &amp;<i> index</i> = 0)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#chromaticAberrationCorrectionEnabled">chromaticAberrationCorrectionEnabled</a></b>() const</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> QOculusRift &amp; </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#display">display</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#enableChromaticAberrationCorrection">enableChromaticAberrationCorrection</a></b>(const bool<i> enable</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#enableTimewarp">enableTimewarp</a></b>(const bool<i> enable</i> = true)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#enableVignette">enableVignette</a></b>(const bool<i> enable</i> = true)</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#freezeEyeUpdates">freezeEyeUpdates</a></b>(const ovrEyeType &amp;<i> eye</i>, const bool<i> freeze</i> = true)</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> const float &amp; </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#pixelDensity">pixelDensity</a></b>() const</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#setPixelDensity">setPixelDensity</a></b>(const float &amp;<i> value</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#timewarpEnabled">timewarpEnabled</a></b>() const</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> bool </td><td class="memItemRight bottomAlign"><b><a href="qoculusriftstereorenderer.html#vignetteEnabled">vignetteEnabled</a></b>() const</td></tr>
 </table>
 <a name="reimplemented-public-functions"></a>
 <h2>Reimplemented Public Functions</h2>
@@ -83,6 +89,10 @@
 <p>Reimplemented from <a href="qabstractstereorenderer.html#autoSwapsBuffers">QAbstractStereoRenderer::autoSwapsBuffers</a>().</p>
 <p>Returns <tt>true</tt> since the Oculus SDK handles buffer swapping (in SDK distortion mode).</p>
 <!-- @@@autoSwapsBuffers -->
+<!-- $$$chromaticAberrationCorrectionEnabled[overload1]$$$chromaticAberrationCorrectionEnabled -->
+<h3 class="fn"><a name="chromaticAberrationCorrectionEnabled"></a><span class="type">bool</span> QOculusRiftStereoRenderer::<span class="name">chromaticAberrationCorrectionEnabled</span>() const</h3>
+<p>Returns <tt>true</tt> if chromatic aberration correction is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@chromaticAberrationCorrectionEnabled -->
 <!-- $$$configureGL[overload1]$$$configureGL -->
 <h3 class="fn"><a name="configureGL"></a><span class="type">void</span> QOculusRiftStereoRenderer::<span class="name">configureGL</span>()<tt> [protected]</tt></h3>
 <p>Configures the OpenGL context for use with the Oculus SDK.</p>
@@ -91,6 +101,18 @@
 <h3 class="fn"><a name="display"></a><span class="type"><a href="qoculusrift.html">QOculusRift</a></span> &amp; QOculusRiftStereoRenderer::<span class="name">display</span>()</h3>
 <p>Returns the Oculus Rift display device that is used by this renderer.</p>
 <!-- @@@display -->
+<!-- $$$enableChromaticAberrationCorrection[overload1]$$$enableChromaticAberrationCorrectionconstbool -->
+<h3 class="fn"><a name="enableChromaticAberrationCorrection"></a><span class="type">void</span> QOculusRiftStereoRenderer::<span class="name">enableChromaticAberrationCorrection</span>(const <span class="type">bool</span><i> enable</i> = true)</h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then chromatic aberration correction is enabled, otherwise it is disabled.</p>
+<!-- @@@enableChromaticAberrationCorrection -->
+<!-- $$$enableTimewarp[overload1]$$$enableTimewarpconstbool -->
+<h3 class="fn"><a name="enableTimewarp"></a><span class="type">void</span> QOculusRiftStereoRenderer::<span class="name">enableTimewarp</span>(const <span class="type">bool</span><i> enable</i> = true)</h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then timewarp is enabled, otherwise it is disabled.</p>
+<!-- @@@enableTimewarp -->
+<!-- $$$enableVignette[overload1]$$$enableVignetteconstbool -->
+<h3 class="fn"><a name="enableVignette"></a><span class="type">void</span> QOculusRiftStereoRenderer::<span class="name">enableVignette</span>(const <span class="type">bool</span><i> enable</i> = true)</h3>
+<p>If <i>enable</i> is set to <tt>true</tt> then vignetting is enabled, otherwise it is disabled.</p>
+<!-- @@@enableVignette -->
 <!-- $$$freezeEyeUpdates[overload1]$$$freezeEyeUpdatesconstovrEyeType&constbool -->
 <h3 class="fn"><a name="freezeEyeUpdates"></a><span class="type">void</span> QOculusRiftStereoRenderer::<span class="name">freezeEyeUpdates</span>(const <span class="type">ovrEyeType</span> &amp;<i> eye</i>, const <span class="type">bool</span><i> freeze</i> = true)</h3>
 <p>If <i>freeze</i> is set to <tt>true</tt>, updates for the specified <i>eye</i> are ignored.</p>
@@ -119,6 +141,14 @@
 <p>Sets the pixel density to the specified <i>value</i>.</p>
 <p><b>See also </b><a href="qoculusriftstereorenderer.html#pixelDensity">pixelDensity</a>().</p>
 <!-- @@@setPixelDensity -->
+<!-- $$$timewarpEnabled[overload1]$$$timewarpEnabled -->
+<h3 class="fn"><a name="timewarpEnabled"></a><span class="type">bool</span> QOculusRiftStereoRenderer::<span class="name">timewarpEnabled</span>() const</h3>
+<p>Returns <tt>true</tt> if timewarp is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@timewarpEnabled -->
+<!-- $$$vignetteEnabled[overload1]$$$vignetteEnabled -->
+<h3 class="fn"><a name="vignetteEnabled"></a><span class="type">bool</span> QOculusRiftStereoRenderer::<span class="name">vignetteEnabled</span>() const</h3>
+<p>Returns <tt>true</tt> if vignetting is enabled, <tt>false</tt> otherwise.</p>
+<!-- @@@vignetteEnabled -->
 </div>
 </body>
 </html>

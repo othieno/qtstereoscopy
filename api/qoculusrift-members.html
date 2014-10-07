@@ -17,13 +17,8 @@
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#QOculusRift">QOculusRift</a></b></span>(const unsigned int &amp;)</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#dtor.QOculusRift">~QOculusRift</a></b></span>()</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#aspectRatio">aspectRatio</a></b></span>() const : float</li>
-<li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#available">available</a></b></span>() const : bool</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#available">available</a></b></span>() const : bool</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#cameraFrustumDepth">cameraFrustumDepth</a></b></span>(float * const, float * const) const</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#cameraFrustumFov">cameraFrustumFov</a></b></span>(float * const, float * const) const</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#chromaticAberrationCorrectionEnabled">chromaticAberrationCorrectionEnabled</a></b></span>() const : bool</li>
+<li class="fn"><span class="name"><b><a href="qoculusrift.html#descriptor">descriptor</a></b></span>() const : const ovrHmdDesc &amp;</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#dynamicPredictionEnabled">dynamicPredictionEnabled</a></b></span>() const : bool</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#enableChromaticAberrationCorrection">enableChromaticAberrationCorrection</a></b></span>(const bool)</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#enableDynamicPrediction">enableDynamicPrediction</a></b></span>(const bool)</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#enableEyeTracking">enableEyeTracking</a></b></span>(const bool)</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#enableEyeTracking">enableEyeTracking</a></b></span>(const bool)</li>
@@ -33,16 +28,11 @@
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#enableOrientationTracking">enableOrientationTracking</a></b></span>(const bool)</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#enablePositionalTracking">enablePositionalTracking</a></b></span>(const bool)</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#enablePositionalTracking">enablePositionalTracking</a></b></span>(const bool)</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#enableTimewarp">enableTimewarp</a></b></span>(const bool)</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#enableVignette">enableVignette</a></b></span>(const bool)</li>
+<li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#enableVsync">enableVsync</a></b></span>(const bool)</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#enableVsync">enableVsync</a></b></span>(const bool)</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#enableYawCorrection">enableYawCorrection</a></b></span>(const bool)</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#enabledDistortionCapabilities">enabledDistortionCapabilities</a></b></span>() const : const unsigned int &amp;</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#enabledHmdCapabilities">enabledHmdCapabilities</a></b></span>() const : const unsigned int &amp;</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#enabledTrackingCapabilities">enabledTrackingCapabilities</a></b></span>() const : const unsigned int &amp;</li>
-<li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#eyePosition">eyePosition</a></b></span>() const : QPoint</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#eyePosition">eyePosition</a></b></span>() const : QPoint</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#eyeRenderOrder">eyeRenderOrder</a></b></span>() const : std::array&lt;ovrEyeType, ovrEye_Count&gt;</li>
+<li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#eyePosition">eyePosition</a></b></span>() const : QPointF</li>
+<li class="fn"><span class="name"><b><a href="qoculusrift.html#eyePosition">eyePosition</a></b></span>() const : QPointF</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#eyeResolution">eyeResolution</a></b></span>() const : QSize</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#eyeTrackingAvailable">eyeTrackingAvailable</a></b></span>() const : bool</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#eyeTrackingAvailable">eyeTrackingAvailable</a></b></span>() const : bool</li>
@@ -58,29 +48,26 @@
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#interpupillaryDistance">interpupillaryDistance</a></b></span>() const : float</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#latencyTestingEnabled">latencyTestingEnabled</a></b></span>() const : bool</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#lowPersistenceEnabled">lowPersistenceEnabled</a></b></span>() const : bool</li>
-</ul></td><td class="topAlign"><ul>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#manufacturerName">manufacturerName</a></b></span>() const : QString</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#manufacturerName">manufacturerName</a></b></span>() const : QString</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#maximumFov">maximumFov</a></b></span>() const : std::array&lt;ovrFovPort, ovrEye_Count&gt;</li>
-<li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#normalizedEyePosition">normalizedEyePosition</a></b></span>() const : QPointF</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#orientationTrackingAvailable">orientationTrackingAvailable</a></b></span>() const : bool</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#orientationTrackingAvailable">orientationTrackingAvailable</a></b></span>() const : bool</li>
+</ul></td><td class="topAlign"><ul>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#orientationTrackingEnabled">orientationTrackingEnabled</a></b></span>() const : bool</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#orientationTrackingEnabled">orientationTrackingEnabled</a></b></span>() const : bool</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#positionalTrackingAvailable">positionalTrackingAvailable</a></b></span>() const : bool</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#positionalTrackingAvailable">positionalTrackingAvailable</a></b></span>() const : bool</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#positionalTrackingEnabled">positionalTrackingEnabled</a></b></span>() const : bool</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#positionalTrackingEnabled">positionalTrackingEnabled</a></b></span>() const : bool</li>
+<li class="fn"><span class="name"><b><a href="qoculusrift.html#positionalTrackingFrustum">positionalTrackingFrustum</a></b></span>(float * const, float * const, float * const, float * const) const</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#productId">productId</a></b></span>() const : const short int &amp;</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#productName">productName</a></b></span>() const : QString</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#productName">productName</a></b></span>() const : QString</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#recommendedFov">recommendedFov</a></b></span>() const : std::array&lt;ovrFovPort, ovrEye_Count&gt;</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#refreshRate">refreshRate</a></b></span>() const : unsigned int</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#refreshRate">refreshRate</a></b></span>() const : unsigned int</li>
-<li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#resetHeadOrientation">resetHeadOrientation</a></b></span>()</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#resetHeadOrientation">resetHeadOrientation</a></b></span>()</li>
-<li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#resetHeadPosition">resetHeadPosition</a></b></span>()</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#resetHeadPosition">resetHeadPosition</a></b></span>()</li>
+<li class="fn"><span class="name"><b><a href="qoculusrift.html#resetTracking">resetTracking</a></b></span>()</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#resolution">resolution</a></b></span>() const : QSize</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#resolution">resolution</a></b></span>() const : QSize</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#serialNumber">serialNumber</a></b></span>() const : QString</li>
@@ -88,17 +75,19 @@
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#setInterpupillaryDistance">setInterpupillaryDistance</a></b></span>(const float &amp;)</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#setUserHeight">setUserHeight</a></b></span>(const float &amp;)</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#setUserHeight">setUserHeight</a></b></span>(const float &amp;)</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#supportedDistortionCapabilities">supportedDistortionCapabilities</a></b></span>() const : unsigned int</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#supportedHmdCapabilities">supportedHmdCapabilities</a></b></span>() const : unsigned int</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#supportedTrackingCapabilities">supportedTrackingCapabilities</a></b></span>() const : unsigned int</li>
+<li class="fn"><span class="name"><b><a href="qoculusrift.html#supportedDistortionCapabilities">supportedDistortionCapabilities</a></b></span>() const : const unsigned int &amp;</li>
+<li class="fn"><span class="name"><b><a href="qoculusrift.html#supportedHmdCapabilities">supportedHmdCapabilities</a></b></span>() const : const unsigned int &amp;</li>
+<li class="fn"><span class="name"><b><a href="qoculusrift.html#supportedTrackingCapabilities">supportedTrackingCapabilities</a></b></span>() const : const unsigned int &amp;</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#systemId">systemId</a></b></span>() const : const int &amp;</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#systemName">systemName</a></b></span>() const : QString</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#timewarpEnabled">timewarpEnabled</a></b></span>() const : bool</li>
+<li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#trackingAvailable">trackingAvailable</a></b></span>() const : bool</li>
+<li class="fn"><span class="name"><b><a href="qoculusrift.html#trackingAvailable">trackingAvailable</a></b></span>() const : bool</li>
+<li class="fn"><span class="name"><b><a href="qoculusrift.html#trackingCameraAvailable">trackingCameraAvailable</a></b></span>() const : bool</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#type">type</a></b></span>() const : const ovrHmdType &amp;</li>
 <li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#userHeight">userHeight</a></b></span>() const : float</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#userHeight">userHeight</a></b></span>() const : float</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#vendorId">vendorId</a></b></span>() const : const short int &amp;</li>
-<li class="fn"><span class="name"><b><a href="qoculusrift.html#vignetteEnabled">vignetteEnabled</a></b></span>() const : bool</li>
+<li class="fn"><span class="name"><b><a href="qabstractstereodisplay.html#vsyncEnabled">vsyncEnabled</a></b></span>() const : bool</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#vsyncEnabled">vsyncEnabled</a></b></span>() const : bool</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#windowPosition">windowPosition</a></b></span>() const : QPoint</li>
 <li class="fn"><span class="name"><b><a href="qoculusrift.html#yawCorrectionEnabled">yawCorrectionEnabled</a></b></span>() const : bool</li>
