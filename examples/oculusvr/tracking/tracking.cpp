@@ -21,32 +21,74 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#include <QCoreApplication>
 #include <QOculusRift>
+#include <QTimer>
 #include <iostream>
+#include <iomanip>
 
 
-int main(int, char**)
+std::ostream& operator<<(std::ostream&, const QVector3D&);
+std::ostream& operator<<(std::ostream&, const QQuaternion&);
+
+
+int main(int argc, char** argv)
 {
-   QOculusRift rift;
+   QCoreApplication application(argc, argv);
 
+   const QOculusRift rift;
    const auto& trackingAvailable = rift.trackingAvailable();
 
-   std::cout << std::boolalpha
+   std::cout
+   << std::boolalpha
+   << "Interpupillary distance: " << rift.interpupillaryDistance() << "mm" << std::endl
    << "Low persistence enabled: " << rift.lowPersistenceEnabled() << std::endl
    << "Latency testing enabled: " << rift.latencyTestingEnabled() << std::endl
-   << "Tracking available: " << trackingAvailable << std::endl;
+   << "Sensor tracking available: " << trackingAvailable << std::endl;
 
-   if (trackingAvailable)
+   if (!trackingAvailable)
+   {
+      qWarning("[QtStereoscopy] Warning: No available tracking sensors. Closing application...");
+      return 0;
+   }
+   else
    {
       std::cout
+      << std::setiosflags(std::ios::fixed)
+      << std::setprecision(3)
+      << "Tracking camera available: " << rift.trackingCameraAvailable() << std::endl
       << "Orientation tracking enabled: " << rift.orientationTrackingEnabled() << std::endl
       << "Magnetic yaw correction enabled: " << rift.yawCorrectionEnabled() << std::endl
-      << "Positional tracking enabled: " << rift.positionalTrackingEnabled() << std::endl;
+      << "Positional tracking enabled: " << rift.positionalTrackingEnabled() << std::endl
+      << "Eye tracking enabled: " << rift.eyeTrackingEnabled() << std::endl;
 
-      while (true)
+      QTimer updateTimer;
+      QCoreApplication::connect(&updateTimer, &QTimer::timeout, [&rift]()
       {
-         //TODO COMPLETE ME
-      }
+         std::cout
+         << "Position: " << rift.headPosition()
+         << "\t\t"
+         << "Orientation: " << rift.headOrientation()
+         << std::endl;
+      });
+      updateTimer.start(300);
+
+      return application.exec();
    }
-   return 0;
+}
+
+
+std::ostream&
+operator<<(std::ostream& os, const QVector3D& v)
+{
+   os << "(" << std::setw(8) << v.x() << ", " << std::setw(8) << v.y() << ", " << std::setw(8) << v.z() << ")";
+   return os;
+}
+
+
+std::ostream&
+operator<<(std::ostream& os, const QQuaternion& q)
+{
+   os << "(" << q.vector() << ", " << std::setw(8) << q.scalar() << ")";
+   return os;
 }

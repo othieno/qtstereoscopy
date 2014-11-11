@@ -337,20 +337,17 @@ QOculusRiftStereoRenderer::eyeCamera(const ovrEyeType& eye, const ovrPosef& head
 {
    auto& camera = _eyeCameras[eye];
    const auto& eyeRenderConfig = _eyeRenderConfigurations[eye];
+   const auto& viewAdjust = eyeRenderConfig.ViewAdjust;
+   const auto& orientation = headPose.Orientation;
 
-   // Calculate the view transformation matrix.
-   const auto& ovrViewAdjust = eyeRenderConfig.ViewAdjust;
-   const auto& ovrViewTranslation = OVR::Matrix4f::Translation(ovrViewAdjust);
-   const auto& ovrViewOrientation = OVR::Matrix4f(OVR::Quatf(headPose.Orientation).Inverted());
-   const auto* ovrViewData = &(ovrViewTranslation * ovrViewOrientation).M[0][0];
+   // Calculate the view transformation matrix from the eye's view offset and the head's orientation.
+   QMatrix4x4 T;
+   T.translate(viewAdjust.x, viewAdjust.y, viewAdjust.z);
 
-   for (unsigned int i = 0; i < 4; ++i)
-   {
-      camera.view(i, 0) = *ovrViewData++;
-      camera.view(i, 1) = *ovrViewData++;
-      camera.view(i, 2) = *ovrViewData++;
-      camera.view(i, 3) = *ovrViewData++;
-   }
+   QMatrix4x4 R;
+   R.rotate(QQuaternion(orientation.w, orientation.x, orientation.y, orientation.z).conjugate());
+
+   camera.view = T * R;
 
    // Calculate the projection transformation matrices.
    if (camera.projectionChanged())
@@ -358,7 +355,7 @@ QOculusRiftStereoRenderer::eyeCamera(const ovrEyeType& eye, const ovrPosef& head
       const auto& ovrFov = eyeRenderConfig.Fov;
       const auto& znear = camera.nearClippingPlane;
       const auto& zfar = camera.farClippingPlane;
-      const auto& viewAdjustX = ovrViewAdjust.x;
+      const auto& viewAdjustX = viewAdjust.x;
       const auto& orthoScale = OVR::Vector2f(1.0f) / OVR::Vector2f(eyeRenderConfig.PixelsPerTanAngleAtCenter);
       const auto& ovrPerspective = ovrMatrix4f_Projection(ovrFov, znear, zfar, true);
       const auto* ovrPerspectiveData = &ovrPerspective.M[0][0];
