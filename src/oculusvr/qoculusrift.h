@@ -30,11 +30,25 @@
 
 QT_BEGIN_NAMESPACE
 
-class QOculusRift : public QAbstractStereoDisplay
+class QOculusRiftPrivate;
+class QOculusRift Q_DECL_FINAL : public QAbstractStereoDisplay
 {
 public:
-   explicit QOculusRift(const unsigned int& index = 0);
-   ~QOculusRift();
+   struct TrackingFrustum
+   {
+      float horizontalFovInRadians;
+      float verticalFovInRadians;
+      float nearClippingDistanceInMeters;
+      float farClippingDistanceInMeters;
+   };
+
+   struct FirmwareVersion
+   {
+      short int major;
+      short int minor;
+   };
+
+   QOculusRift(const unsigned int& index = 0, const bool& forceDebugDevice = false);
 
    QString productName() const Q_DECL_OVERRIDE Q_DECL_FINAL;
    QString manufacturerName() const Q_DECL_OVERRIDE Q_DECL_FINAL;
@@ -48,8 +62,8 @@ public:
    float interpupillaryDistance() const Q_DECL_OVERRIDE Q_DECL_FINAL;
    void setInterpupillaryDistance(const float&) Q_DECL_OVERRIDE Q_DECL_FINAL;
 
-   float userHeight() const Q_DECL_OVERRIDE Q_DECL_FINAL;
-   void setUserHeight(const float&) Q_DECL_OVERRIDE Q_DECL_FINAL;
+   float eyeHeight() const Q_DECL_OVERRIDE Q_DECL_FINAL;
+   void setEyeHeight(const float&) Q_DECL_OVERRIDE Q_DECL_FINAL;
 
    bool trackingAvailable() const Q_DECL_OVERRIDE Q_DECL_FINAL;
    bool trackingCameraAvailable() const;
@@ -64,13 +78,7 @@ public:
    bool positionalTrackingEnabled() const Q_DECL_OVERRIDE Q_DECL_FINAL;
    void enablePositionalTracking(const bool enable = true) Q_DECL_OVERRIDE Q_DECL_FINAL;
    QVector3D headPosition() const Q_DECL_OVERRIDE Q_DECL_FINAL;
-   void positionalTrackingFrustum
-   (
-      float* const horizontalFovInRadiansOut,
-      float* const verticalFovInRadiansOut,
-      float* const nearClippingPlaneInMetersOut,
-      float* const farClippingPlaneInMetersOut
-   ) const;
+   TrackingFrustum positionalTrackingFrustum() const;
 
    bool eyeTrackingAvailable() const Q_DECL_OVERRIDE Q_DECL_FINAL;
    bool eyeTrackingEnabled() const Q_DECL_OVERRIDE Q_DECL_FINAL;
@@ -91,15 +99,18 @@ public:
 
    const ovrHmdDesc& descriptor() const;
    const ovrHmdType& type() const;
+   const bool& isDebugDevice() const;
    const ovrHmd& handle() const;
    operator const ovrHmd&() const;
 
-   const short int& vendorId() const;
-   const short int& productId() const;
+   short int vendorId() const;
+   short int productId() const;
 
    QString serialNumber() const;
 
-   void firmwareVersion(short int* const major, short int* const minor) const;
+   short int majorFirmwareVersion() const;
+   short int minorFirmwareVersion() const;
+   FirmwareVersion firmwareVersion() const;
 
    const unsigned int& supportedHmdCapabilities() const;
    const unsigned int& supportedTrackingCapabilities() const;
@@ -113,13 +124,8 @@ public:
    QString systemName() const;
    const int& systemId() const;
 private:
-   void updateHmdCapabilities();
-   void updateTrackingCapabilities();
-
-   const ovrHmdDesc _descriptor;
-
-   unsigned int _enabledHmdCapabilities;
-   unsigned int _enabledTrackingCapabilities;
+   QOculusRiftPrivate* const d_ptr;
+   Q_DECLARE_PRIVATE(QOculusRift);
 };
 
 QT_END_NAMESPACE

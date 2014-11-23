@@ -21,4 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "testqoculusriftstereorenderer.h"
+#ifndef QOCULUSRIFT_TEST_H
+#define QOCULUSRIFT_TEST_H
+
+#include <QtTest/QtTest>
+
+
+QT_BEGIN_NAMESPACE
+
+class QOculusRiftTest : public QObject
+{
+   Q_OBJECT
+private slots:
+   void testDebugDeviceInitialState();
+   void testDebugDeviceTracking();
+   void testDebugDeviceMeasurements();
+
+   void testHardwareDependentCapabilities();
+};
+
+QT_END_NAMESPACE
+
+#endif // QOCULUSRIFT_TEST_H

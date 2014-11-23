@@ -152,8 +152,7 @@ template<class T> void
 QStereoWindow<T>::paintGL()
 {
    _renderer->apply();
-   if (!_renderer->autoSwapsBuffers())
-      _context.swapBuffers(this);
+   _renderer->swapBuffers(_context, *this);
 }
 
 

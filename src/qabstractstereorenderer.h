@@ -37,10 +37,10 @@ template<class T> class QStereoWindow;
 class QAbstractStereoRenderer : public QObject, protected QOpenGLFunctions
 {
 public:
-   template<class T> void initialize(QStereoWindow<T>& window);
+   template<class T> void initialize(const QStereoWindow<T>& window);
 
    virtual void apply() = 0;
-   virtual bool autoSwapsBuffers() const;
+   virtual void swapBuffers(QOpenGLContext& context, QSurface& surface);
            void setViewport(const QRect& viewport);
 protected:
    QAbstractStereoRenderer() = default;
@@ -52,7 +52,7 @@ protected:
 
 
 template<class T> void
-QAbstractStereoRenderer::initialize(QStereoWindow<T>& window)
+QAbstractStereoRenderer::initialize(const QStereoWindow<T>& window)
 {
    initializeOpenGLFunctions();
    initializeWindow(window.winId());

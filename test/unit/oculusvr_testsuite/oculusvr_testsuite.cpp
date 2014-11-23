@@ -21,18 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef TESTQOCULUSRIFT_H
-#define TESTQOCULUSRIFT_H
-
-#include <QtTest/QtTest>
+#include "qoculusrift_test.h"
+#include "qoculusriftstereorenderer_test.h"
 
 
-QT_BEGIN_NAMESPACE
-
-class TestQOculusRift : public QObject
+int main(int argc, char** argv)
 {
-};
+   QVector<QObject*> tests =
+   {
+      new QOculusRiftTest,
+      new QOculusRiftStereoRendererTest,
+   };
 
-QT_END_NAMESPACE
-
-#endif // TESTQOCULUSRIFT_H
+   // Run each unit test, breaking the loop when a single one fails.
+   for (auto* const t : tests)
+   {
+      if (QTest::qExec(t, argc, argv))
+         return 1;
+   }
+   return 0;
+}

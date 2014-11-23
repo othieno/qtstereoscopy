@@ -8,7 +8,7 @@
    \brief Constructs a QAbstractStereoRenderer.
 */
 /*!
-   \fn void QAbstractStereoRenderer::initialize(QStereoWindow<T>& window)
+   \fn void QAbstractStereoRenderer::initialize(const QStereoWindow<T>& window)
    \brief Initializes the renderer for use with the specified \a window.
 */
 /*!
@@ -16,8 +16,8 @@
    \brief Applies the stereoscopic renderer's implementation.
 */
 /*!
-   \fn bool QAbstractStereoRenderer::autoSwapsBuffers() const
-   \brief Returns \c true if the renderer handles swapping the front and back buffers, \c false otherwise.
+   \fn void QAbstractStereoRenderer::swapBuffers(QOpenGLContext& context, QSurface& surface)
+   \brief Swaps the front and back buffers of \a surface in the given OpenGL \a context.
 */
 /*!
    \fn void QAbstractStereoRenderer::setViewport(const QRect& viewport)

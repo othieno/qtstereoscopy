@@ -21,23 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "testqoculusrift.h"
-#include "testqoculusriftstereorenderer.h"
-
-
-int main(int argc, char** argv)
-{
-   QVector<QObject*> tests =
-   {
-      new TestQOculusRift,
-      new TestQOculusRiftStereoRenderer,
-   };
-
-   // Run each test, but break the loop when a single one of them fails.
-   for (auto* const t : tests)
-   {
-      if (QTest::qExec(t, argc, argv))
-         return 1;
-   }
-   return 0;
-}
+#include "qoculusrift_benchmark.h"

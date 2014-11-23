@@ -5,12 +5,10 @@
    \brief The QOculusRift class adds support for the Oculus Rift head-mounted display device.
 */
 /*!
-   \fn QOculusRift::QOculusRift(const unsigned int& index)
+   \fn QOculusRift::QOculusRift(const unsigned int& index = 0, const bool& forceDebugDevice = false)
    \brief Constructs a QOculusRift that is attached to a device with the specified \a index.
-*/
-/*!
-   \fn QOculusRift::~QOculusRift()
-   \brief Destroys the QOculusRift.
+
+   For debugging purposes, a debug device can be created by setting \a forceDebugDevice to \c true.
 */
 /*!
    \fn QString QOculusRift::productName() const
@@ -41,10 +39,10 @@
    \span {style="display:none"}{\a value}
 */
 /*!
-   \fn float QOculusRift::userHeight() const
+   \fn float QOculusRift::eyeHeight() const
 */
 /*!
-   \fn voiid QOculusRift::setUserHeight(const float& value)
+   \fn voiid QOculusRift::setEyeHeight(const float& value)
    \span {style="display:none"}{\a value}
 */
 /*!
@@ -88,11 +86,10 @@
    \fn QVector3D QOculusRift::headPosition() const
 */
 /*!
-   \fn void QOculusRift::positionalTrackingFrustum(float* const horizontal, float* const vertical, float* const near, float* const far) const
-   \brief Returns the positional tracking frustum's \a horizontal and \a vertical FOV in radians, as well as its \a near
-   and \a far clipping plane distances in meters.
+   \fn QOculusRift::TrackingFrustum QOculusRift::positionalTrackingFrustum() const
+   \brief Returns the tracking camera's frustum.
 
-   If any parameter is \c null, then the corresponding field is ignored.
+   The frustum contains the horizontal and vertical FOV in radians, as well as near and far clipping plane distances in meters.
 */
 /*!
    \fn bool QOculusRift::eyeTrackingAvailable() const
@@ -148,6 +145,10 @@
    \brief Returns the device type.
 */
 /*!
+   \fn const bool& QOculusRift::isDebugDevice() const
+   \brief Returns \c true if this is a debug device, \c false otherwise.
+*/
+/*!
    \fn const ovrHmd& QOculusRift::handle() const
    \brief Returns the underlying device handle.
 */
@@ -169,10 +170,16 @@
    \brief Returns the device's serial number.
 */
 /*!
-   \fn void QOculusRift::firmwareVersion(short int* const major, short int* const minor) const
-   \brief Returns the device's \a major and \a minor firmware version.
-
-   If either parameter is \c null, then the corresponding version is ignored.
+   \fn short int QOculusRift::majorFirmwareVersion() const
+   \brief Returns the device's major firmware version.
+*/
+/*!
+   \fn short int QOculusRift::minorFirmwareVersion() const
+   \brief Returns the device's minor firmware version.
+*/
+/*!
+   \fn QOculusRift::FirmwareVersion QOculusRift::firmwareVersion() const
+   \brief Returns the device's firmware version.
 */
 /*!
    \fn unsigned int QOculusRift::supportedHmdCapabilities() const

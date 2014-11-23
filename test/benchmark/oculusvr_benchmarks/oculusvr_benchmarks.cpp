@@ -21,25 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "qabstractstereorenderer.h"
-#include "qstereowindow.h"
-#include <QtCore/QRect>
+#include "qoculusrift_benchmark.h"
+#include "qoculusriftstereorenderer_benchmark.h"
 
 
-void
-QAbstractStereoRenderer::swapBuffers(QOpenGLContext& context, QSurface& surface)
+int main(int argc, char** argv)
 {
-   context.swapBuffers(&surface);
-}
+   QVector<QObject*> benchmarks =
+   {
+      new QOculusRiftBenchmark,
+      new QOculusRiftStereoRendererBenchmark,
+   };
 
+   // Run each benchmark.
+   for (auto* const b : benchmarks)
+      QTest::qExec(b, argc, argv);
 
-void
-QAbstractStereoRenderer::initializeWindow(const WId&)
-{}
-
-
-void
-QAbstractStereoRenderer::setViewport(const QRect& viewport)
-{
-   glViewport(viewport.x(), viewport.y(), viewport.width(), viewport.height());
+   return 0;
 }

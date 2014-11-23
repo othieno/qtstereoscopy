@@ -21,18 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef TESTQOCULUSRIFTSTEREORENDERER_H
-#define TESTQOCULUSRIFTSTEREORENDERER_H
+#ifndef QOCULUSRIFTSTEREORENDERER_TEST_H
+#define QOCULUSRIFTSTEREORENDERER_TEST_H
 
 #include <QtTest/QtTest>
 
 
 QT_BEGIN_NAMESPACE
 
-class TestQOculusRiftStereoRenderer : public QObject
+class QOculusRiftStereoRendererTest : public QObject
 {
+   Q_OBJECT
+private slots:
+   void testDebugDeviceInitialState();
+
+   void testDebugDeviceWindow();
+
+   void testDebugDevicePixelDensity();
+   void testDebugDevicePixelDensity_data();
 };
 
 QT_END_NAMESPACE
 
-#endif // TESTQOCULUSRIFTSTEREORENDERER_H
+#endif // QOCULUSRIFTSTEREORENDERER_TEST_H

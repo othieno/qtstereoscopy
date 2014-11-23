@@ -21,25 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "qabstractstereorenderer.h"
-#include "qstereowindow.h"
-#include <QtCore/QRect>
+#ifndef QOCULUSRIFT_P_H
+#define QOCULUSRIFT_P_H
+
+#include "qoculusrift.h"
+#include <atomic>
 
 
-void
-QAbstractStereoRenderer::swapBuffers(QOpenGLContext& context, QSurface& surface)
+QT_BEGIN_NAMESPACE
+
+class QOculusRiftPrivate : public QObject
 {
-   context.swapBuffers(&surface);
-}
+public:
+   QOculusRiftPrivate(QOculusRift* const parent, const unsigned int& index, const bool& forceDebugDevice);
+   ~QOculusRiftPrivate();
 
+   const bool& isDebugDevice() const;
+   const ovrHmd& handle() const;
+   const ovrHmdDesc& descriptor() const;
 
-void
-QAbstractStereoRenderer::initializeWindow(const WId&)
-{}
+   bool trackingAvailable() const;
+   void resetTracking();
 
+   bool isCapEnabled(const unsigned int& capability) const;
+   void setCapEnabled(const unsigned int& capability, const bool enable);
+private:
+   bool isHmdCap(const unsigned int& capability) const;
+   void updateHmdCaps();
 
-void
-QAbstractStereoRenderer::setViewport(const QRect& viewport)
-{
-   glViewport(viewport.x(), viewport.y(), viewport.width(), viewport.height());
-}
+   bool isTrackingCap(const unsigned int& capability) const;
+   void updateTrackingCaps();
+
+   static std::atomic<unsigned int> N_DEVICE_INSTANCES;
+
+   ovrHmdDesc _descriptor;
+   bool _isDebugDevice;
+   struct
+   {
+      unsigned int hmd;
+      unsigned int tracking;
+   } _enabledCaps;
+};
+
+QT_END_NAMESPACE
+
+#endif // QOCULUSRIFT_P_H

@@ -27,30 +27,24 @@
 #include "qabstractstereorenderer.h"
 #include "qoculusrift.h"
 #include "qstereoeyecamera.h"
-#include <QtGui/QOpenGLFunctions>
-#include <QtGui/QMatrix4x4>
-#include <QtGui/QOpenGLFramebufferObjectFormat>
-#include <memory>
-#include <array>
 #include <OVR_CAPI.h>
-
-union ovrGLConfig;
-union ovrGLTexture_s;
-typedef ovrGLTexture_s ovrGLTexture;
 
 
 QT_BEGIN_NAMESPACE
 
+class QOculusRift;
+class QOculusRiftStereoRendererPrivate;
 class QOculusRiftStereoRenderer : public QAbstractStereoRenderer
 {
    Q_OBJECT
 public:
-   explicit QOculusRiftStereoRenderer(const unsigned int& index = 0);
+   QOculusRiftStereoRenderer(const unsigned int& index = 0, const bool& forceDebugDevice = false);
 
    void apply() Q_DECL_OVERRIDE Q_DECL_FINAL;
-   bool autoSwapsBuffers() const Q_DECL_OVERRIDE Q_DECL_FINAL;
+   void swapBuffers(QOpenGLContext&, QSurface&) Q_DECL_OVERRIDE Q_DECL_FINAL {}
 
    QOculusRift& display();
+   const QOculusRift& const_display() const;
 
    const float& pixelDensity() const;
    void setPixelDensity(const float& density);
@@ -65,39 +59,17 @@ public:
    void enableVignette(const bool enable = true);
 
    void freezeEyeUpdates(const ovrEyeType& eye, const bool freeze = true);
+
+   static Q_DECL_CONSTEXPR float minPixelDensity(){ return 0.25f; }
+   static Q_DECL_CONSTEXPR float maxPixelDensity(){ return 4.00f; }
 protected:
    void initializeWindow(const WId&) Q_DECL_OVERRIDE Q_DECL_FINAL;
    void initializeGL() Q_DECL_OVERRIDE;
    void configureGL();
    void paintGL(const QStereoEyeCamera&, const float&) Q_DECL_OVERRIDE;
 private:
-   const QStereoEyeCamera& eyeCamera(const ovrEyeType& eye, const ovrPosef& headPose);
-
-   QOculusRift _display;
-
-   QOpenGLFramebufferObjectFormat _fboFormat;
-   std::unique_ptr<QOpenGLFramebufferObject> _fbo;
-   bool _fboChanged;
-
-   struct ovrGLDeleter Q_DECL_FINAL
-   {
-      void operator()(ovrGLConfig* const);
-      void operator()(ovrGLTexture* const);
-   };
-   std::unique_ptr<ovrGLConfig, QOculusRiftStereoRenderer::ovrGLDeleter> _apiConfiguration;
-   std::unique_ptr<ovrGLTexture[], QOculusRiftStereoRenderer::ovrGLDeleter> _eyeTextureConfigurations;
-
-   std::array<ovrEyeRenderDesc, ovrEye_Count> _eyeRenderConfigurations;
-   bool _eyeRenderConfigurationsChanged;
-
-   std::array<QStereoEyeCamera, ovrEye_Count> _eyeCameras;
-   std::array<ovrFovPort, ovrEye_Count> _eyeFovs;
-
-   unsigned int _enabledDistortionCapabilities;
-
-   float _pixelDensity;
-
-   bool _forceZeroIPD;
+   QOculusRiftStereoRendererPrivate* const d_ptr;
+   Q_DECLARE_PRIVATE(QOculusRiftStereoRenderer);
 };
 
 QT_END_NAMESPACE

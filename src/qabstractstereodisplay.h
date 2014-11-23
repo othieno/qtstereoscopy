@@ -24,6 +24,7 @@
 #ifndef QABSTRACTSTEREODISPLAY_H
 #define QABSTRACTSTEREODISPLAY_H
 
+#include <QtCore/QObject>
 #include <QtCore/QSize>
 #include <QtCore/QString>
 #include <QtGui/QQuaternion>
@@ -31,7 +32,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class QAbstractStereoDisplay
+class QAbstractStereoDisplay : public QObject
 {
 public:
    virtual QString productName() const = 0;
@@ -48,8 +49,8 @@ public:
    virtual float interpupillaryDistance() const = 0;
    virtual void setInterpupillaryDistance(const float& distance) = 0;
 
-   virtual float userHeight() const = 0;
-   virtual void setUserHeight(const float& height) = 0;
+   virtual float eyeHeight() const = 0;
+   virtual void setEyeHeight(const float& height) = 0;
 
    virtual bool trackingAvailable() const = 0;
 

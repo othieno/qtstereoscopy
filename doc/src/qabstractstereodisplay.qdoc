@@ -45,12 +45,12 @@
    \brief Sets the display's interpupillary distance (IPD) to the specified \a value in millimeters.
 */
 /*!
-   \fn float QAbstractStereoDisplay::userHeight() const
-   \brief Returns the user's height in meters.
+   \fn float QAbstractStereoDisplay::eyeHeight() const
+   \brief Returns the eye height in meters.
 */
 /*!
-   \fn void QAbstractStereoDisplay::setUserHeight(const float& value)
-   \brief Sets the user's height to a specified \a value in meters.
+   \fn void QAbstractStereoDisplay::setEyeHeight(const float& value)
+   \brief Sets the eye height to a specified \a value in meters.
 */
 /*!
    \fn bool QAbstractStereoDisplay::trackingAvailable() const

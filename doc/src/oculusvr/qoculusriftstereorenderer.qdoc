@@ -5,20 +5,27 @@
    stereo rendering model used by the Oculus SDK.
 */
 /*!
-   \fn QOculusRiftStereoRenderer::QOculusRiftStereoRenderer(const unsigned int& index = 0)
+   \fn QOculusRiftStereoRenderer::QOculusRiftStereoRenderer(const unsigned int& index = 0, const bool& forceDebugDevice = false)
    \brief Constructs a QOculusRiftStereoRenderer that is attached to the Oculus Rift with the specified \a index.
+
+   For debugging purposes, the renderer can be attached to a debug device by setting \a forceDebugDevice to \c true.
 */
 /*!
    \fn void QOculusRiftStereoRenderer::apply()
    \brief Draws a scene with the stereoscopic model used by the Oculus Rift.
 */
 /*!
-   \fn bool QOculusRiftStereoRenderer::autoSwapsBuffers() const
-   \brief Returns \c true since the Oculus SDK handles buffer swapping (in SDK distortion mode).
+   \fn void QOculusRiftStereoRenderer::swapBuffers(QOpenGLContext& context, QSurface& surface)
+   \brief Overrides the default implementation to do nothing since the Oculus SDK handles buffer swapping (in SDK distortion mode).
+   \span {style="display:none"}{\a context, \a surface}
 */
 /*!
    \fn QOculusRift& QOculusRiftStereoRenderer::display();
-   \brief Returns the Oculus Rift display device that is used by this renderer.
+   \brief Returns a reference to the Oculus Rift display device that is used by this renderer.
+*/
+/*!
+   \fn const QOculusRift& QOculusRiftStereoRenderer::const_display() const;
+   \brief Returns a const reference to the Oculus Rift display device that is used by this renderer.
 */
 /*!
    \fn const float& QOculusRiftStereoRenderer::pixelDensity() const;
