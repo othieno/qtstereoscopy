@@ -21,38 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef QSTEREOEYECAMERA_H
-#define QSTEREOEYECAMERA_H
-
-#include <QtGui/QVector3D>
-#include <QtGui/QMatrix4x4>
+#include "qstereoeyeparameters_p.h"
 
 
-QT_BEGIN_NAMESPACE
+float QStereoEyeParametersPrivate::ORTHO_DISTANCE = 0.8f;
+float QStereoEyeParametersPrivate::NEAR_CLIPPING_DISTANCE = 0.01f;
+float QStereoEyeParametersPrivate::FAR_CLIPPING_DISTANCE = 10000.0f;
 
-struct QStereoEyeCamera
-{
-   QStereoEyeCamera();
 
-   bool projectionChanged() const;
-   void setProjectionChanged(const bool changed);
-
-   QMatrix4x4 view;
-   QMatrix4x4 perspective;
-   QMatrix4x4 ortho;
-
-   QPointF pointOfInterest;
-
-   static float nearClippingPlane;
-   static float farClippingPlane;
-
-   float orthoDistance;
-   QVector3D viewAdjust;
-   QRect viewport;
-private:
-   bool _hasProjectionChanged;
-};
-
-QT_END_NAMESPACE
-
-#endif // QSTEREOEYECAMERA_H
+QStereoEyeParametersPrivate::QStereoEyeParametersPrivate(QStereoEyeParameters* const parent) :
+QObject(parent),
+gazePoint(0, 0),
+viewAdjust(0, 0, 0),
+headPosition(0, 0, 0),
+headOrientation(1.0, 0, 0, 0)
+{}

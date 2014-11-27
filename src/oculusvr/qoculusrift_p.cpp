@@ -34,7 +34,7 @@
 
 
 // The number of instances signals when LibOVR is initialized and destroyed.
-std::atomic<unsigned int> QOculusRiftPrivate::N_DEVICE_INSTANCES(0);
+std::atomic<unsigned int> QOculusRiftPrivate::DEVICE_INSTANCE_COUNT(0);
 
 
 QOculusRiftPrivate::QOculusRiftPrivate
@@ -44,11 +44,11 @@ QOculusRiftPrivate::QOculusRiftPrivate
    const bool& forceDebugDevice
 ) :
 QObject(parent),
-_isDebugDevice(forceDebugDevice),
-_enabledCaps({0, 0})
+isDebugDevice_(forceDebugDevice),
+enabledCaps_({0, 0})
 {
    // Initialize LibOVR iff this is the first instance.
-   if (!N_DEVICE_INSTANCES++)
+   if (!DEVICE_INSTANCE_COUNT++)
    {
       if (Q_UNLIKELY(!ovr_Initialize()))
          qFatal("[QtStereoscopy] Error: Could not initialize LibOVR!");
@@ -62,8 +62,8 @@ _enabledCaps({0, 0})
    // Instantiate an HMD device. If no hardware is detected, create a debug device.
    ovrHmd deviceHandle = forceDebugDevice ? nullptr : ovrHmd_Create(index);
 
-   _isDebugDevice = (deviceHandle == nullptr);
-   if (_isDebugDevice)
+   isDebugDevice_ = (deviceHandle == nullptr);
+   if (isDebugDevice_)
    {
       deviceHandle = ovrHmd_CreateDebug(ovrHmd_DK1);
       if (Q_UNLIKELY(deviceHandle == nullptr))
@@ -73,24 +73,24 @@ _enabledCaps({0, 0})
    }
 
    // Populate the descriptor. If this is a debug device, then remove all tracking capabilities.
-   ovrHmd_GetDesc(deviceHandle, const_cast<ovrHmdDesc*>(&_descriptor));
-   if (_isDebugDevice)
-      const_cast<unsigned int&>(_descriptor.SensorCaps) = 0;
+   ovrHmd_GetDesc(deviceHandle, const_cast<ovrHmdDesc*>(&descriptor_));
+   if (isDebugDevice_)
+      const_cast<unsigned int&>(descriptor_.SensorCaps) = 0;
 
 // TODO Check if the following is necessary in SDK 0.4+ and remove if necessary.
 #ifndef DISABLE_IN_SDK_0_4
    // Disable positional tracking and yaw correction for the DK1.
-   if (trackingAvailable() && _descriptor.Type == ovrHmd_DK1)
+   if (trackingAvailable() && descriptor_.Type == ovrHmd_DK1)
    {
-      auto& caps = const_cast<unsigned int&>(_descriptor.SensorCaps);
+      auto& caps = const_cast<unsigned int&>(descriptor_.SensorCaps);
       caps = caps & ~ovrSensorCap_Position & ~ovrSensorCap_YawCorrection;
    }
 #endif
    // Enable all HMD capabilities, but do not disable VSYNC!
-   _enabledCaps.hmd = _descriptor.HmdCaps & ~ovrHmdCap_NoVSync;
+   enabledCaps_.hmd = descriptor_.HmdCaps & ~ovrHmdCap_NoVSync;
    updateHmdCaps();
 
-   _enabledCaps.tracking = _descriptor.SensorCaps;
+   enabledCaps_.tracking = descriptor_.SensorCaps;
    updateTrackingCaps();
 }
 
@@ -98,10 +98,10 @@ _enabledCaps({0, 0})
 QOculusRiftPrivate::~QOculusRiftPrivate()
 {
    // Destroy the device.
-   ovrHmd_Destroy(_descriptor.Handle);
+   ovrHmd_Destroy(descriptor_.Handle);
 
    // Shutdown LibOVR iff this is the last device instance.
-   if (!--N_DEVICE_INSTANCES)
+   if (!--DEVICE_INSTANCE_COUNT)
       ovr_Shutdown();
 }
 
@@ -109,21 +109,21 @@ QOculusRiftPrivate::~QOculusRiftPrivate()
 const bool&
 QOculusRiftPrivate::isDebugDevice() const
 {
-   return _isDebugDevice;
+   return isDebugDevice_;
 }
 
 
 const ovrHmd&
 QOculusRiftPrivate::handle() const
 {
-   return _descriptor.Handle;
+   return descriptor_.Handle;
 }
 
 
 const ovrHmdDesc&
 QOculusRiftPrivate::descriptor() const
 {
-   return _descriptor;
+   return descriptor_;
 }
 
 
@@ -152,8 +152,8 @@ bool
 QOculusRiftPrivate::isCapEnabled(const unsigned int& cap) const
 {
    return
-   isHmdCap(cap)      ? (_enabledCaps.hmd & cap) == cap      :
-   isTrackingCap(cap) ? (_enabledCaps.tracking & cap) == cap : false;
+   isHmdCap(cap)      ? (enabledCaps_.hmd & cap) == cap      :
+   isTrackingCap(cap) ? (enabledCaps_.tracking & cap) == cap : false;
 }
 
 
@@ -172,12 +172,12 @@ QOculusRiftPrivate::setCapEnabled(const unsigned int& cap, const bool enable)
 
       if (isHmdCap(cap))
       {
-         writeBit(_enabledCaps.hmd);
+         writeBit(enabledCaps_.hmd);
          updateHmdCaps();
       }
       else if (isTrackingCap(cap))
       {
-         writeBit(_enabledCaps.tracking);
+         writeBit(enabledCaps_.tracking);
          updateTrackingCaps();
       }
    }
@@ -203,7 +203,7 @@ QOculusRiftPrivate::isHmdCap(const unsigned int& cap) const
 void
 QOculusRiftPrivate::updateHmdCaps()
 {
-   ovrHmd_SetEnabledCaps(_descriptor.Handle, _enabledCaps.hmd);
+   ovrHmd_SetEnabledCaps(descriptor_.Handle, enabledCaps_.hmd);
 }
 
 
@@ -229,11 +229,11 @@ QOculusRiftPrivate::updateTrackingCaps()
    // tracking capabilities are set, and tracking is available, configure the sensor appropriately.
    if (trackingAvailable())
    {
-      if (!_enabledCaps.tracking)
-         ovrHmd_StopSensor(_descriptor.Handle);
+      if (!enabledCaps_.tracking)
+         ovrHmd_StopSensor(descriptor_.Handle);
       else
       {
-         if (!ovrHmd_StartSensor(_descriptor.Handle, _descriptor.SensorCaps, _enabledCaps.tracking))
+         if (!ovrHmd_StartSensor(descriptor_.Handle, descriptor_.SensorCaps, enabledCaps_.tracking))
             qFatal("[QtStereoscopy] Error: Could not initialize the device's tracking sensors.");
       }
    }

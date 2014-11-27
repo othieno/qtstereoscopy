@@ -67,12 +67,12 @@ INCLUDEPATH += "$$QTSTEREOSCOPY_SRC/oculusvr/"
 
 HEADERS +=\
    "$$QTSTEREOSCOPY_SRC/oculusvr/qoculusrift.h"\
-   "$$QTSTEREOSCOPY_SRC/oculusvr/qoculusriftstereorenderer.h"
+   "$$QTSTEREOSCOPY_SRC/oculusvr/qoculusriftrenderer.h"
 
 SOURCES +=\
    "$$QTSTEREOSCOPY_SRC/oculusvr/qoculusrift.cpp"\
    "$$QTSTEREOSCOPY_SRC/oculusvr/qoculusrift_p.cpp"\
-   "$$QTSTEREOSCOPY_SRC/oculusvr/qoculusriftstereorenderer.cpp"\
-   "$$QTSTEREOSCOPY_SRC/oculusvr/qoculusriftstereorenderer_p.cpp"
+   "$$QTSTEREOSCOPY_SRC/oculusvr/qoculusriftrenderer.cpp"\
+   "$$QTSTEREOSCOPY_SRC/oculusvr/qoculusriftrenderer_p.cpp"
 }
 else:error("The OVRSDK environment variable is defined, but the directory \'$$OVRSDK\' does not contain a valid Oculus SDK installation.")

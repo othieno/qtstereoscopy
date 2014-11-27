@@ -22,6 +22,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 #
+set -e
+set -o pipefail
+
 function show_usage()
 {
    echo "Usage: $0 [options]"
@@ -106,7 +109,7 @@ fi
 
 if [[ "$RUNTIME" = true ]]
 then
-   if [[ "$VERBOSE" = false ]]; then printf "Performing runtime code analysis... "; fi
+   if [[ "$VERBOSE" = false ]]; then printf "Performing runtime code analysis (this could take a while)... "; fi
 
    MAKEFLAGS="--silent"
    if [[ "$VERBOSE" = true ]]; then MAKEFLAGS=""; fi
@@ -124,15 +127,16 @@ then
    }
 
    if [[ "$VERBOSE" = false ]]; then do_runtime_tests > /dev/null && echo "done"; else do_runtime_tests; fi
+   if [[ "$?" != "0" ]]; then exit 1; fi;
 fi
 
 if [[ "$PERFORMANCE" = true ]]
 then
    # Run benchmarks.
-	BENCHMARKDIR="$BASEDIR/test/benchmark"
-	$QMAKE "$BENCHMARKDIR" -o "$BENCHMARKDIR/Makefile"\
-	&& $MAKE $MAKEFLAGS -C "$BENCHMARKDIR"\
-	&& "$BENCHMARKDIR/oculusvr_benchmarks/build/oculusvr_benchmarks"
+   BENCHMARKDIR="$BASEDIR/test/benchmark"
+   $QMAKE "$BENCHMARKDIR" -o "$BENCHMARKDIR/Makefile"\
+   && $MAKE $MAKEFLAGS -C "$BENCHMARKDIR"\
+   && "$BENCHMARKDIR/oculusvr_benchmarks/build/oculusvr_benchmarks"
 fi
 
 exit 0

@@ -21,16 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "qoculusriftstereorenderer_test.h"
-#include "QOculusRiftStereoRenderer"
+#include "qoculusriftrenderer_test.h"
+#include "QOculusRiftRenderer"
 #include "QStereoWindow"
 
 
 void
-QOculusRiftStereoRendererTest::testDebugDeviceInitialState()
+QOculusRiftRendererTest::testDebugDeviceInitialState()
 {
    QTest::ignoreMessage(QtWarningMsg, "[QtStereoscopy] Warning: Created a debug device. Certain features may not be available.");
-   QOculusRiftStereoRenderer renderer(0, true);
+   QOculusRiftRenderer renderer(0, true);
 
    QCOMPARE(renderer.const_display().isDebugDevice(), true);
    QCOMPARE(renderer.pixelDensity(), 1.0f);
@@ -42,14 +42,14 @@ QOculusRiftStereoRendererTest::testDebugDeviceInitialState()
 
 
 void
-QOculusRiftStereoRendererTest::testDebugDeviceWindow()
+QOculusRiftRendererTest::testDebugDeviceWindow()
 {
 /*
    int argc = 0;
    char** argv = nullptr;
 
    QGuiApplication app(argc, argv);
-   QStereoWindow<QOculusRiftStereoRenderer> window;
+   QStereoWindow<QOculusRiftRenderer> window;
 
    window.showNormal();
 
@@ -59,13 +59,13 @@ QOculusRiftStereoRendererTest::testDebugDeviceWindow()
 
 
 void
-QOculusRiftStereoRendererTest::testDebugDevicePixelDensity()
+QOculusRiftRendererTest::testDebugDevicePixelDensity()
 {
    QFETCH(float, actual);
    QFETCH(float, expected);
 
    QTest::ignoreMessage(QtWarningMsg, "[QtStereoscopy] Warning: Created a debug device. Certain features may not be available.");
-   QOculusRiftStereoRenderer renderer(0, true);
+   QOculusRiftRenderer renderer(0, true);
 
    renderer.setPixelDensity(actual);
    QCOMPARE(renderer.pixelDensity(), expected);
@@ -73,10 +73,10 @@ QOculusRiftStereoRendererTest::testDebugDevicePixelDensity()
 
 
 void
-QOculusRiftStereoRendererTest::testDebugDevicePixelDensity_data()
+QOculusRiftRendererTest::testDebugDevicePixelDensity_data()
 {
-   const float& MIN_PIXEL_DENSITY = QOculusRiftStereoRenderer::minPixelDensity();
-   const float& MAX_PIXEL_DENSITY = QOculusRiftStereoRenderer::maxPixelDensity();
+   constexpr float MIN_PIXEL_DENSITY = QOculusRiftRenderer::minPixelDensity();
+   constexpr float MAX_PIXEL_DENSITY = QOculusRiftRenderer::maxPixelDensity();
 
    QTest::addColumn<float>("actual");
    QTest::addColumn<float>("expected");

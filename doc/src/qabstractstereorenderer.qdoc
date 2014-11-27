@@ -20,6 +20,10 @@
    \brief Swaps the front and back buffers of \a surface in the given OpenGL \a context.
 */
 /*!
+   \fn void QAbstractStereoRenderer::ignoreEyeUpdates(const QEye& eye, const bool ignore)
+   \brief When \a ignore is set to \c true, updates for the specified \a eye are ignored.
+*/
+/*!
    \fn void QAbstractStereoRenderer::setViewport(const QRect& viewport)
    \brief Sets the viewport to \a viewport.
 */
@@ -32,8 +36,8 @@
    \brief Initializes OpenGL.
 */
 /*!
-   \fn void QAbstractStereoRenderer::paintGL(const QStereoEyeCamera& camera, const float& dt)
+   \fn void QAbstractStereoRenderer::paintGL(const QStereoEyeParameters& parameters, const float& dt)
    \brief Draws a frame in a given stereoscopic configuration. This member function is called twice per frame for each eye,
-   with a \a camera describing the linear transformations for a specific eye. The elapsed time since the previous frame was
+   with \a parameters describing the linear transformations for a specific eye. The elapsed time since the previous frame was
    rendered is given in \a dt.
 */

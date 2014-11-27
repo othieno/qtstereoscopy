@@ -95,14 +95,16 @@
    \fn bool QOculusRift::eyeTrackingAvailable() const
 */
 /*!
-   \fn bool QOculusRift::eyeTrackingEnabled() const
+   \fn bool QOculusRift::eyeTrackingEnabled(const QEye& eye) const
+   \span {style="display:none"}{\a eye}
 */
 /*!
-   \fn void QOculusRift::enableEyeTracking(const bool enable)
-   \span {style="display:none"}{\a enable}
+   \fn void QOculusRift::enableEyeTracking(const QEye& eye, const bool enable)
+   \span {style="display:none"}{\a eye, \a enable}
 */
 /*!
-   \fn QPoint QOculusRift::eyePosition() const
+   \fn QPointF QOculusRift::gazePoint(const QEye& eye) const
+   \span {style="display:none"}{\a eye}
 */
 /*!
    \fn bool QOculusRift::yawCorrectionEnabled() const

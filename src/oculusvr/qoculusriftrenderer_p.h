@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef QOCULUSRIFTSTEREORENDERER_P_H
-#define QOCULUSRIFTSTEREORENDERER_P_H
+#ifndef QOCULUSRIFTRENDERER_P_H
+#define QOCULUSRIFTRENDERER_P_H
 
 #include "qoculusrift.h"
-#include "qstereoeyecamera.h"
+#include "qstereoeyeparameters.h"
 #include <QtGui/QMatrix4x4>
 #include <QtGui/QOpenGLFramebufferObjectFormat>
 #include <OVR_CAPI.h>
@@ -37,10 +37,10 @@ using ovrGLTexture = ovrGLTexture_s;
 
 QT_BEGIN_NAMESPACE
 
-class QOculusRiftStereoRendererPrivate : public QObject
+class QOculusRiftRendererPrivate : public QObject
 {
 public:
-   QOculusRiftStereoRendererPrivate(QOculusRiftStereoRenderer* const parent, const unsigned int& index, const bool& forceDebugDevice);
+   QOculusRiftRendererPrivate(QOculusRiftRenderer* const parent, const unsigned int& index, const bool& forceDebugDevice);
 
    void configureWindow(QWindow& window);
    void configureGL();
@@ -59,31 +59,35 @@ public:
    void setDistortionCapabilityEnabled(const unsigned int& capability, const bool enable);
 
    ovrGLTexture& eyeTextureConfiguration(const ovrEyeType& eye);
-   const QStereoEyeCamera& eyeCamera(const ovrEyeType& eye, const ovrPosef& headPose);
+   const QStereoEyeParameters& eyeParameters(const ovrEyeType& eye, const ovrPosef& pose);
 private:
+   void configureFBO();
+   void configureRendering();
+
    void* nativeDisplay(QWindow& window);
 
-   QOculusRift _display;
+   QOculusRift display_;
 
-   QOpenGLFramebufferObjectFormat _fboFormat;
-   QScopedPointer<QOpenGLFramebufferObject> _fbo;
+   QScopedPointer<QOpenGLFramebufferObject> fbo_;
+   QOpenGLFramebufferObjectFormat fboFormat_;
+   bool fboSizeChanged_;
+   bool fboFormatChanged_;
 
-   bool _fboChanged;
+   QScopedPointer<ovrGLConfig> apiConfig_;
+   QScopedArrayPointer<ovrGLTexture> eyeTextureConfigs_;
 
-   QScopedPointer<ovrGLConfig> _apiConfig;
-   QScopedArrayPointer<ovrGLTexture> _eyeTextureConfigs;
+   std::array<bool, ovrEye_Count> projectionChanged_;
 
-   std::array<ovrEyeRenderDesc, ovrEye_Count> _eyeRenderConfigs;
-   std::array<QStereoEyeCamera, ovrEye_Count> _eyeCameras;
-   std::array<ovrFovPort, ovrEye_Count> _eyeFovs;
+   std::array<QStereoEyeParameters, ovrEye_Count> eyeParameters_;
+   std::array<ovrFovPort,           ovrEye_Count> eyeFov_;
+   std::array<ovrEyeRenderDesc,     ovrEye_Count> eyeRenderingInfo_;
+   bool eyeRenderingInfoChanged_;
 
-   bool _eyeRenderConfigsChanged;
-
-   unsigned int _enabledDistortionCapabilities;
-   float _pixelDensity;
-   bool _forceZeroIPD;
+   unsigned int enabledDistortionCapabilities_;
+   float pixelDensity_;
+   bool forceZeroIPD_;
 };
 
 QT_END_NAMESPACE
 
-#endif // QOCULUSRIFTSTEREORENDERER_P_H
+#endif // QOCULUSRIFTRENDERER_P_H

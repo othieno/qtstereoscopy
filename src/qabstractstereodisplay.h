@@ -28,6 +28,7 @@
 #include <QtCore/QSize>
 #include <QtCore/QString>
 #include <QtGui/QQuaternion>
+#include "qeye.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -39,7 +40,8 @@ public:
    virtual QString manufacturerName() const = 0;
 
    virtual QSize resolution() const = 0;
-           QSize eyeResolution() const;
+   virtual QSize eyeResolution(const QEye& eye) const;
+           QSize halfResolution() const;
            float aspectRatio() const;
    virtual unsigned int refreshRate() const = 0;
 
@@ -65,9 +67,11 @@ public:
    virtual QVector3D headPosition() const = 0;
 
    virtual bool eyeTrackingAvailable() const = 0;
-   virtual bool eyeTrackingEnabled() const = 0;
-   virtual void enableEyeTracking(const bool enable) = 0;
-   virtual QPointF eyePosition() const = 0;
+   virtual bool eyeTrackingEnabled(const QEye& eye) const = 0;
+           bool eyeTrackingEnabled() const;
+   virtual void enableEyeTracking(const QEye& eye, const bool enable) = 0;
+           void enableEyeTracking(const bool enable);
+   virtual QPointF gazePoint(const QEye& eye) const = 0;
 };
 
 QT_END_NAMESPACE

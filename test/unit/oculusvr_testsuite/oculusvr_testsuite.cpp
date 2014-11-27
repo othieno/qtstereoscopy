@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 #include "qoculusrift_test.h"
-#include "qoculusriftstereorenderer_test.h"
+#include "qoculusriftrenderer_test.h"
 
 
 int main(int argc, char** argv)
@@ -30,7 +30,7 @@ int main(int argc, char** argv)
    QVector<QObject*> tests =
    {
       new QOculusRiftTest,
-      new QOculusRiftStereoRendererTest,
+      new QOculusRiftRendererTest,
    };
 
    // Run each unit test, breaking the loop when a single one fails.

@@ -60,7 +60,8 @@ int main(int argc, char** argv)
       << "Orientation tracking enabled: " << rift.orientationTrackingEnabled() << std::endl
       << "Magnetic yaw correction enabled: " << rift.yawCorrectionEnabled() << std::endl
       << "Positional tracking enabled: " << rift.positionalTrackingEnabled() << std::endl
-      << "Eye tracking enabled: " << rift.eyeTrackingEnabled() << std::endl;
+      << "Left eye tracking enabled: " << rift.eyeTrackingEnabled(QEye::Left) << std::endl
+      << "Right eye tracking enabled: " << rift.eyeTrackingEnabled(QEye::Right) << std::endl;
 
       QTimer updateTimer;
       QCoreApplication::connect(&updateTimer, &QTimer::timeout, [&rift]()

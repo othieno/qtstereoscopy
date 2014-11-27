@@ -21,27 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef QOCULUSRIFTSTEREORENDERER_H
-#define QOCULUSRIFTSTEREORENDERER_H
+#ifndef QOCULUSRIFTRENDERER_H
+#define QOCULUSRIFTRENDERER_H
 
 #include "qabstractstereorenderer.h"
 #include "qoculusrift.h"
-#include "qstereoeyecamera.h"
+#include "qstereoeyeparameters.h"
 #include <OVR_CAPI.h>
 
 
 QT_BEGIN_NAMESPACE
 
 class QOculusRift;
-class QOculusRiftStereoRendererPrivate;
-class QOculusRiftStereoRenderer : public QAbstractStereoRenderer
+class QOculusRiftRendererPrivate;
+class QOculusRiftRenderer : public QAbstractStereoRenderer
 {
    Q_OBJECT
 public:
-   QOculusRiftStereoRenderer(const unsigned int& index = 0, const bool& forceDebugDevice = false);
+   QOculusRiftRenderer(const unsigned int& index = 0, const bool& forceDebugDevice = false);
 
    void apply() Q_DECL_OVERRIDE Q_DECL_FINAL;
-   void swapBuffers(QOpenGLContext&, QSurface&) Q_DECL_OVERRIDE Q_DECL_FINAL {}
+   void swapBuffers(QOpenGLContext&, QSurface&) Q_DECL_OVERRIDE Q_DECL_FINAL;
+   void ignoreEyeUpdates(const QEye& eye, const bool freeze = true) Q_DECL_OVERRIDE Q_DECL_FINAL;
 
    QOculusRift& display();
    const QOculusRift& const_display() const;
@@ -58,20 +59,18 @@ public:
    bool vignetteEnabled() const;
    void enableVignette(const bool enable = true);
 
-   void freezeEyeUpdates(const ovrEyeType& eye, const bool freeze = true);
-
    static Q_DECL_CONSTEXPR float minPixelDensity(){ return 0.25f; }
    static Q_DECL_CONSTEXPR float maxPixelDensity(){ return 4.00f; }
 protected:
    void initializeWindow(const WId&) Q_DECL_OVERRIDE Q_DECL_FINAL;
    void initializeGL() Q_DECL_OVERRIDE;
    void configureGL();
-   void paintGL(const QStereoEyeCamera&, const float&) Q_DECL_OVERRIDE;
+   void paintGL(const QStereoEyeParameters&, const float&) Q_DECL_OVERRIDE;
 private:
-   QOculusRiftStereoRendererPrivate* const d_ptr;
-   Q_DECLARE_PRIVATE(QOculusRiftStereoRenderer);
+   QOculusRiftRendererPrivate* const d_ptr;
+   Q_DECLARE_PRIVATE(QOculusRiftRenderer);
 };
 
 QT_END_NAMESPACE
 
-#endif // QOCULUSRIFTSTEREORENDERER_H
+#endif // QOCULUSRIFTRENDERER_H

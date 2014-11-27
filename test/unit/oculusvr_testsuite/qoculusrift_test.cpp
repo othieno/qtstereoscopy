@@ -46,7 +46,8 @@ QOculusRiftTest::testDebugDeviceInitialState()
    QCOMPARE(device.minorFirmwareVersion(), short(0));
 
    QCOMPARE(device.resolution(), QSize(1280, 800));
-   QCOMPARE(device.eyeResolution(), QSize(640, 400));
+   QCOMPARE(device.eyeResolution(QEye::Left), device.eyeResolution(QEye::Right));
+   QCOMPARE(device.halfResolution(), QSize(640, 400));
    QCOMPARE(device.aspectRatio(), 1.6f);
    QCOMPARE(device.refreshRate(), 60u);
 
@@ -80,10 +81,14 @@ QOculusRiftTest::testDebugDeviceTracking()
    QCOMPARE(device.headPosition(), QVector3D(0.0, 0.0, 0.0));
 
    QCOMPARE(device.eyeTrackingAvailable(), false);
-   QCOMPARE(device.eyeTrackingEnabled(), false);
-   device.enableEyeTracking(true);
-   QCOMPARE(device.eyeTrackingEnabled(), false);
-   QCOMPARE(device.eyePosition(), QPointF(0, 0));
+   QCOMPARE(device.eyeTrackingEnabled(QEye::Left), false);
+   QCOMPARE(device.eyeTrackingEnabled(QEye::Right), false);
+   device.enableEyeTracking(QEye::Left, true);
+   device.enableEyeTracking(QEye::Right, true);
+   QCOMPARE(device.eyeTrackingEnabled(QEye::Left), false);
+   QCOMPARE(device.eyeTrackingEnabled(QEye::Right), false);
+   QCOMPARE(device.gazePoint(QEye::Left), QPointF(0, 0));
+   QCOMPARE(device.gazePoint(QEye::Left), device.gazePoint(QEye::Right));
 }
 
 

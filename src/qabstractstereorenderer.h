@@ -27,11 +27,12 @@
 #include <QtCore/QObject>
 #include <QtGui/QOpenGLFunctions>
 #include <QtGui/qwindowdefs.h>
+#include "qeye.h"
 
 
 QT_BEGIN_NAMESPACE
 
-class QStereoEyeCamera;
+class QStereoEyeParameters;
 template<class T> class QStereoWindow;
 
 class QAbstractStereoRenderer : public QObject, protected QOpenGLFunctions
@@ -41,13 +42,14 @@ public:
 
    virtual void apply() = 0;
    virtual void swapBuffers(QOpenGLContext& context, QSurface& surface);
+   virtual void ignoreEyeUpdates(const QEye& eye, const bool freeze) = 0;
            void setViewport(const QRect& viewport);
 protected:
    QAbstractStereoRenderer() = default;
 
    virtual void initializeWindow(const WId& windowId);
    virtual void initializeGL() = 0;
-   virtual void paintGL(const QStereoEyeCamera& camera, const float& dt) = 0;
+   virtual void paintGL(const QStereoEyeParameters& parameters, const float& dt) = 0;
 };
 
 

@@ -60,9 +60,9 @@ private:
    bool event(QEvent* const e) Q_DECL_OVERRIDE;
    void exposeEvent(QExposeEvent* const e) Q_DECL_OVERRIDE;
 
-   QOpenGLContext _context;
-   Renderer* const _renderer;
-   bool _updateRequestPending;
+   QOpenGLContext context_;
+   Renderer* const renderer_;
+   bool updateRequestPending_;
 };
 
 
@@ -71,7 +71,7 @@ QStereoWindow<T>::QStereoWindow(QStereoWindow* const parent) :
 QStereoWindow(new T, parent)
 {
    // Change the renderer's ownership to manage dynamic memory automatically.
-   _renderer->setParent(this);
+   renderer_->setParent(this);
 }
 
 
@@ -97,14 +97,14 @@ QStereoWindow(&renderer, title, parent)
 
 template<class T>
 QStereoWindow<T>::QStereoWindow(T* const renderer, QStereoWindow* const parent) :
-_renderer(renderer),
-_updateRequestPending(false)
+renderer_(renderer),
+updateRequestPending_(false)
 {
    setSurfaceType(QWindow::OpenGLSurface);
    if (Q_UNLIKELY(!supportsOpenGL()))
       qFatal("[QtStereoscopy] Error: This system is not OpenGL compatible.");
 
-   if (_renderer == nullptr)
+   if (renderer_ == nullptr)
       qFatal("[QtStereoscopy] Error: QStereoWindow renderer is null.");
 
    if (parent != nullptr)
@@ -123,14 +123,14 @@ QStereoWindow(renderer, parent)
 template<class T> QOpenGLContext&
 QStereoWindow<T>::context()
 {
-   return _context;
+   return context_;
 }
 
 
 template<class T> T&
 QStereoWindow<T>::renderer()
 {
-   return *_renderer;
+   return *renderer_;
 }
 
 
@@ -140,9 +140,9 @@ QStereoWindow<T>::update()
    // Post an update request event in the event pool. Since overflowing the
    // pool is a bad idea, coalesce update requests by adding the aforementioned
    // event iff no prior events of the same kind are pending.
-   if (!_updateRequestPending)
+   if (!updateRequestPending_)
    {
-      _updateRequestPending = true;
+      updateRequestPending_ = true;
       QCoreApplication::postEvent(this, new QEvent(QEvent::UpdateRequest));
    }
 }
@@ -151,8 +151,8 @@ QStereoWindow<T>::update()
 template<class T> void
 QStereoWindow<T>::paintGL()
 {
-   _renderer->apply();
-   _renderer->swapBuffers(_context, *this);
+   renderer_->apply();
+   renderer_->swapBuffers(context_, *this);
 }
 
 
@@ -161,9 +161,9 @@ QStereoWindow<T>::event(QEvent* const e)
 {
    // When an update request is received, this means it is time to draw a new frame. Perform said
    // action and make another update request (or else no more draw calls are performed.)
-   if (e->type() == QEvent::UpdateRequest && _context.makeCurrent(this))
+   if (e->type() == QEvent::UpdateRequest && context_.makeCurrent(this))
    {
-      _updateRequestPending = false; // The pending request is being handled.
+      updateRequestPending_ = false; // The pending request is being handled.
       paintGL();
       update();
    }
@@ -175,12 +175,12 @@ template<class T> void
 QStereoWindow<T>::exposeEvent(QExposeEvent* const e)
 {
    // When the window is exposed the first time, its OpenGL context and renderer need to be initialized.
-   if (isExposed() && !_context.isValid())
+   if (isExposed() && !context_.isValid())
    {
-      _context.setFormat(requestedFormat());
-      if (_context.create() && _context.makeCurrent(this))
+      context_.setFormat(requestedFormat());
+      if (context_.create() && context_.makeCurrent(this))
       {
-         _renderer->initialize(*this);
+         renderer_->initialize(*this);
          update();
       }
       else

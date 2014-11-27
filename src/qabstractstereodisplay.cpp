@@ -25,14 +25,38 @@
 
 
 QSize
-QAbstractStereoDisplay::eyeResolution() const
+QAbstractStereoDisplay::eyeResolution(const QEye&) const
 {
-   return QSize(resolution().width() / 2, resolution().height() / 2);
+   return halfResolution();
+}
+
+
+QSize
+QAbstractStereoDisplay::halfResolution() const
+{
+   const auto& r = resolution();
+   return QSize(r.width() >> 1, r.height() >> 1);
 }
 
 
 float
 QAbstractStereoDisplay::aspectRatio() const
 {
-   return static_cast<float>(resolution().width()) / static_cast<float>(resolution().height());
+   const auto& r = resolution();
+   return r.width() / float(r.height());
+}
+
+
+bool
+QAbstractStereoDisplay::eyeTrackingEnabled() const
+{
+   return eyeTrackingEnabled(QEye::Left) && eyeTrackingEnabled(QEye::Right);
+}
+
+
+void
+QAbstractStereoDisplay::enableEyeTracking(const bool enable)
+{
+   enableEyeTracking(QEye::Left,  enable);
+   enableEyeTracking(QEye::Right, enable);
 }

@@ -62,7 +62,7 @@ QDOCCONF="$(git rev-parse --show-toplevel)/doc/qtstereoscopy.qdocconf"
 # we cannot rely on its exit code to determine if it failed. We can, however, check if its stderr output is
 # empty (no errors or warnings) or not (warnings or errors building the documentation).
 OUTPUT="$($QDOC -redirect-documentation-to-dev-null "$QDOCCONF" 2>&1)"
-if [ ! -z $OUTPUT ]
+if [[ ! -z $OUTPUT ]]
 then
    if [[ "$VERBOSE" = false ]]; then OUTPUT="The QtStereoscopy API documentation is either incomplete or obsolete. Please update it."; fi
    echo "$OUTPUT" 1>&2

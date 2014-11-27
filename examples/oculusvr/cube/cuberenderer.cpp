@@ -22,10 +22,10 @@
  * THE SOFTWARE.
  */
 #include "cuberenderer.h"
-
+#include <QMatrix4x4>
 
 CubeRenderer::CubeRenderer() :
-QOculusRiftStereoRenderer(),
+QOculusRiftRenderer(),
 _angle(0)
 {}
 
@@ -71,19 +71,19 @@ CubeRenderer::update(const float& dt)
 
 
 void
-CubeRenderer::paintGL(const QStereoEyeCamera& camera, const float& dt)
+CubeRenderer::paintGL(const QStereoEyeParameters& parameters, const float& dt)
 {
    update(dt);
 
-   setViewport(camera.viewport);
+   setViewport(parameters.viewport());
 
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
-   glMultMatrixf(camera.perspective.data());
+   glMultMatrixf(parameters.perspective().constData());
 
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
-   glMultMatrixf(camera.view.data());
+   glMultMatrixf(parameters.view().constData());
 
    // Move the triangle away from the screen and rotate it.
    glTranslatef(0.0f, 0.0f, -1.5f);

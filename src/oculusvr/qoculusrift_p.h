@@ -52,15 +52,15 @@ private:
    bool isTrackingCap(const unsigned int& capability) const;
    void updateTrackingCaps();
 
-   static std::atomic<unsigned int> N_DEVICE_INSTANCES;
+   static std::atomic<unsigned int> DEVICE_INSTANCE_COUNT;
 
-   ovrHmdDesc _descriptor;
-   bool _isDebugDevice;
+   ovrHmdDesc descriptor_;
+   bool isDebugDevice_;
    struct
    {
       unsigned int hmd;
       unsigned int tracking;
-   } _enabledCaps;
+   } enabledCaps_;
 };
 
 QT_END_NAMESPACE

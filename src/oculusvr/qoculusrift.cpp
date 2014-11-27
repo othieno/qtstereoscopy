@@ -273,19 +273,19 @@ QOculusRift::eyeTrackingAvailable() const
 
 
 bool
-QOculusRift::eyeTrackingEnabled() const
+QOculusRift::eyeTrackingEnabled(const QEye&) const
 {
    return false;
 }
 
 
 void
-QOculusRift::enableEyeTracking(const bool)
+QOculusRift::enableEyeTracking(const QEye&, const bool)
 {}
 
 
 QPointF
-QOculusRift::eyePosition() const
+QOculusRift::gazePoint(const QEye&) const
 {
    return QPointF(0, 0);
 }
@@ -321,7 +321,7 @@ QOculusRift::lowPersistenceEnabled() const
 void
 QOculusRift::enableLowPersistence(const bool enable)
 {
-   if (!isDebugDevice()) //TODO Should the following condition be added: '&& type() != ovrHmd_DK1)'?
+   if (!isDebugDevice()) //TODO Should the following condition be added: '&& type() != ovrHmd_DK1)' or does the DK1 support low persistence?
    {
       Q_D(QOculusRift);
       d->setCapEnabled(ovrHmdCap_LowPersistence, enable);

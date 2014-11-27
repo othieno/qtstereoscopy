@@ -1,0 +1,105 @@
+/*!
+   \class QStereoEyeParameters
+   \inmodule QtStereoscopy
+   \brief The QStereoEyeParameters class contains linear transformations for a single eye.
+*/
+/*!
+   \fn QStereoEyeParameters::QStereoEyeParameters()
+   \brief Constructs a QStereoEyeParameters.
+*/
+/*!
+   \fn const QEye& QStereoEyeParameters::eye() const
+   \brief Returns the eye associated with this parameter set.
+*/
+/*!
+   \fn void QStereoEyeParameters::setEye(const QEye& eye)
+   \brief Stores the \a eye associated with this parameter set.
+*/
+/*!
+   \fn const QPointF& QStereoEyeParameters::gazePoint() const
+   \brief Returns the eye's gaze point.
+*/
+/*!
+   \fn void QStereoEyeParameters::setGazePoint(const QPointF& point)
+   \brief Stores the eye's gaze \a point.
+*/
+/*!
+   \fn const QQuaternion& QStereoEyeParameters::headOrientation() const
+   \brief Returns the head's current orientation.
+*/
+/*!
+   \fn void QStereoEyeParameters::setHeadOrientation(const QQuaternion& orientation)
+   \brief Stores the head's current \a orientation.
+*/
+/*!
+   \fn const QVector3D& QStereoEyeParameters::headPosition() const
+   \brief Returns the head's current position.
+*/
+/*!
+   \fn void QStereoEyeParameters::setHeadPosition(const QVector3D& position)
+   \brief Stores the head's current \a position.
+*/
+/*!
+   \fn const QMatrix4x4& QStereoEyeParameters::view() const
+   \brief Returns the eye's view transformation matrix.
+*/
+/*!
+   \fn void QStereoEyeParameters::setView(const QMatrix4x4& view)
+   \brief Stores the eye's \a view transformation matrix.
+*/
+/*!
+   \fn const QVector3D& QStereoEyeParameters::viewAdjust() const
+   \brief Returns the eye's view adjust transformation.
+*/
+/*!
+   \fn void QStereoEyeParameters::setViewAdjust(const QVector3D& adjust)
+   \brief Stores the eye's view \a adjust transformation.
+*/
+/*!
+   \fn const QRect& QStereoEyeParameters::viewport() const
+   \brief Returns the eye's rendering viewport.
+*/
+/*!
+   \fn void QStereoEyeParameters::setViewport(const QRect& viewport)
+   \brief Stores the eye's rendering \a viewport.
+*/
+/*!
+   \fn const QMatrix4x4& QStereoEyeParameters::perspective() const
+   \brief Returns the eye's perspective projection matrix.
+*/
+/*!
+   \fn void QStereoEyeParameters::setPerspective(const QMatrix4x4& perspective)
+   \brief Stores the eye's \a perspective projection matrix.
+*/
+/*!
+   \fn const QMatrix4x4& QStereoEyeParameters::ortho() const
+   \brief Returns the eye's orthogonal (orthographic) projection matrix.
+*/
+/*!
+   \fn void QStereoEyeParameters::setOrtho(const QMatrix4x4& orthogonal)
+   \brief Stores the eye's \a orthogonal projection matrix.
+*/
+/*!
+   \fn static const float& QStereoEyeParameters::orthoDistance()
+   \brief Returns the orthogonal distance, i.e. the distance from the view to any 2D object.
+*/
+/*!
+   \fn static void QStereoEyeParameters::setOrthoDistance(const float& distance)
+   \brief Stores the orthogonal \a distance.
+*/
+/*!
+   \fn static const float& QStereoEyeParameters::nearClippingDistance()
+   \brief Returns the near clipping plane's distance.
+*/
+/*!
+   \fn static void QStereoEyeParameters::setNearClippingDistance(const float& distance)
+   \brief Stores the near clipping plane's \a distance.
+*/
+/*!
+   \fn static const float& QStereoEyeParameters::farClippingDistance()
+   \brief Returns the far clipping plane's distance.
+*/
+/*!
+   \fn static void QStereoEyeParameters::setFarClippingDistance(const float& distance)
+   \brief Stores the far clipping plane's \a distance.
+*/

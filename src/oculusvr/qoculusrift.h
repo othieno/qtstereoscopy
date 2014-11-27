@@ -81,9 +81,9 @@ public:
    TrackingFrustum positionalTrackingFrustum() const;
 
    bool eyeTrackingAvailable() const Q_DECL_OVERRIDE Q_DECL_FINAL;
-   bool eyeTrackingEnabled() const Q_DECL_OVERRIDE Q_DECL_FINAL;
-   void enableEyeTracking(const bool enable) Q_DECL_OVERRIDE Q_DECL_FINAL;
-   QPointF eyePosition() const Q_DECL_OVERRIDE Q_DECL_FINAL;
+   bool eyeTrackingEnabled(const QEye& eye) const Q_DECL_OVERRIDE Q_DECL_FINAL;
+   void enableEyeTracking(const QEye& eye, const bool enable) Q_DECL_OVERRIDE Q_DECL_FINAL;
+   QPointF gazePoint(const QEye& eye) const Q_DECL_OVERRIDE Q_DECL_FINAL;
 
    bool yawCorrectionEnabled() const;
    void enableYawCorrection(const bool enable = true);

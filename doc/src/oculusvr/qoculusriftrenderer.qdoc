@@ -1,0 +1,80 @@
+/*!
+   \class QOculusRiftRenderer
+   \inmodule QtStereoscopy
+   \brief The QOculusRiftRenderer class extends QAbstractStereoRenderer functionality with support for the
+   stereo rendering model used by the Oculus SDK.
+*/
+/*!
+   \fn QOculusRiftRenderer::QOculusRiftRenderer(const unsigned int& index = 0, const bool& forceDebugDevice = false)
+   \brief Constructs a QOculusRiftRenderer that is attached to the Oculus Rift with the specified \a index.
+
+   For debugging purposes, the renderer can be attached to a debug device by setting \a forceDebugDevice to \c true.
+*/
+/*!
+   \fn void QOculusRiftRenderer::apply()
+   \brief Draws a scene with the stereoscopic model used by the Oculus Rift.
+*/
+/*!
+   \fn void QOculusRiftRenderer::swapBuffers(QOpenGLContext& context, QSurface& surface)
+   \brief Overrides the default implementation to do nothing since the Oculus SDK handles buffer swapping (in SDK distortion mode).
+   \span {style="display:none"}{\a context, \a surface}
+*/
+/*!
+   \fn void QOculusRiftRenderer::ignoreEyeUpdates(const QEye& eye, const bool ignore)
+   \span {style="display:none"}{\a eye, \a ignore}
+*/
+/*!
+   \fn QOculusRift& QOculusRiftRenderer::display();
+   \brief Returns a reference to the Oculus Rift display device that is used by this renderer.
+*/
+/*!
+   \fn const QOculusRift& QOculusRiftRenderer::const_display() const;
+   \brief Returns a const reference to the Oculus Rift display device that is used by this renderer.
+*/
+/*!
+   \fn const float& QOculusRiftRenderer::pixelDensity() const;
+   \brief Returns the pixel density.
+*/
+/*!
+   \fn void QOculusRiftRenderer::setPixelDensity(const float& value)
+   \brief Sets the pixel density to the specified \a value.
+*/
+/*!
+   \fn bool QOculusRiftRenderer::chromaticAberrationCorrectionEnabled() const
+   \brief Returns \c true if chromatic aberration correction is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRiftRenderer::enableChromaticAberrationCorrection(const bool enable)
+   \brief If \a enable is set to \c true then chromatic aberration correction is enabled, otherwise it is disabled.
+*/
+/*!
+   \fn bool QOculusRiftRenderer::timewarpEnabled() const
+   \brief Returns \c true if timewarp is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRiftRenderer::enableTimewarp(const bool enable)
+   \brief If \a enable is set to \c true then timewarp is enabled, otherwise it is disabled.
+*/
+/*!
+   \fn bool QOculusRiftRenderer::vignetteEnabled() const
+   \brief Returns \c true if vignetting is enabled, \c false otherwise.
+*/
+/*!
+   \fn void QOculusRiftRenderer::enableVignette(const bool enable)
+   \brief If \a enable is set to \c true then vignetting is enabled, otherwise it is disabled.
+*/
+/*!
+   \fn void QOculusRiftRenderer::initializeWindow(const WId& windowId)
+   \span {style="display:none"}{\a windowId}
+*/
+/*!
+   \fn void QOculusRiftRenderer::initializeGL()
+*/
+/*!
+   \fn void QOculusRiftRenderer::configureGL()
+   \brief Configures the OpenGL context for use with the Oculus SDK.
+*/
+/*!
+   \fn void QOculusRiftRenderer::paintGL(const QStereoEyeParameters& parameters, const float& dt)
+   \span {style="display:none"}{\a parameters \a dt}
+*/

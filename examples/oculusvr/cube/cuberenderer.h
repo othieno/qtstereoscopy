@@ -24,16 +24,16 @@
 #ifndef QTSTEREOSCOPY_CUBERENDERER_H
 #define QTSTEREOSCOPY_CUBERENDERER_H
 
-#include <QOculusRiftStereoRenderer>
+#include <QOculusRiftRenderer>
 
 
-class CubeRenderer Q_DECL_FINAL : public QOculusRiftStereoRenderer
+class CubeRenderer Q_DECL_FINAL : public QOculusRiftRenderer
 {
 public:
    CubeRenderer();
 
    void initializeGL() Q_DECL_OVERRIDE Q_DECL_FINAL;
-   void paintGL(const QStereoEyeCamera&, const float&) Q_DECL_OVERRIDE;
+   void paintGL(const QStereoEyeParameters&, const float&) Q_DECL_OVERRIDE;
 
    void update(const float& dt);
 private:

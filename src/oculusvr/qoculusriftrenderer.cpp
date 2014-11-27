@@ -21,21 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "qoculusriftstereorenderer.h"
-#include "qoculusriftstereorenderer_p.h"
+#include "qoculusriftrenderer.h"
+#include "qoculusriftrenderer_p.h"
 #include <QtGui/QWindow>
 #include <OVR_CAPI_GL.h>
 
 
-QOculusRiftStereoRenderer::QOculusRiftStereoRenderer(const unsigned int& index, const bool& forceDebugDevice) :
-d_ptr(new QOculusRiftStereoRendererPrivate(this, index, forceDebugDevice))
+QOculusRiftRenderer::QOculusRiftRenderer(const unsigned int& index, const bool& forceDebugDevice) :
+d_ptr(new QOculusRiftRendererPrivate(this, index, forceDebugDevice))
 {}
 
 
 void
-QOculusRiftStereoRenderer::apply()
+QOculusRiftRenderer::apply()
 {
-   Q_D(QOculusRiftStereoRenderer);
+   Q_D(QOculusRiftRenderer);
 
    // Make sure there're no "dirty" rendering configurations before rendering is performed.
    d->configureGL();
@@ -49,9 +49,9 @@ QOculusRiftStereoRenderer::apply()
    for (const auto& eye : display.descriptor().EyeRenderOrder)
    {
       const auto& pose = ovrHmd_BeginEyeRender(display, eye);
-      const auto& camera = d->eyeCamera(eye, pose);
+      const auto& parameters = d->eyeParameters(eye, pose);
 
-      paintGL(camera, frameTiming.DeltaSeconds);
+      paintGL(parameters, frameTiming.DeltaSeconds);
 
       ovrHmd_EndEyeRender(display, eye, pose, &d->eyeTextureConfiguration(eye).Texture);
    }
@@ -68,100 +68,105 @@ QOculusRiftStereoRenderer::apply()
 }
 
 
-QOculusRift&
-QOculusRiftStereoRenderer::display()
+void
+QOculusRiftRenderer::swapBuffers(QOpenGLContext&, QSurface&)
+{}
+
+
+void
+QOculusRiftRenderer::ignoreEyeUpdates(const QEye&, const bool)
 {
-   Q_D(QOculusRiftStereoRenderer);
+   qCritical("[QtStereoscopy] Implement QOculusRiftRenderer::ignoreEyeUpdates.");
+}
+
+
+QOculusRift&
+QOculusRiftRenderer::display()
+{
+   Q_D(QOculusRiftRenderer);
    return d->display();
 }
 
 
 const QOculusRift&
-QOculusRiftStereoRenderer::const_display() const
+QOculusRiftRenderer::const_display() const
 {
-   Q_D(const QOculusRiftStereoRenderer);
+   Q_D(const QOculusRiftRenderer);
    return d->const_display();
 }
 
 
 const float&
-QOculusRiftStereoRenderer::pixelDensity() const
+QOculusRiftRenderer::pixelDensity() const
 {
-   Q_D(const QOculusRiftStereoRenderer);
+   Q_D(const QOculusRiftRenderer);
    return d->pixelDensity();
 }
 
 
 void
-QOculusRiftStereoRenderer::setPixelDensity(const float& density)
+QOculusRiftRenderer::setPixelDensity(const float& density)
 {
-   Q_D(QOculusRiftStereoRenderer);
+   Q_D(QOculusRiftRenderer);
    d->setPixelDensity(density);
 }
 
 
 bool
-QOculusRiftStereoRenderer::chromaticAberrationCorrectionEnabled() const
+QOculusRiftRenderer::chromaticAberrationCorrectionEnabled() const
 {
-   Q_D(const QOculusRiftStereoRenderer);
+   Q_D(const QOculusRiftRenderer);
    return d->isDistortionCapabilityEnabled(ovrDistortionCap_Chromatic);
 }
 
 
 void
-QOculusRiftStereoRenderer::enableChromaticAberrationCorrection(const bool enable)
+QOculusRiftRenderer::enableChromaticAberrationCorrection(const bool enable)
 {
-   Q_D(QOculusRiftStereoRenderer);
+   Q_D(QOculusRiftRenderer);
    d->setDistortionCapabilityEnabled(ovrDistortionCap_Chromatic, enable);
 }
 
 
 bool
-QOculusRiftStereoRenderer::timewarpEnabled() const
+QOculusRiftRenderer::timewarpEnabled() const
 {
-   Q_D(const QOculusRiftStereoRenderer);
+   Q_D(const QOculusRiftRenderer);
    return d->isDistortionCapabilityEnabled(ovrDistortionCap_TimeWarp);
 }
 
 
 void
-QOculusRiftStereoRenderer::enableTimewarp(const bool enable)
+QOculusRiftRenderer::enableTimewarp(const bool enable)
 {
-   Q_D(QOculusRiftStereoRenderer);
+   Q_D(QOculusRiftRenderer);
    d->setDistortionCapabilityEnabled(ovrDistortionCap_TimeWarp, enable);
 }
 
 
 bool
-QOculusRiftStereoRenderer::vignetteEnabled() const
+QOculusRiftRenderer::vignetteEnabled() const
 {
-   Q_D(const QOculusRiftStereoRenderer);
+   Q_D(const QOculusRiftRenderer);
    return d->isDistortionCapabilityEnabled(ovrDistortionCap_Vignette);
 }
 
 
 void
-QOculusRiftStereoRenderer::enableVignette(const bool enable)
+QOculusRiftRenderer::enableVignette(const bool enable)
 {
-   Q_D(QOculusRiftStereoRenderer);
+   Q_D(QOculusRiftRenderer);
    d->setDistortionCapabilityEnabled(ovrDistortionCap_Vignette, enable);
 }
 
 
 void
-QOculusRiftStereoRenderer::freezeEyeUpdates(const ovrEyeType&, const bool)
-{
-   qCritical("[QtStereoscopy] Implement QOculusRiftStereoRenderer::freezeEyeUpdates.");
-}
-
-
-void
-QOculusRiftStereoRenderer::initializeWindow(const WId& winId)
+QOculusRiftRenderer::initializeWindow(const WId& winId)
 {
    auto* const window = QWindow::fromWinId(winId);
    if (window != nullptr)
    {
-      Q_D(QOculusRiftStereoRenderer);
+      Q_D(QOculusRiftRenderer);
       d->configureWindow(*window);
    }
    else
@@ -170,10 +175,10 @@ QOculusRiftStereoRenderer::initializeWindow(const WId& winId)
 
 
 void
-QOculusRiftStereoRenderer::initializeGL()
+QOculusRiftRenderer::initializeGL()
 {}
 
 
 void
-QOculusRiftStereoRenderer::paintGL(const QStereoEyeCamera&, const float&)
+QOculusRiftRenderer::paintGL(const QStereoEyeParameters&, const float&)
 {}

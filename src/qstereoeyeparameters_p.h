@@ -21,59 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "qstereoeyecamera.h"
+#ifndef QSTEREOEYEPARAMETERS_P_H
+#define QSTEREOEYEPARAMETERS_P_H
 
-float QStereoEyeCamera::nearClippingPlane = 0.01f;
-float QStereoEyeCamera::farClippingPlane = 10000.0f;
-
-
-QStereoEyeCamera::QStereoEyeCamera() :
-orthoDistance(0.8f),
-_hasProjectionChanged(true)
-{}
+#include "qstereoeyeparameters.h"
+#include "qeye.h"
+#include <QPointF>
+#include <QMatrix4x4>
 
 
+QT_BEGIN_NAMESPACE
 
-
-
-
-
-
-/**
- * @brief Sets the viewing frustum's clipping plane distances.
-void
-QOculusRiftStereoRenderer::setClippingPlaneDistances(const float* const near, const float* const far)
+struct QStereoEyeParametersPrivate : public QObject
 {
-   bool projectionChanged = false;
+public:
+   explicit QStereoEyeParametersPrivate(QStereoEyeParameters* const parent);
 
-   if (near != nullptr && !qFuzzyCompare(_clippingPlaneDistance.near, *near))
-   {
-      _clippingPlaneDistance.near = *near;
-      projectionChanged = true;
-   }
-   if (far != nullptr && !qFuzzyCompare(_clippingPlaneDistance.far, *far))
-   {
-      _clippingPlaneDistance.far = *far;
-      projectionChanged = true;
-   }
+   QEye eye;
+   QRect viewport;
+   QPointF gazePoint;
+   QVector3D viewAdjust;
+   QVector3D headPosition;
+   QQuaternion headOrientation;
 
-   // Mark both projection transform configurations as dirty.
-   if (projectionChanged)
-      _dirty.projection.fill(true);
-}
-*/
+   QMatrix4x4 view;
+   QMatrix4x4 ortho;
+   QMatrix4x4 perspective;
 
+   static float ORTHO_DISTANCE;
+   static float NEAR_CLIPPING_DISTANCE;
+   static float FAR_CLIPPING_DISTANCE;
+};
 
+QT_END_NAMESPACE
 
-bool
-QStereoEyeCamera::projectionChanged() const
-{
-   return _hasProjectionChanged;
-}
-
-
-void
-QStereoEyeCamera::setProjectionChanged(const bool changed)
-{
-   _hasProjectionChanged = changed;
-}
+#endif // QSTEREOEYEPARAMETERS_P_H

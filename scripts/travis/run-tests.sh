@@ -22,6 +22,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 #
+set -e
+set -o pipefail
+
 function show_usage()
 {
    echo "Usage: $0 [options]"
@@ -30,10 +33,6 @@ function show_usage()
    echo "  -c, --concise       Print minimal feedback."
    echo "  -h, --help          Print this help and exit"
 }
-
-# Make the script fail if any of the following commands has an exit status that is not zero (failure).
-set -e
-set -o pipefail
 
 # Parse input arguments.
 VERBOSE_FLAG="--verbose"
@@ -59,3 +58,5 @@ SCRIPTDIR="$(git rev-parse --show-toplevel)/scripts"
 
 # Perform static and runtime code analysis.
 "$SCRIPTDIR/analysis.sh" --static --runtime $VERBOSE_FLAG
+
+exit 0
